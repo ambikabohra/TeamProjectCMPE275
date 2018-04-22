@@ -5,19 +5,18 @@
 
 <body>
 
-<div th:replace="common/navbar :: common-navbar" />
+<div th:replace="common/navbar :: common-navbar"/>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="jumbotron">
-                <h1 class="text-center" th:text="#{copy.h1.text}" ></h1>
+                <h1 class="text-center" th:text="#{copy.h1.text}"></h1>
                 <p class="lead" th:text="#{copy.p.lead}"></p>
             </div>
         </div>
     </div>
 </div>
-
 
 
 <!-- Marketing messaging and featurettes
@@ -32,51 +31,62 @@
             <a href="https://www.linkedin.com/in/karandidwani/">
                 <img class="img-circle"
                      th:src="@{/images/karan_didwani.jpeg}"
-                     alt="Karan Didwani" width="140" height="140" />
+                     alt="Karan Didwani" width="140" height="140"/>
             </a>
-            <h2>Karan Didwani <small class="member-title">MS-SE</small></h2>
+            <h2>Karan Didwani
+                <small class="member-title">MS-SE</small>
+            </h2>
             <div class="span4 collapse-group">
                 <p class="collapse text-justify" th:text="#{copy.project.lead.intro}"></p>
-                <p><a class="btn btn-primary btn-collapse" href="#" role="button" th:text="#{copy.viewdetails.button}"></a></p>
+                <p><a class="btn btn-primary btn-collapse" href="#" role="button"
+                      th:text="#{copy.viewdetails.button}"></a></p>
             </div>
         </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
 
     <!-- START THE FEATURETTES -->
 
-    <hr class="featurette-divider" />
+    <hr class="featurette-divider"/>
 
     <div class="featurette">
-        <img class="featurette-image pull-right" th:src="@{/images/create_survey.png}" width="500" height="500" />
+        <img class="featurette-image pull-right" th:src="@{/images/create_survey.png}" width="500" height="500"/>
         <h2 class="featurette-heading">Create your own Survey <span class="muted">It'll blow your mind.</span></h2>
         <p class="lead">Using our web application create your own surveys and get the information that you need.
-            Create questions just with a single click, assign the question a response type from multiple options to long text answer.
-            Use our simple web user interface to create as many surveys you wish with as many questions you want your surveyees to answer.
+            Create questions just with a single click, assign the question a response type from multiple options to long
+            text answer.
+            Use our simple web user interface to create as many surveys you wish with as many questions you want your
+            surveyees to answer.
             The more the better</p>
     </div>
 
-    <hr class="featurette-divider" />
+    <hr class="featurette-divider"/>
 
     <div class="featurette">
         <img class="featurette-image pull-left" th:src="@{/images/share.jpg}" width="500" height="500"/>
         <h2 class="featurette-heading">Share your survey<span class="muted">See for yourself.</span></h2>
-        <p class="lead">Share your survey with your friends, family, colleagues or with everyone. You can create a survey and share the link to the survey.
-        Share the survey with only selected people if needed. Send out an email with the link to the survey so that only invited users can take the survey.
-            Create a public survey and just share the link or login to our website to leverage more options and take or create surveys.
+        <p class="lead">Share your survey with your friends, family, colleagues or with everyone. You can create a
+            survey and share the link to the survey.
+            Share the survey with only selected people if needed. Send out an email with the link to the survey so that
+            only invited users can take the survey.
+            Create a public survey and just share the link or login to our website to leverage more options and take or
+            create surveys.
         </p>
     </div>
 
-    <hr class="featurette-divider" />
+    <hr class="featurette-divider"/>
 
     <div class="featurette">
         <img class="featurette-image pull-right" th:src="@{/images/result.jpg}" width="500" height="500"/>
         <h2 class="featurette-heading">And lastly, Analyze Response <span class="muted">Checkmate.</span></h2>
-        <p class="lead">Collect and store the responses to the questions in the survey. Analyze them to get the maximum information from the responses.
-        After all this is what you came to us for. The responses are the user critical data and it is stored very safely with us. Only the creator of the survey can view the responses.
-        Download the survey response and monitor all the users submitted the responses to all the questions in the survey</p>
+        <p class="lead">Collect and store the responses to the questions in the survey. Analyze them to get the maximum
+            information from the responses.
+            After all this is what you came to us for. The responses are the user critical data and it is stored very
+            safely with us. Only the creator of the survey can view the responses.
+            Download the survey response and monitor all the users submitted the responses to all the questions in the
+            survey</p>
     </div>
 
-    <hr class="featurette-divider" />
+    <hr class="featurette-divider"/>
 
     <!-- /END THE FEATURETTES -->
 
@@ -87,7 +97,6 @@
     </footer>
 
 </div><!-- /.container -->
-
 
 
 <!-- Bootstrap core JavaScript
