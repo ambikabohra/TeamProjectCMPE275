@@ -1,53 +1,80 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeeaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace = "common/header :: common-header" />
+<head th:replace="common/header :: common-header" />
 
 <body>
+
+<div th:replace="common/navbar :: common-navbar" />
+
 <div class="container">
 
-    <div th:replace ="common/navbar :: common-navbar" />
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center">
 
-   <div class="container">
-       <div class="row">
-           <div class="col-md-6 col-md-offset-3">
-               <div class="well">
-                   <div class="text-center">
-                       <h1 th:text="#{login.h1.text}" />
-                       <p th:text="#{login.p.lead}" />
-                   </div>
+            <div th:if="${param.error}" class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+                <p th:text="#{login.error.message}" />
+            </div>
+            <div th:if="${param.logout}" class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+                <p th:text="#{login.logout.success}" />
+            </div>
+        </div>
+    </div>
 
-                   <div class="text-left">
-                       <form id="loginForm"
-                             action="@{/login}"
-                             method="post">
+    <div class="row">
 
-                           <div class="form-group">
-                               <label for="username" th:text="#{login.username.text}" />
-                               <input type="text" id="username" name="username" class="form-control"/>
-                           </div>
-                           <div class="form-group">
-                               <label for="password" th:text="#{login.password.text}" />
-                               <input type="password" id="password" name="password" class="form-control"/>
-                           </div>
+        <div class="col-md-6 col-md-offset-3">
 
-                           <div class="form-group">
-                               <input type="submit" value="Log In" class="btn btn-primary"/>
-                           </div>
+            <div class="well">
 
-                       </form>
-                   </div>
+                <div class="text-center">
 
-               </div>
-           </div>
-       </div>
-   </div>
+                    <h1 th:text="#{login.h1.text}" />
+                    <p class="lead" th:text="#{login.p.lead}" />
 
-</div><!-- /.container -->
+                </div>
+
+                <div class="text-left">
+
+                    <form id="loginForm"
+                          th:action="@{/login}"
+                          method="post">
+
+                        <div class="form-group">
+                            <label for="username" th:text="#{login.username.text}" />
+                            <input type="text" id="username" name="username" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" th:text="#{login.password.text}" />
+                            <input type="password" id="password" name="password" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" th:text="#{navbar.login.text}" class="btn btn-primary" />
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<div th:replace = "common/header :: before-body-scripts" />
+<div th:replace="common/header :: before-body-scripts" />
+
 </body>
 </html>
