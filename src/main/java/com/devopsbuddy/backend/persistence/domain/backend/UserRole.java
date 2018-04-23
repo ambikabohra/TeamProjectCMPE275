@@ -3,14 +3,11 @@ package com.devopsbuddy.backend.persistence.domain.backend;
 import javax.persistence.*;
 import java.io.Serializable;
 
-
 @Entity
 @Table(name = "user_role")
 public class UserRole implements Serializable {
 
-    /**
-     * The Serial Version UID for Serializable classes.
-     */
+    /** The Serial Version UID for Serializable classes. */
     private static final long serialVersionUID = 1L;
 
     public UserRole() {
@@ -18,21 +15,12 @@ public class UserRole implements Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
-    public UserRole(User user, Role role) {
-        this.user = user;
-        this.role = role;
-    }
-
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private Role role;
 
@@ -52,14 +40,6 @@ public class UserRole implements Serializable {
         this.role = role;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,13 +47,15 @@ public class UserRole implements Serializable {
 
         UserRole userRole = (UserRole) o;
 
-        return id == userRole.id;
+        if (!user.equals(userRole.user)) return false;
+        return role.equals(userRole.role);
 
     }
 
     @Override
     public int hashCode() {
-        return (int) (id ^ (id >>> 32));
+        int result = user.hashCode();
+        result = 31 * result + role.hashCode();
+        return result;
     }
 }
-

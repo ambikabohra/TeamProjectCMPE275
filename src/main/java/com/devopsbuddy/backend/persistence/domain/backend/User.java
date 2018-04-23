@@ -4,20 +4,26 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Created by tedonema on 28/03/2016.
+ */
 @Entity
 public class User implements Serializable {
 
-    /**
-     * The serial version UID for Serializable classes .
-     */
+    /** The Serial Version UID for Serializable classes. */
     private static final long serialVersionUID = 1L;
+
+
+    public User() {
+
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     private String username;
 
@@ -27,34 +33,40 @@ public class User implements Serializable {
 
     @Column(name = "first_name")
     private String firstName;
+
     @Column(name = "last_name")
     private String lastName;
+
     @Column(name = "phone_number")
     private String phoneNumber;
+
     @Length(max = 500)
     private String description;
+
     private String country;
+
     @Column(name = "profile_image_url")
     private String profileImageUrl;
+
     @Column(name = "stripe_customer_id")
     private String stripeCustomerId;
+
     private boolean enabled;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "plan_id")
     private Plan plan;
 
+
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<UserRole> userRole;
+    private Set<UserRole> userRoles = new HashSet<>();
 
-    public User() {
-    }
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -64,14 +76,6 @@ public class User implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
@@ -146,6 +150,14 @@ public class User implements Serializable {
         this.enabled = enabled;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Plan getPlan() {
         return plan;
     }
@@ -154,37 +166,31 @@ public class User implements Serializable {
         this.plan = plan;
     }
 
-    public Set<UserRole> getUserRole() {
-        return userRole;
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
     }
 
-    public void setUserRole(Set<UserRole> userRole) {
-        this.userRole = userRole;
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
+
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
+
         User user = (User) o;
-        return id == user.id &&
-                enabled == user.enabled &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName) &&
-                Objects.equals(phoneNumber, user.phoneNumber) &&
-                Objects.equals(description, user.description) &&
-                Objects.equals(country, user.country) &&
-                Objects.equals(profileImageUrl, user.profileImageUrl) &&
-                Objects.equals(stripeCustomerId, user.stripeCustomerId) &&
-                Objects.equals(plan, user.plan);
+
+        return id == user.id;
+
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(id, username, password, email, firstName, lastName, phoneNumber, description, country, profileImageUrl, stripeCustomerId, enabled, plan);
+        return (int) (id ^ (id >>> 32));
     }
+
+
 }
