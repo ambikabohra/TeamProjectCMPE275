@@ -10,10 +10,6 @@ public class UserRole implements Serializable {
     /** The Serial Version UID for Serializable classes. */
     private static final long serialVersionUID = 1L;
 
-    public UserRole() {
-
-    }
-
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -23,6 +19,15 @@ public class UserRole implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private Role role;
+
+    public UserRole() {
+
+    }
+
+    public UserRole(User user, Role role){
+        this.user = user;
+        this.role = role;
+    }
 
     public User getUser() {
         return user;

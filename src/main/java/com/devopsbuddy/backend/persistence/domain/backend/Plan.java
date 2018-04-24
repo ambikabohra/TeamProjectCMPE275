@@ -1,5 +1,7 @@
 package com.devopsbuddy.backend.persistence.domain.backend;
 
+import com.devopsbuddy.enums.PlanEnum;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
@@ -11,14 +13,19 @@ public class Plan implements Serializable {
     /** The serial version UID for Serializable classes . */
     private static final long serialVersionUID = 1L;
 
-    public Plan(){
-
-    }
-
     @Id
     private int id;
 
     private String name;
+
+    public Plan(){
+
+    }
+
+    public Plan(PlanEnum planEnum){
+        this.id = planEnum.getId();
+        this.name = planEnum.getPlanName();
+    }
 
     public int getId() {
         return id;
