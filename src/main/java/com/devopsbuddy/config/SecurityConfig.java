@@ -1,5 +1,6 @@
 package com.devopsbuddy.config;
 
+import com.devopsbuddy.backend.service.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -20,6 +21,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private Environment env;
+
+    @Autowired
+    private UserSecurityService userSecurityService;
 
     /** Public URLs. */
     private static final String[] PUBLIC_MATCHERS = {
@@ -47,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
-                .antMatchers("/payload").hasRole("USER")
+               /* .antMatchers("/payload").hasRole("BASIC")*/
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/payload")
@@ -59,7 +63,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+                .userDetailsService(userSecurityService);
     }
 }

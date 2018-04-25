@@ -1,9 +1,12 @@
 package com.devopsbuddy.backend.persistence.domain.backend;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +14,7 @@ import java.util.Set;
  * Created by tedonema on 28/03/2016.
  */
 @Entity
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
 
     /** The Serial Version UID for Serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -73,6 +76,7 @@ public class User implements Serializable {
     public String getUsername() {
         return username;
     }
+
 
     public void setUsername(String username) {
         this.username = username;
@@ -192,5 +196,26 @@ public class User implements Serializable {
         return (int) (id ^ (id >>> 32));
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
+        return authorities;
+    }
 
 }

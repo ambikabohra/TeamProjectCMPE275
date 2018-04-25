@@ -2,6 +2,7 @@ package com.devopsbuddy.backend.persistence.domain.backend;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "user_role")
@@ -11,12 +12,14 @@ public class UserRole implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
 
@@ -45,22 +48,25 @@ public class UserRole implements Serializable {
         this.role = role;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (!(o instanceof UserRole)) return false;
         UserRole userRole = (UserRole) o;
-
-        if (!user.equals(userRole.user)) return false;
-        return role.equals(userRole.role);
-
+        return id == userRole.id;
     }
 
     @Override
     public int hashCode() {
-        int result = user.hashCode();
-        result = 31 * result + role.hashCode();
-        return result;
+
+        return Objects.hash(id);
     }
 }
