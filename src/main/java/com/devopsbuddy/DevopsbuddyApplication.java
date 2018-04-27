@@ -10,6 +10,7 @@ import com.devopsbuddy.utils.UserUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,7 +24,14 @@ public class DevopsbuddyApplication implements CommandLineRunner {
 
 	@Autowired
 	private UserService userService;
-	
+
+	@Value("${webmaster.username}")
+	private String webmasterUsername;
+	@Value("${webmaster.password}")
+	private String webmasterPassword;
+	@Value("${webmaster.email}")
+	private String webmasterEmail;
+
 	/* The Application Logger */
 	private static final Logger LOG = LoggerFactory.getLogger(DevopsbuddyApplication.class);
 
@@ -34,12 +42,10 @@ public class DevopsbuddyApplication implements CommandLineRunner {
 	@Override
 	public void run(String... strings) throws Exception {
 
-		String username = "proUser";
-		String email = "proUser@devopsbuddy.com";
-
 		Set<UserRole> userRoles = new HashSet<>();
-		User basicUser = UserUtils.createBasicUser(username, email);
-		userRoles.add(new UserRole(basicUser, new Role(RolesEnum.BASIC)));
+		User basicUser = UserUtils.createBasicUser(webmasterUsername, webmasterEmail);
+		basicUser.setPassword(webmasterPassword);
+		userRoles.add(new UserRole(basicUser, new Role(RolesEnum.ADMIN)));
 		LOG.debug("Creating user with username {}", basicUser.getUsername());
 		userService.createUser(basicUser, PlanEnum.BASIC, userRoles);
 		LOG.debug("User {} created", basicUser.getUsername());
