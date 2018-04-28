@@ -23,7 +23,7 @@ public class PasswordResetToken implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     @Column(unique = true)
     private String token;
@@ -54,11 +54,11 @@ public class PasswordResetToken implements Serializable {
         expiryDate =  creationDateTime.plusMinutes(expiratioInMinutes);
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
