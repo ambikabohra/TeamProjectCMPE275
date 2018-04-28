@@ -25,14 +25,9 @@ import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RepositoriesIntegrationTest {
+public class UserIntegrationTest extends AbstractIntegrationTest{
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PlanRepository planRepository;
-    @Autowired
-    private RoleRepository roleRepository;
+
 
     @Rule public TestName testName = new TestName();
 
@@ -92,38 +87,6 @@ public class RepositoriesIntegrationTest {
         User user = createUser(username,email);
 
         userRepository.delete(user.getId());
-
-    }
-
-    //-----------------> Private methods
-
-    private Plan createBasicPlan(PlanEnum planEnum) {
-        return new Plan(planEnum);
-    }
-
-    private Role createBasicRole(RolesEnum rolesEnum) {
-        return new Role(rolesEnum);
-    }
-
-    private User createUser(String username, String email) {
-
-        Plan basicPlan = createBasicPlan(PlanEnum.BASIC);
-        planRepository.save(basicPlan);
-
-        User basicUser = UserUtils.createBasicUser(username, email);
-        basicUser.setPlan(basicPlan);
-
-        Role basicRole = createBasicRole(RolesEnum.BASIC);
-        roleRepository.save(basicRole);
-
-        Set<UserRole> userRoles = new HashSet<>();
-        UserRole userRole = new UserRole(basicUser, basicRole);
-        userRoles.add(userRole);
-
-        basicUser.getUserRoles().addAll(userRoles);
-        basicUser = userRepository.save(basicUser);
-
-        return basicUser;
 
     }
 
