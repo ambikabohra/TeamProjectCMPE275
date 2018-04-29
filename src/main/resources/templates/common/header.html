@@ -11,11 +11,16 @@
     <!-- Custom CSS -->
     <link type="text/css" th:href="@{/css/style.css}" rel="stylesheet" media="screen"/>
 
+    <!-- Form validation -->
+    <link type="text/css" th:href="@{/css/formValidation.min.css}" rel="stylesheet" media="screen"/>
+
 </head>
 
 <div th:fragment="before-body-scripts">
     <script th:src="@{webjars/jquery/2.1.4/jquery.min.js}"></script>
     <script th:src="@{webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/devopsbuddy.js}"></script>
+    <script th:src="@{/js/formValidation.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
 </div>
 </html>
