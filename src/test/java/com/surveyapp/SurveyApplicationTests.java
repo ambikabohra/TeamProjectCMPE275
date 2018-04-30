@@ -10,13 +10,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DevopsbuddyApplicationTests {
+public class SurveyApplicationTests {
 
 	@Autowired
 	private I18NService i18NService;
 
 	@Test
-	public void testMessageByLocaleService() throws Exception{
+    public void testMessageByLocaleService() {
 		String messageId = "index.main.callout";
 		String expectedResult = "Bootstrap starter template";
 		String actual = i18NService.getMessage(messageId);

@@ -20,7 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @SpringBootApplication
-public class DevopsbuddyApplication implements CommandLineRunner {
+public class SurveyApplication implements CommandLineRunner {
 
 	@Autowired
 	private UserService userService;
@@ -36,14 +36,14 @@ public class DevopsbuddyApplication implements CommandLineRunner {
 	private String webmasterEmail;
 
 	/* The Application Logger */
-	private static final Logger LOG = LoggerFactory.getLogger(DevopsbuddyApplication.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SurveyApplication.class);
 
 	public static void main(String[] args) {
-		SpringApplication.run(DevopsbuddyApplication.class, args);
+        SpringApplication.run(SurveyApplication.class, args);
 	}
 
 	@Override
-	public void run(String... strings) throws Exception {
+    public void run(String... strings) {
 
 		LOG.info("Creating Basic and Pro plans in the database...");
 		planService.createPlan(PlanEnum.BASIC.getId());
