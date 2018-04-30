@@ -31,7 +31,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.devopsbuddy" level="debug" />
+    <logger name="com.surveyapp" level="debug" />
     <logger name="uk.co.jemos.podam" level="warn" />
     <logger name="org.springframework" level="info" />
     <logger name="org.hibernate" level="warn" />
