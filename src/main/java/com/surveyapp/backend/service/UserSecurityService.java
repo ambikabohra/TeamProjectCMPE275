@@ -28,6 +28,12 @@ public class UserSecurityService implements UserDetailsService {
              LOG.warn("Username {} was not found", username);
              throw new UsernameNotFoundException(("Username "+username+" not found"));
          }
+
+         if(!user.isVerified()){
+             LOG.warn("Username {} is not verified", username);
+             throw new UsernameNotFoundException(("Username "+username+" is not verified"));
+         }
+
          return user;
     }
 }

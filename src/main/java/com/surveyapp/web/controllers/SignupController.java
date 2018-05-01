@@ -4,9 +4,8 @@ import com.surveyapp.backend.persistence.domain.backend.Plan;
 import com.surveyapp.backend.persistence.domain.backend.Role;
 import com.surveyapp.backend.persistence.domain.backend.User;
 import com.surveyapp.backend.persistence.domain.backend.UserRole;
-import com.surveyapp.backend.service.PlanService;
-import com.surveyapp.backend.service.S3Service;
-import com.surveyapp.backend.service.UserService;
+import com.surveyapp.backend.persistence.repositories.UserRepository;
+import com.surveyapp.backend.service.*;
 import com.surveyapp.enums.PlanEnum;
 import com.surveyapp.enums.RolesEnum;
 import com.surveyapp.exceptions.S3Exception;
@@ -16,9 +15,8 @@ import com.surveyapp.web.domain.frontend.ProAccountPayload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -30,14 +28,9 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.time.Clock;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-/**
- * Created by tedonema on 26/04/2016.
- */
+
 @Controller
 public class SignupController {
 
@@ -50,14 +43,32 @@ public class SignupController {
     @Autowired
     private S3Service s3Service;
 
-    /** The application logger */
+    @Autowired
+    private I18NService i18NService;
+
+    @Value("${webmaster.email}")
+    private String webMasterEmail;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    /**
+     * The application logger
+     */
     private static final Logger LOG = LoggerFactory.getLogger(SignupController.class);
 
     public static final String SIGNUP_URL_MAPPING = "/signup";
 
+    public static final String VERIFY_ACCOUNT_URL = "/verifycode";
+
     public static final String PAYLOAD_MODEL_KEY_NAME = "payload";
 
     public static final String SUBSCRIPTION_VIEW_NAME = "registration/signup";
+
+    public static final String VERIFICATION_VIEW_NAME = "registration/accountVerificationForm";
 
     public static final String DUPLICATED_USERNAME_KEY = "duplicatedUsername";
 
@@ -68,6 +79,8 @@ public class SignupController {
     public static final String ERROR_MESSAGE_KEY = "message";
 
     public static final String GENERIC_ERROR_VIEW_NAME = "error/genericError";
+
+    public static final String EMAIL_MESSAGE_TEXT_PROPERTY_NAME = "verify.account.email.text";
 
     @RequestMapping(value = SIGNUP_URL_MAPPING, method = RequestMethod.GET)
     public String signupGet(@RequestParam("planId") int planId, ModelMap model) {
@@ -81,7 +94,8 @@ public class SignupController {
     }
 
     @RequestMapping(value = SIGNUP_URL_MAPPING, method = RequestMethod.POST)
-    public String signUpPost(@RequestParam(name = "planId", required = true) int planId,
+    public String signUpPost(HttpServletRequest servletRequest,
+                             @RequestParam(name = "planId", required = true) int planId,
                              @RequestParam(name = "file", required = false) MultipartFile file,
                              @ModelAttribute(PAYLOAD_MODEL_KEY_NAME) @Valid ProAccountPayload payload,
                              ModelMap model) throws IOException {
@@ -149,6 +163,11 @@ public class SignupController {
 
         User registeredUser = null;
 
+        //Karan - generate a random string and save it with user
+        String code = UUID.randomUUID().toString();
+        user.setCode(code);
+
+
         // By default users get the BASIC ROLE
         Set<UserRole> roles = new HashSet<>();
         if (planId == PlanEnum.BASIC.getId()) {
@@ -161,17 +180,84 @@ public class SignupController {
         }
 
 
-        // Auto logins the registered user
+
+        /*// Auto logins the registered user
         Authentication auth = new UsernamePasswordAuthenticationToken(
                 registeredUser, null, registeredUser.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(auth);
+        SecurityContextHolder.getContext().setAuthentication(auth);*/
 
         LOG.info("User created successfully");
 
+        //now send user an email with the code to verify the account
+        String emailText = i18NService.getMessage(EMAIL_MESSAGE_TEXT_PROPERTY_NAME, servletRequest.getLocale());
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(user.getEmail());
+        mailMessage.setSubject("[Devopsbuddy]: How to Reset Your Password");
+        mailMessage.setText(emailText + "\r\n" + code);
+        mailMessage.setFrom(webMasterEmail);
+
+        emailService.sendGenericEmailMessage(mailMessage);
+
         model.addAttribute(SIGNED_UP_MESSAGE_KEY, "true");
+        //send the id of the user to assign it in hidden tag and use it to verify on next page
+        model.addAttribute("principalId", user.getId());
 
         return SUBSCRIPTION_VIEW_NAME;
     }
+
+    @RequestMapping(value = VERIFY_ACCOUNT_URL, method = RequestMethod.GET)
+    public String verifyAccountGet(@RequestParam(name = "principal_id") long principalId,
+                                   ModelMap model) throws Exception {
+
+        LOG.info("Inside get call of verify account. id is {}", principalId);
+        model.addAttribute("principalId", principalId);
+        return VERIFICATION_VIEW_NAME;
+    }
+
+
+    @RequestMapping(value = VERIFY_ACCOUNT_URL, method = RequestMethod.POST)
+    public String verifyAccountPost(@RequestParam(name = "code") String code,
+                                    @RequestParam(name = "principal_id") long principalId,
+                                    ModelMap model) throws Exception {
+
+        LOG.info("Inside post call of verify account. code recieved is {} and id is {}", code, principalId);
+
+        if (code.isEmpty() || code == null) {
+            LOG.info("code is empty");
+            throw new Exception("code not found");
+        }
+
+        User user = userService.findById(principalId);
+
+        if (user == null) {
+            LOG.info("user not found");
+            throw new Exception("user not found");
+        }
+
+        String userCodeInDb = user.getCode();
+        LOG.info("code for user {} is {} ", user.getUsername(), userCodeInDb);
+
+        if (userCodeInDb.isEmpty() || userCodeInDb == null) {
+            LOG.info("code for user {} is {} ", user.getUsername(), userCodeInDb);
+            throw new Exception("user code not found");
+        }
+
+        boolean verified = false;
+        if (userCodeInDb.equals(code)) {
+            LOG.info("code is verified");
+            user.setVerified(true);
+            userRepository.save(user);
+            verified = true;
+        } else {
+
+        }
+
+        model.addAttribute("verified", verified);
+
+        return "user/login";
+    }
+
 
     @ExceptionHandler({S3Exception.class})
     public ModelAndView signupException(HttpServletRequest request, Exception exception) {

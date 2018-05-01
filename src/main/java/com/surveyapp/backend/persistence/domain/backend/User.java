@@ -62,6 +62,11 @@ public class User implements Serializable, UserDetails {
     @JoinColumn(name = "plan_id")
     private Plan plan;
 
+    private boolean verified;
+
+    @Column(unique = true)
+    private String code;
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new HashSet<>();
@@ -193,6 +198,21 @@ public class User implements Serializable, UserDetails {
     }
 
 
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     @Override
     public boolean equals(Object o) {

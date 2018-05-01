@@ -21,6 +21,18 @@
                     </button>
                     <p th:text="#{signup.profile.created.success}" class="text-center"/>
                 </div>
+                <div th:if="${signedUp == 'true'}" class="alert alert-success alert-dismissible" role="alert">
+                    <div class="well">
+                        <form id="verifyaccount" th:action="@{/verifycode}" method="get" role="form">
+                            <!-- Code -->
+                            <input type="hidden" name="principal_id" id="principal_id" th:value="${principalId}" />
+                            <p th:text="#{signup.verify.link.text}" class="text-center"/>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" th:text="#{signup.verify.button.text}"></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div th:if="${signedUp == 'false'}" class="alert alert-danger alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">x</span>
@@ -33,7 +45,7 @@
 
                 <h1 th:if="${#httpServletRequest.getParameter('planId') == '1'}" th:text="#{signup.h1.basic.profile}"></h1>
                 <h1 th:if="${#httpServletRequest.getParameter('planId') == '2'}" th:text="#{signup.h1.pro.profile}"></h1>
-                <p class="lead">Please fill in the form to subscribe to DevOps Buddy!</p>
+                <p class="lead">Please fill in the form to create an account with us!</p>
 
                 <form id="signupForm" th:action="@{/signup}"
                       th:object="${__${T(com.surveyapp.web.controllers.SignupController).PAYLOAD_MODEL_KEY_NAME}__}"

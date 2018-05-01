@@ -24,6 +24,7 @@ public class UserUtils {
         user.setEnabled(true);
         user.setDescription("basicUserDescription");
         user.setProfileImageUrl("https://basicUser.image.com/basicUserProfileImageURL");
+        user.setVerified(false);
 
         return user;
 

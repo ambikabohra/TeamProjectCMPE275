@@ -106,4 +106,7 @@ public class UserService {
     }
 
 
+    public User findById(long principalId) {
+        return userRepository.findById(principalId);
+    }
 }
