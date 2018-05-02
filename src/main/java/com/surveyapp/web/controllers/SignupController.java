@@ -40,9 +40,9 @@ public class SignupController {
     @Autowired
     private UserService userService;
 
-    @Autowired
+    /*@Autowired
     private S3Service s3Service;
-
+*/
     @Autowired
     private I18NService i18NService;
 
@@ -138,7 +138,7 @@ public class SignupController {
         User user = UserUtils.fromWebUserToDomainUser(payload);
 
         // Stores the profile image on Amazon S3 and stores the URL in the user's record
-        if (file != null && !file.isEmpty()) {
+        /*if (file != null && !file.isEmpty()) {
 
             String profileImageUrl = s3Service.storeProfileImage(file, payload.getUsername());
             if (profileImageUrl != null) {
@@ -148,7 +148,7 @@ public class SignupController {
                         " be created without the image");
             }
 
-        }
+        }*/
 
         // Sets the Plan and the Roles (depending on the chosen plan)
         LOG.debug("Retrieving plan from the database");
