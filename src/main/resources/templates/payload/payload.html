@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="common/header :: common-header" />
+<head th:replace="common/header :: common-header"/>
 
 <body>
 
-<div th:replace="common/navbar :: common-navbar" />
+<div th:replace="common/navbar :: common-navbar"/>
 
 <div class="container">
 
@@ -17,9 +17,35 @@
 
                 <div class="text-center">
 
-                    <h1 th:text="#{payload.h1.text}" />
+                    <h1 th:text="#{home.welcome.message}"/>
 
-                    <p class="lead" th:text="#{payload.p.lead}" />
+                    <p class="lead" th:text="#{home.second.message}"/>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="well">
+                                    <h2 class="text-center" th:text="#{payload.surveyor.button.text}"></h2>
+                                    <h4 th:text="#{payload.explain.button}"></h4>
+                                    <br/>
+                                    <a class="btn btn-primary btn-lg btn-block"
+                                       th:href="@{/surveyorhome}"
+                                       th:text="#{payload.surveyor.button.text}"></a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="well">
+                                    <h2 class="text-center" th:text="#{payload.surveyee.button.text}"></h2>
+                                    <h4 th:text="#{payload.explain.surveyee.button}"></h4>
+                                    <br/>
+                                    <a class="btn btn-success btn-lg btn-block"
+                                       th:href="@{/surveyeehome}"
+                                       th:text="#{payload.surveyee.button.text}"></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -34,7 +60,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<div th:replace="common/header :: before-body-scripts" />
+<div th:replace="common/header :: before-body-scripts"/>
 
 </body>
 </html>
