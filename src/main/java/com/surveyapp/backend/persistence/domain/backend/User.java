@@ -6,9 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by tedonema on 28/03/2016.
@@ -75,6 +73,9 @@ public class User implements Serializable, UserDetails {
             fetch = FetchType.LAZY,
             mappedBy = "user")
     private Set<PasswordResetToken> passwordResetTokens = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Survey> surveys= new ArrayList<>();   //mapped survey list to user
 
     public Set<PasswordResetToken> getPasswordResetTokens() {
         return passwordResetTokens;
@@ -212,6 +213,14 @@ public class User implements Serializable, UserDetails {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public List<Survey> getSurveys() {
+        return surveys;
+    }
+
+    public void setSurveys(List<Survey> surveys) {
+        this.surveys = surveys;
     }
 
     @Override
