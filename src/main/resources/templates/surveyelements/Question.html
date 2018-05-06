@@ -4,11 +4,12 @@
 <head th:replace="common/header :: common-header"/>
 
 <body>
+<!--multiple choice part-->
 <div class="container" th:fragment="multipleChoiceQuestion">
     <div class="row">
         <div class="col-md-12">
             <div class="jumbotron" onclick="editMultipleChoiceQuestion()">
-                <h4 id="question">New Question here...</h4>
+                <h4 id="questionMC">New Question here...</h4>
                 <div class="row">
                     <div class="col-md-12">
                         <form id="options">
@@ -39,7 +40,7 @@
                 <form class="form-group" id="editoptions">
                     <label id="quesText">Type your question here</label><br/>
                     <input type="text" class="text" id="quesTextField" oninput="editMultipleChoiceQuesText()"/>
-                    <br/>
+                    <br/><br/>
                     <label>Edit Options</label><br/>
                     <input type="text" class="text" id="option1Text" oninput="changeMultipleChoiceOptionText('option1')"
                            placeholder="Option 1"/>
@@ -55,6 +56,30 @@
     </div>
 </div>
 <div th:replace="common/header :: before-body-scripts"/>
+
+
+<!--Star option part-->
+<div class="container" th:fragment="starRatingQuestion">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" onclick="editMultipleChoiceQuestion()">
+                <h4 id="questionStar">New Question here...</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="starOptions">
+                            <h2>Star Rating</h2>
+                            <span id="star1" class="fa fa-star" onclick ="markChecked('star1')"></span>
+                            <span id="star2" class="fa fa-star" onclick ="markChecked('star2')"></span>
+                            <span id="star3" class="fa fa-star" onclick ="markChecked('star3')"></span>
+                            <span id="star4" class="fa fa-star" onclick ="markChecked('star4')"></span>
+                            <span id="star5" class="fa fa-star" onclick ="markChecked('star5')"></span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

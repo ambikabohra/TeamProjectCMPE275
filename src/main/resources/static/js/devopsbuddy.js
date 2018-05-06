@@ -1,8 +1,10 @@
-$( document ).ready( main );
+$(document).ready(main);
+
+var addMultipleChoiceEditTemplate = true;
 
 function main() {
 
-    $('.btn-collapse').click(function(e) {
+    $('.btn-collapse').click(function (e) {
         e.preventDefault();
         var $this = $(this);
         var $collapse = $this.closest('.collapse-group').find('.collapse');
@@ -220,7 +222,7 @@ function main() {
         }
     })
     // Revalidate phone number when changing the country
-        .on('change', '[name="country"]', function(e) {
+        .on('change', '[name="country"]', function (e) {
             $('#signupForm').formValidation('revalidateField', 'phoneNumber');
         });
 
@@ -233,9 +235,9 @@ function addMultipleChoiceQues() {
 
     var temp = document.getElementsByTagName("template")[0];
     var clon = temp.content.cloneNode(true);
-    if(clon == null || clon == ""){
+    if (clon == null || clon == "") {
         console.log("nothing here");
-    }else{
+    } else {
         console.log(clon);
     }
     document.getElementById("placeHolder").appendChild(clon);
@@ -244,23 +246,27 @@ function addMultipleChoiceQues() {
 
 function editMultipleChoiceQuestion() {
 
-    var temp = document.getElementsByTagName("template")[1];
-    var editTab = temp.content.cloneNode(true);
-    if(editTab == null || editTab == ""){
-        console.log("nothing here");
-    }else{
-        console.log(editTab);
+    if (addMultipleChoiceEditTemplate) {
+        var temp = document.getElementsByTagName("template")[1];
+        var editTab = temp.content.cloneNode(true);
+        if (editTab == null || editTab == "") {
+            console.log("nothing here");
+        } else {
+            console.log(editTab);
+        }
+        document.getElementById("placeHolder").appendChild(editTab);
+        addEditTemplate = false;
     }
-    document.getElementById("placeHolder").appendChild(editTab);
+
 
 }
 
 function editMultipleChoiceQuesText() {
 
-   var question = document.getElementById("question");
-   var quesTextFieldValue = document.getElementById("quesTextField").value;
-   question.innerHTML = quesTextFieldValue;
-   console.log(quesTextFieldValue);
+    var question = document.getElementById("questionMC");
+    var quesTextFieldValue = document.getElementById("quesTextField").value;
+    question.innerHTML = quesTextFieldValue;
+    console.log(quesTextFieldValue);
 
 }
 
@@ -269,28 +275,42 @@ function changeMultipleChoiceOptionText(optionPar) {
     var option;
     var optionText;
 
-   if(optionPar == "option1"){
+    if (optionPar == "option1") {
 
-       option = document.getElementById("option1");
-       optionText = document.getElementById("option1Text").value;
-       option.innerHTML = optionText;
-   }else if(optionPar == "option2"){
+        option = document.getElementById("option1");
+        optionText = document.getElementById("option1Text").value;
+        option.innerHTML = optionText;
+    } else if (optionPar == "option2") {
 
-       option = document.getElementById("option2");
-       optionText = document.getElementById("option2Text").value;
-       option.innerHTML = optionText;
-   }else if(optionPar == "option3"){
+        option = document.getElementById("option2");
+        optionText = document.getElementById("option2Text").value;
+        option.innerHTML = optionText;
+    } else if (optionPar == "option3") {
 
-       option = document.getElementById("option3");
-       optionText = document.getElementById("option3Text").value;
-       option.innerHTML = optionText;
-   }else if(optionPar == "option4"){
+        option = document.getElementById("option3");
+        optionText = document.getElementById("option3Text").value;
+        option.innerHTML = optionText;
+    } else if (optionPar == "option4") {
 
-       option = document.getElementById("option4");
-       optionText = document.getElementById("option4Text").value;
-       option.innerHTML = optionText;
-   }
+        option = document.getElementById("option4");
+        optionText = document.getElementById("option4Text").value;
+        option.innerHTML = optionText;
+    }
 
 }
+/*
+function markChecked(star) {
+    var starNum = star.substr(star.lastIndexOf('r'),1);
+    console.log(starNum);
+    while()
+    var star = document.getElementById(star);
+    if(flag == "unchecked"){
+        star.setAttribute('class','fa fa-star checked');
+        flag = "checked";
+    }else{
+        star.setAttribute('class','fa fa-star');
+        flag = "unchecked";
+    }
+}*/
 
 

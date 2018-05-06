@@ -23,8 +23,7 @@
                                         <div class="btn-group" role="group">
                                             <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                                role="button" aria-haspopup="true" aria-expanded="false"> Add Question
-                                                <span
-                                                        class="caret"></span> </a>
+                                                <span class="caret"></span> </a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="#" onclick="addMultipleChoiceQues()">Multiple Choice</a>
                                                 </li>
@@ -50,11 +49,40 @@
                                             <div th:replace="surveyelements/Question :: editMultipleChoiceQues"></div>
                                         </template>
                                         <template id="quesPlaceHolder">
-                                            <div th:replace="surveyelements/Question :: question"/>
+                                            <div th:replace="surveyelements/Question :: trueFalseOptions"/>
                                         </template>
                                         <template id="optionPlaceHolder">
-                                            <div th:replace="surveyelements/Question :: question"/>
+                                            <div th:replace="surveyelements/Question :: editTrueFalseQues"/>
                                         </template>
+                                        <template id="singleQuesPlaceHolder">
+                                            <div th:replace="surveyelements/Question :: singleQuestion"></div>
+                                        </template>
+                                        <template id="singleAnsQuestionEdit">
+                                            <div th:replace="surveyelements/Question :: singleAnsQuestionEdit"></div>
+                                        </template>
+                                        <!--Star Type Question-->
+                                       <!-- <template id="starQuesPlaceHolder">
+                                            <div th:replace="surveyelements/Question :: singleQuestion"></div>
+                                        </template>
+                                        <template id="starQuestionEdit">
+                                            <div th:replace="surveyelements/Question :: singleAnsQuestionEdit"></div>
+                                        </template>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <br/>
+                                        <a class="btn btn-primary btn-md btn-block"
+                                           th:href="@{/savequestion}"
+                                           th:text="#{save.question.button.text}"></a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <br/>
+                                        <a class="btn btn-success btn-md btn-block"
+                                           th:href="@{/publishsurvey}"
+                                           th:text="#{publish.survey.button.text}"></a>
                                     </div>
                                 </div>
                             </div>
