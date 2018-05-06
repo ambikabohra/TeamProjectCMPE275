@@ -20,10 +20,6 @@
                 <li><a th:text="#{navbar.contact.text}" href="/contact"></a></li>
                 <li th:if="${#authorization.expression('isAuthenticated()')}">
                     <a th:text="#{navbar.change.role.text}" href="/payload"></a></li>
-                <li th:if="${role=='surveyor'}">
-                    <a th:text="#{navbar.create.survey.text}" href="/payload"></a></li>
-                <li th:if="${role=='surveyee'}">
-                    <a th:text="#{navbar.take.survey.text}" href="/payload"></a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

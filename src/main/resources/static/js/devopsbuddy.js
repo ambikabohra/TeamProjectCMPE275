@@ -1,4 +1,4 @@
-$( document ).ready( main );
+//$( document ).ready( main );
 
 function main() {
 
@@ -225,3 +225,72 @@ function main() {
         });
 
 }
+
+var count = 0;
+
+
+function addMultipleChoiceQues() {
+
+    var temp = document.getElementsByTagName("template")[0];
+    var clon = temp.content.cloneNode(true);
+    if(clon == null || clon == ""){
+        console.log("nothing here");
+    }else{
+        console.log(clon);
+    }
+    document.getElementById("placeHolder").appendChild(clon);
+
+}
+
+function editQuestion() {
+
+    var temp = document.getElementsByTagName("template")[1];
+    var editTab = temp.content.cloneNode(true);
+    if(editTab == null || editTab == ""){
+        console.log("nothing here");
+    }else{
+        console.log(editTab);
+    }
+    document.getElementById("placeHolder").appendChild(editTab);
+
+}
+
+function editQuesText() {
+
+   var question = document.getElementById("question");
+   var quesTextFieldValue = document.getElementById("quesTextField").value;
+   question.innerHTML = quesTextFieldValue;
+   console.log(quesTextFieldValue);
+
+}
+
+function changeOptionText(optionPar) {
+
+    var option;
+    var optionText;
+
+   if(optionPar == "option1"){
+
+       option = document.getElementById("option1");
+       optionText = document.getElementById("option1Text").value;
+       option.innerHTML = optionText;
+   }else if(optionPar == "option2"){
+
+       option = document.getElementById("option2");
+       optionText = document.getElementById("option2Text").value;
+       option.innerHTML = optionText;
+   }else if(optionPar == "option3"){
+
+       option = document.getElementById("option3");
+       optionText = document.getElementById("option3Text").value;
+       option.innerHTML = optionText;
+   }else if(optionPar == "option4"){
+
+       option = document.getElementById("option4");
+       optionText = document.getElementById("option4Text").value;
+       option.innerHTML = optionText;
+   }
+
+}
+
+
