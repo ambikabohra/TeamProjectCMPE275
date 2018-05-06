@@ -39,7 +39,6 @@ public class SurveyController{
         return new ResponseEntity<>(surveyObj, HttpStatus.OK);
 
     }
-
 }
 
 
