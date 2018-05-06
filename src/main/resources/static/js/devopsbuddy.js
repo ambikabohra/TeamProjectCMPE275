@@ -1,6 +1,8 @@
 $(document).ready(main);
 
 var addMultipleChoiceEditTemplate = true;
+var addTrueFalseEditTemplate = true;
+var addSingleAnsEditTemplate = true;
 
 function main() {
 
@@ -298,6 +300,82 @@ function changeMultipleChoiceOptionText(optionPar) {
     }
 
 }
+
+
+function editTrueFalseQues() {
+
+    var temp = document.getElementsByTagName("template")[3];
+    var editTab = temp.content.cloneNode(true);
+    if(editTab == null || editTab == ""){
+        console.log("nothing here");
+    }else{
+        console.log(editTab);
+    }
+    document.getElementById("placeHolder").appendChild(editTab);
+
+}
+
+
+function addTrueFalse() {
+    if(addTrueFalseEditTemplate){
+        var temp = document.getElementsByTagName("template")[2];
+        var clon = temp.content.cloneNode(true);
+        if(clon == null || clon == ""){
+            console.log("nothing here");
+        }else{
+            console.log(clon);
+        }
+        document.getElementById("placeHolder").appendChild(clon);
+        addTrueFalseEditTemplate = false;
+    }
+}
+
+
+function editTrueFalseQuesText() {
+
+    var question = document.getElementById("questionTF");
+    var quesTextFieldValue = document.getElementById("quesTextFieldTF").value;
+    question.innerHTML = quesTextFieldValue;
+    console.log(quesTextFieldValue);
+
+}
+
+function addShortAnsQues() {
+    if(addSingleAnsEditTemplate){
+        var temp = document.getElementsByTagName("template")[4];
+        var clon = temp.content.cloneNode(true);
+        if(clon == null || clon == ""){
+            console.log("nothing here");
+        }else{
+            console.log(clon);
+        }
+        document.getElementById("placeHolder").appendChild(clon);
+        addTrueFalseEditTemplate = false;
+    }
+}
+
+function AddShortAnsQuesTextBox() {
+
+    var temp = document.getElementsByTagName("template")[5];
+    var editTab = temp.content.cloneNode(true);
+    if(editTab == null || editTab == ""){
+        console.log("nothing here");
+    }else{
+        console.log(editTab);
+    }
+    document.getElementById("placeHolder").appendChild(editTab);
+
+}
+
+function editShortAnsQuesText() {
+
+    var question = document.getElementById("questionSA");
+    var quesTextFieldValue = document.getElementById("quesTextFieldSA").value;
+    question.innerHTML = quesTextFieldValue;
+    console.log(quesTextFieldValue);
+
+}
+
 /*
 function markChecked(star) {
     var starNum = star.substr(star.lastIndexOf('r'),1);

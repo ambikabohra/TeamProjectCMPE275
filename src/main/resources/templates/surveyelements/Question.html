@@ -55,6 +55,93 @@
         </div>
     </div>
 </div>
+
+<div class="container" th:fragment="trueFalseOptions">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" onclick="editTrueFalseQues()">
+                <h4 id="questionTF">New Question here...</h4>
+                <!-- <div class="container">
+                     <div class="row">
+                         <div class="col-md-12">
+                             <div class="well">-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="options">
+                            <div class="form-control">
+                                <input type="radio" name="TF" value="True"/><label style="margin-left: 20px" id="option1">True</label>
+                            </div>
+                            <div class="form-control">
+                                <input type="radio" name="TF" value="False"/> <label style="margin-left: 20px" id="option2">False</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--           </div>
+                       </div>
+                   </div>
+               </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="editTrueFalseQues">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-group" id="editoptionsTF">
+                    <label id="quesTextTF">Type your question here</label><br/>
+                    <input type="text" class="text" id="quesTextFieldTF" oninput="editTrueFalseQuesText()"/>
+                    <br/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="singleQuestion">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" onclick="AddShortAnsQuesTextBox()">
+                <h4 id="questionSA">New Question here...</h4>
+                <!-- <div class="container">
+                     <div class="row">
+                         <div class="col-md-12">
+                             <div class="well">-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="options">
+                            <div class="form-control">
+                                <input type="text" name="shortAns" value=""/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--           </div>
+                       </div>
+                   </div>
+               </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="singleAnsQuestionEdit">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-group" id="editoptionsSA">
+                    <label id="quesTextSA">Type your question here</label><br/>
+                    <input type="text" class="text" id="quesTextFieldSA" oninput="editShortAnsQuesText()"/>
+                    <br/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div th:replace="common/header :: before-body-scripts"/>
 
 

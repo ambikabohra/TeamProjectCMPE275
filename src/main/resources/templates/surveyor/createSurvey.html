@@ -25,10 +25,9 @@
                                                role="button" aria-haspopup="true" aria-expanded="false"> Add Question
                                                 <span class="caret"></span> </a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="#" onclick="addMultipleChoiceQues()">Multiple Choice</a>
-                                                </li>
-                                                <li><a href="#">True False</a></li>
-                                                <li><a href="#">Short Answer Type</a></li>
+                                                <li><a href="#" onclick="addMultipleChoiceQues()">Multiple Choice</a></li>
+                                                <li><a href="#" onclick="addTrueFalse()">True False</a></li>
+                                                <li><a href="#" onclick="addShortAnsQues()">Short Answer Type</a></li>
                                                 <li><a href="#">DateTime</a></li>
                                                 <li><a href="#">Star</a></li>
                                             </ul>
@@ -49,10 +48,10 @@
                                             <div th:replace="surveyelements/Question :: editMultipleChoiceQues"></div>
                                         </template>
                                         <template id="quesPlaceHolder">
-                                            <div th:replace="surveyelements/Question :: trueFalseOptions"/>
+                                            <div th:replace="surveyelements/Question :: trueFalseOptions"></div>
                                         </template>
                                         <template id="optionPlaceHolder">
-                                            <div th:replace="surveyelements/Question :: editTrueFalseQues"/>
+                                            <div th:replace="surveyelements/Question :: editTrueFalseQues"></div>
                                         </template>
                                         <template id="singleQuesPlaceHolder">
                                             <div th:replace="surveyelements/Question :: singleQuestion"></div>
