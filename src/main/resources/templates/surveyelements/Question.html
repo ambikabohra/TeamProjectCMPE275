@@ -7,12 +7,8 @@
 <div class="container" th:fragment="multipleChoiceQuestion">
     <div class="row">
         <div class="col-md-12">
-            <div class="jumbotron" onclick="editQuestion()">
+            <div class="jumbotron" onclick="editMultipleChoiceQuestion()">
                 <h4 id="question">New Question here...</h4>
-                <!-- <div class="container">
-                     <div class="row">
-                         <div class="col-md-12">
-                             <div class="well">-->
                 <div class="row">
                     <div class="col-md-12">
                         <form id="options">
@@ -31,10 +27,6 @@
                         </form>
                     </div>
                 </div>
-                <!--           </div>
-                       </div>
-                   </div>
-               </div>-->
             </div>
         </div>
     </div>
@@ -46,16 +38,16 @@
             <div class="col-md-12">
                 <form class="form-group" id="editoptions">
                     <label id="quesText">Type your question here</label><br/>
-                    <input type="text" class="text" id="quesTextField" oninput="editQuesText()"/>
+                    <input type="text" class="text" id="quesTextField" oninput="editMultipleChoiceQuesText()"/>
                     <br/>
                     <label>Edit Options</label><br/>
-                    <input type="text" class="text" id="option1Text" oninput="changeOptionText('option1')"
+                    <input type="text" class="text" id="option1Text" oninput="changeMultipleChoiceOptionText('option1')"
                            placeholder="Option 1"/>
-                    <input type="text" class="text" id="option2Text" oninput="changeOptionText('option2')"
+                    <input type="text" class="text" id="option2Text" oninput="changeMultipleChoiceOptionText('option2')"
                            placeholder="Option 2"/>
-                    <input type="text" class="text" id="option3Text" oninput="changeOptionText('option3')"
+                    <input type="text" class="text" id="option3Text" oninput="changeMultipleChoiceOptionText('option3')"
                            placeholder="Option 3"/>
-                    <input type="text" class="text" id="option4Text" oninput="changeOptionText('option4')"
+                    <input type="text" class="text" id="option4Text" oninput="changeMultipleChoiceOptionText('option4')"
                            placeholder="Option 4"/>
                 </form>
             </div>

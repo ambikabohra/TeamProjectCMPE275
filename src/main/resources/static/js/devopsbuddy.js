@@ -1,4 +1,4 @@
-//$( document ).ready( main );
+$( document ).ready( main );
 
 function main() {
 
@@ -242,7 +242,7 @@ function addMultipleChoiceQues() {
 
 }
 
-function editQuestion() {
+function editMultipleChoiceQuestion() {
 
     var temp = document.getElementsByTagName("template")[1];
     var editTab = temp.content.cloneNode(true);
@@ -255,7 +255,7 @@ function editQuestion() {
 
 }
 
-function editQuesText() {
+function editMultipleChoiceQuesText() {
 
    var question = document.getElementById("question");
    var quesTextFieldValue = document.getElementById("quesTextField").value;
@@ -264,7 +264,7 @@ function editQuesText() {
 
 }
 
-function changeOptionText(optionPar) {
+function changeMultipleChoiceOptionText(optionPar) {
 
     var option;
     var optionText;
