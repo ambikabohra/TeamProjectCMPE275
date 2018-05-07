@@ -12,8 +12,46 @@ public class SurveyorController {
 
     @RequestMapping(value = "/surveyorhome", method = RequestMethod.GET)
     public String getSurveryorHome(ModelMap model){
+
         model.addAttribute("role","surveyor");
         return SURVEYOR_HOME;
     }
+
+    public static final String CREATE_SURVEY = "surveyor/createSurvey";
+
+    @RequestMapping(value = "/createsurvey", method = RequestMethod.GET)
+    public String createSurveyGet(ModelMap model){
+
+        model.addAttribute("role","surveyor");
+        return CREATE_SURVEY;
+    }
+
+    public static final String SHARE_SURVEY = "surveyor/shareSurvey";
+
+    @RequestMapping(value = "/sharesurvey", method = RequestMethod.GET)
+    public String shareSurveyGet(ModelMap model){
+
+        model.addAttribute("role","surveyor");
+        return SHARE_SURVEY;
+    }
+
+    public static final String CHECK_RESPONSES = "surveyor/surveyResponse";
+
+    @RequestMapping(value = "/surveyresponse", method = RequestMethod.GET)
+    public String surveyResponseGet(ModelMap model){
+
+        model.addAttribute("role","surveyor");
+        return CHECK_RESPONSES;
+    }
+
+    public static final String EDIT_SURVEY = "surveyor/editSurvey";
+
+    @RequestMapping(value = "/editsurvey", method = RequestMethod.GET)
+    public String editSurveyGet(ModelMap model){
+
+        model.addAttribute("role","surveyor");
+        return EDIT_SURVEY;
+    }
+
 
 }
