@@ -259,14 +259,12 @@ function editMultipleChoiceQuestion() {
         document.getElementById("placeHolder").appendChild(editTab);
         addEditTemplate = false;
     }
-
-
 }
 
 function editMultipleChoiceQuesText() {
 
     var question = document.getElementById("questionMC");
-    var quesTextFieldValue = document.getElementById("quesTextField").value;
+    var quesTextFieldValue = document.getElementById("multipleChoiceQuesTextField").value;
     question.innerHTML = quesTextFieldValue;
     console.log(quesTextFieldValue);
 
@@ -301,21 +299,6 @@ function changeMultipleChoiceOptionText(optionPar) {
 
 }
 
-
-function editTrueFalseQues() {
-
-    var temp = document.getElementsByTagName("template")[3];
-    var editTab = temp.content.cloneNode(true);
-    if(editTab == null || editTab == ""){
-        console.log("nothing here");
-    }else{
-        console.log(editTab);
-    }
-    document.getElementById("placeHolder").appendChild(editTab);
-
-}
-
-
 function addTrueFalse() {
     if(addTrueFalseEditTemplate){
         var temp = document.getElementsByTagName("template")[2];
@@ -328,6 +311,20 @@ function addTrueFalse() {
         document.getElementById("placeHolder").appendChild(clon);
         addTrueFalseEditTemplate = false;
     }
+}
+
+
+function editTrueFalseQues() {
+
+    var temp = document.getElementsByTagName("template")[3];
+    var editTab = temp.content.cloneNode(true);
+    if(editTab == null || editTab == ""){
+        console.log("nothing here");
+    }else{
+        console.log(editTab);
+    }
+    document.getElementById("placeHolder").appendChild(editTab);
+
 }
 
 
@@ -354,7 +351,7 @@ function addShortAnsQues() {
     }
 }
 
-function AddShortAnsQuesTextBox() {
+function editShortAnsQues() {
 
     var temp = document.getElementsByTagName("template")[5];
     var editTab = temp.content.cloneNode(true);
@@ -376,19 +373,43 @@ function editShortAnsQuesText() {
 
 }
 
-/*
-function markChecked(star) {
-    var starNum = star.substr(star.lastIndexOf('r'),1);
-    console.log(starNum);
-    while()
-    var star = document.getElementById(star);
-    if(flag == "unchecked"){
-        star.setAttribute('class','fa fa-star checked');
-        flag = "checked";
-    }else{
-        star.setAttribute('class','fa fa-star');
-        flag = "unchecked";
+function addStarRatingQues() {
+
+    var temp = document.getElementsByTagName("template")[6];
+    var clon = temp.content.cloneNode(true);
+    if (clon == null || clon == "") {
+        console.log("nothing here");
+    } else {
+        console.log(clon);
     }
-}*/
+    document.getElementById("placeHolder").appendChild(clon);
+
+}
+
+function editStarRatingQues() {
+
+    var temp = document.getElementsByTagName("template")[7];
+    var editTab = temp.content.cloneNode(true);
+    if(editTab == null || editTab == ""){
+        console.log("nothing here");
+    }else{
+        console.log(editTab);
+    }
+    document.getElementById("placeHolder").appendChild(editTab);
+
+}
+
+function editStarRatingQuesText() {
+
+    var question = document.getElementById("questionStar");
+    var quesTextFieldValue = document.getElementById("quesTextStarRatingField").value;
+    question.innerHTML = quesTextFieldValue;
+    console.log(quesTextFieldValue);
+
+}
+
+
+
+
 
 
