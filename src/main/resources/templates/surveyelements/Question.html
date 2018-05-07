@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+<!--multiple choice part-->
+<div class="container" th:fragment="multipleChoiceQuestion">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" onclick="editMultipleChoiceQuestion()">
+                <h4 id="questionMC">New Question here...</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="options">
+                            <div class="form-control">
+                                <input type="checkbox" value=""/><label style="margin-left: 20px" id="option1">Option 1</label>
+                            </div>
+                            <div class="form-control">
+                                <input type="checkbox" value=""/> <label style="margin-left: 20px" id="option2">Option 2</label>
+                            </div>
+                            <div class="form-control">
+                                <input type="checkbox" value=""/> <label style="margin-left: 20px" id="option3">Option 3</label>
+                            </div>
+                            <div class="form-control">
+                                <input type="checkbox" value=""/><label style="margin-left: 20px" id="option4">Option 4</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="editMultipleChoiceQues">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-group" id="editoptions">
+                    <label id="quesText">Type your question here</label><br/>
+                    <input type="text" class="text" id="quesTextField" oninput="editMultipleChoiceQuesText()"/>
+                    <br/><br/>
+                    <label>Edit Options</label><br/>
+                    <input type="text" class="text" id="option1Text" oninput="changeMultipleChoiceOptionText('option1')"
+                           placeholder="Option 1"/>
+                    <input type="text" class="text" id="option2Text" oninput="changeMultipleChoiceOptionText('option2')"
+                           placeholder="Option 2"/>
+                    <input type="text" class="text" id="option3Text" oninput="changeMultipleChoiceOptionText('option3')"
+                           placeholder="Option 3"/>
+                    <input type="text" class="text" id="option4Text" oninput="changeMultipleChoiceOptionText('option4')"
+                           placeholder="Option 4"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="trueFalseOptions">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" onclick="editTrueFalseQues()">
+                <h4 id="questionTF">New Question here...</h4>
+                <!-- <div class="container">
+                     <div class="row">
+                         <div class="col-md-12">
+                             <div class="well">-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="options">
+                            <div class="form-control">
+                                <input type="radio" name="TF" value="True"/><label style="margin-left: 20px" id="option1">True</label>
+                            </div>
+                            <div class="form-control">
+                                <input type="radio" name="TF" value="False"/> <label style="margin-left: 20px" id="option2">False</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--           </div>
+                       </div>
+                   </div>
+               </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="editTrueFalseQues">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-group" id="editoptionsTF">
+                    <label id="quesTextTF">Type your question here</label><br/>
+                    <input type="text" class="text" id="quesTextFieldTF" oninput="editTrueFalseQuesText()"/>
+                    <br/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="singleQuestion">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" onclick="AddShortAnsQuesTextBox()">
+                <h4 id="questionSA">New Question here...</h4>
+                <!-- <div class="container">
+                     <div class="row">
+                         <div class="col-md-12">
+                             <div class="well">-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="options">
+                            <div class="form-control">
+                                <input type="text" name="shortAns" value=""/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--           </div>
+                       </div>
+                   </div>
+               </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="singleAnsQuestionEdit">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-group" id="editoptionsSA">
+                    <label id="quesTextSA">Type your question here</label><br/>
+                    <input type="text" class="text" id="quesTextFieldSA" oninput="editShortAnsQuesText()"/>
+                    <br/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="common/header :: before-body-scripts"/>
+
+
+<!--Star option part-->
+<div class="container" th:fragment="starRatingQuestion">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" onclick="editMultipleChoiceQuestion()">
+                <h4 id="questionStar">New Question here...</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="starOptions">
+                            <h2>Star Rating</h2>
+                            <span id="star1" class="fa fa-star" onclick ="markChecked('star1')"></span>
+                            <span id="star2" class="fa fa-star" onclick ="markChecked('star2')"></span>
+                            <span id="star3" class="fa fa-star" onclick ="markChecked('star3')"></span>
+                            <span id="star4" class="fa fa-star" onclick ="markChecked('star4')"></span>
+                            <span id="star5" class="fa fa-star" onclick ="markChecked('star5')"></span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
