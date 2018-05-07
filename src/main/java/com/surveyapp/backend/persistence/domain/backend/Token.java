@@ -25,14 +25,14 @@ public class Token {
     private Survey survey;
 
 
-    @ManyToMany(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             })
     @JoinTable(name = "user_tokens",
-            joinColumns = { @JoinColumn(name = "pId") },
-            inverseJoinColumns = { @JoinColumn(name = "tokenId") })
+            joinColumns = { @JoinColumn(name = "tokenId") },
+            inverseJoinColumns = { @JoinColumn(name = "pId") })
              private Set<Participant> participants = new HashSet<>();
 
 

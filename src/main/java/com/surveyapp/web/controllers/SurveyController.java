@@ -17,7 +17,7 @@ public class SurveyController{
 
     @Autowired
     private SurveyService surveyService;
-
+    
 
     @RequestMapping(value="/survey/{sId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getSurveyDetail(@PathVariable(value = "sId") int sId, Model model) {
@@ -33,7 +33,7 @@ public class SurveyController{
     public ResponseEntity<?> surveyForm(@PathVariable String email,
                                         @RequestParam(value= "description") String description,
                                         @RequestParam(value = "sType") String surveyType,
-                                        @RequestParam(value = "endTime", required = false) String endTime, ModelMap modelmap){
+                                        @RequestParam(value = "endTime", required = false) String endTime){
 
         Survey surveyObj = surveyService.createSurvey(email, description, surveyType, endTime);
         return new ResponseEntity<>(surveyObj, HttpStatus.OK);

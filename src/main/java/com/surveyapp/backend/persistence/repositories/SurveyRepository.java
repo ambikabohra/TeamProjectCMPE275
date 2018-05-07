@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface SurveyRepository extends CrudRepository<Survey, Integer> {
     Survey findBySurveyId(int sId);
 
+    Survey findByDescription(String description);
 }

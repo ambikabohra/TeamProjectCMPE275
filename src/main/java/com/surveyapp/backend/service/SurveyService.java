@@ -27,6 +27,8 @@ public class SurveyService {
 
             Survey survey = surveyRepository.save(new Survey(true, description, endTime, surveyType, question_list));
             User user = userRepository.findByEmail(email);
+
+            System.out.println(user.getUsername());
             user.getSurveys().add(survey);  //add to the surveyor's survey list
             userRepository.save(user);
 
@@ -37,6 +39,8 @@ public class SurveyService {
             return surveyRepository.findBySurveyId(sId);
     }
 
-
+    public Survey getSurveyByName(String description) {
+            return surveyRepository.findByDescription(description);
+    }
 
 }

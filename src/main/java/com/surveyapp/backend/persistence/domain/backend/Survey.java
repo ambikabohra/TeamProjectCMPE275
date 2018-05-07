@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 //import lombok.Data;
@@ -49,6 +50,15 @@ public class Survey {
          private User user;   //mapped to User table
 
 
+        private Date current = new Date();
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "curr", length = 10)
+    public Date getCurrrent() {
+        return this.current;
+    }
+
+
     public Survey() {
     }
 
@@ -58,6 +68,7 @@ public class Survey {
         this.endTime = endTime;
         this.surveyType = surveyType;
         this.questions = questions;
+        this.current = new Date();
     }
 
 
@@ -109,5 +120,21 @@ public class Survey {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Date current) {
+        this.current = current;
     }
 }
