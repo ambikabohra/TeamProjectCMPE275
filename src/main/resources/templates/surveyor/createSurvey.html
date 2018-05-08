@@ -29,7 +29,7 @@
                                                 <li><a href="#" onclick="addTrueFalse()">True False</a></li>
                                                 <li><a href="#" onclick="addShortAnsQues()">Short Answer Type</a></li>
                                                 <li><a href="#">DateTime</a></li>
-                                                <li><a href="#">Star</a></li>
+                                                <li><a href="#" onclick="addStarRatingQues()">Star</a></li>
                                             </ul>
                                         </div>
                                         <a href="#" class="btn btn-default" role="button">Edit Question</a>
@@ -60,12 +60,12 @@
                                             <div th:replace="surveyelements/Question :: singleAnsQuestionEdit"></div>
                                         </template>
                                         <!--Star Type Question-->
-                                       <!-- <template id="starQuesPlaceHolder">
-                                            <div th:replace="surveyelements/Question :: singleQuestion"></div>
+                                       <template id="starQuesPlaceHolder">
+                                            <div th:replace="surveyelements/Question :: starRatingQuestion"></div>
                                         </template>
                                         <template id="starQuestionEdit">
-                                            <div th:replace="surveyelements/Question :: singleAnsQuestionEdit"></div>
-                                        </template>-->
+                                            <div th:replace="surveyelements/Question :: editStarRatingQuestion"></div>
+                                        </template>
                                     </div>
                                 </div>
                             </div>
