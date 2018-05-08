@@ -1,5 +1,6 @@
 package com.surveyapp.web.controllers;
 
+import com.surveyapp.web.domain.frontend.Question;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class SurveyorController {
 
     public static final String SURVEYOR_HOME = "surveyor/surveyorHome";
+
+    public static final String QUESTION = "question";
 
     @RequestMapping(value = "/surveyorhome", method = RequestMethod.GET)
     public String getSurveryorHome(ModelMap model){
@@ -21,7 +24,7 @@ public class SurveyorController {
 
     @RequestMapping(value = "/createsurvey", method = RequestMethod.GET)
     public String createSurveyGet(ModelMap model){
-
+        model.addAttribute(QUESTION ,new Question());
         model.addAttribute("role","surveyor");
         return CREATE_SURVEY;
     }
