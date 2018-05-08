@@ -21,12 +21,13 @@ public class SurveyorController {
     }
 
     public static final String CREATE_SURVEY = "surveyor/createSurvey";
+    public static final String SET_SURVEY_DETAILS = "survey/setsurvey";
 
     @RequestMapping(value = "/createsurvey", method = RequestMethod.GET)
     public String createSurveyGet(ModelMap model){
         model.addAttribute(QUESTION ,new Question());
         model.addAttribute("role","surveyor");
-        return CREATE_SURVEY;
+        return SET_SURVEY_DETAILS;
     }
 
     public static final String SHARE_SURVEY = "surveyor/shareSurvey";

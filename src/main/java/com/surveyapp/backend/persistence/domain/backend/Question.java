@@ -16,14 +16,13 @@ public class Question {
     private String qType;
     private String description;
 
-    /*@JsonIgnore
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "surveyId")
-    // @JsonBackReference
     private Survey survey;
 
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+   /* @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Response> responses;
 
 
@@ -34,13 +33,13 @@ public class Question {
     public Question() {
     }
 
-    /*public Question(String qType, String description, Survey survey, List<QuestionOption> options) {
+    public Question(String qType, String description, Survey survey/*List<QuestionOption> options*/) {
         this.qType = qType;
         this.description = description;
         this.survey = survey;
-        this.options =options;
+        //this.options =options;
 
-    }*/
+    }
 
     public int getqId() {
         return qId;
@@ -66,7 +65,7 @@ public class Question {
         this.description = description;
     }
 
-    /*public Survey getSurvey() {
+    public Survey getSurvey() {
         return survey;
     }
 
@@ -74,7 +73,7 @@ public class Question {
         this.survey = survey;
     }
 
-
+    /*
     public List<QuestionOption> getOptions() {
         return options;
     }

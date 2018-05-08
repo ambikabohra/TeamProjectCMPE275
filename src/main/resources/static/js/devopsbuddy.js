@@ -260,7 +260,7 @@ function editMultipleChoiceQuestion() {
             console.log(editTab);
         }
         document.getElementById("placeHolder").appendChild(editTab);
-        addEditTemplate = false;
+        addMultipleChoiceEditTemplate = false;
     }
 }
 

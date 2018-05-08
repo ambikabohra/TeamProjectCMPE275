@@ -32,6 +32,9 @@ public class SurveyController {
     public String saveQuestionPost(@ModelAttribute Question question, BindingResult bindingResult) {
 
         if(question.getQuesType().equals("checkbox")){
+
+
+
             com.surveyapp.backend.persistence.domain.backend.Question question1 = SurveyUtils.webToDomainQues(question);
             questionService.addQuestion(question1);
         }

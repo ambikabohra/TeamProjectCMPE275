@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="text-center" th:text="#{create.survey.heading}"></h1>
+                <p class="lead" th:text="#{create.survey.subheading}"></p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form class="form-group" id="setSurvey" method="post">
+                                <div class="well">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="placeHolder"></div>
+                                            <p> Set Survey </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <br/>
+                                            <a class="btn btn-primary btn-md btn-block"
+                                               th:href="@{/savequestion}"
+                                               th:text="#{save.question.button.text}"></a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <br/>
+                                            <a class="btn btn-success btn-md btn-block"
+                                               th:href="@{/publishsurvey}"
+                                               th:text="#{publish.survey.button.text}"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div th:replace="common/header :: before-body-scripts"/>
+
+</body>
+</html>
