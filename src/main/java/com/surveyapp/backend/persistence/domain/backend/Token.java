@@ -25,16 +25,25 @@ public class Token {
     private Survey survey;
 
 
+//    @ManyToMany(fetch = FetchType.LAZY,
+//            cascade = {
+//                    CascadeType.PERSIST,
+//                    CascadeType.MERGE
+//            })
+//    @JoinTable(name = "user_tokens",
+//            joinColumns = { @JoinColumn(name = "pId") },
+//            inverseJoinColumns = { @JoinColumn(name = "tokenId") })
+//             private Set<Participant> participants = new HashSet<>();
+
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             })
     @JoinTable(name = "user_tokens",
-            joinColumns = { @JoinColumn(name = "pId") },
-            inverseJoinColumns = { @JoinColumn(name = "tokenId") })
-             private Set<Participant> participants = new HashSet<>();
-
+            joinColumns = { @JoinColumn(name = "tokenId") },
+            inverseJoinColumns = { @JoinColumn(name = "pId") })
+    private Set<Participant> participants = new HashSet<>();
 
 //    @Transient
 //    @OneToMany(mappedBy = "token", cascade = CascadeType.ALL, orphanRemoval = true)

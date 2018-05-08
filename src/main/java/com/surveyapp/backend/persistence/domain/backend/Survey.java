@@ -60,6 +60,9 @@ public class Survey {
         this.questions = questions;
     }
 
+    public String getDescription(){ return description; }
+
+    public void setDescription(String description) { this.description = description; }
 
     public int getSurveyId() {
         return surveyId;

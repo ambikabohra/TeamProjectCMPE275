@@ -16,4 +16,5 @@ public class TokenService {
 
         return tokenRepository.save(new Token(survey));
     }
+
 }
