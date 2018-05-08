@@ -28,11 +28,11 @@
                                                     Question
                                                     <span class="caret"></span> </a>
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="#" onclick="addMultipleChoiceQues()">Multiple
-                                                        Choice</a></li>
+                                                    <li><a href="#" onclick="addMultipleChoiceQues()">Check Box</a></li>
+                                                    <li><a href="#" onclick="addRadioQues()">Radio</a></li>
+                                                    <li><a href="#" onclick="addDropdownQues()">Dropdown</a></li>
                                                     <li><a href="#" onclick="addTrueFalse()">True False</a></li>
-                                                    <li><a href="#" onclick="addShortAnsQues()">Short Answer Type</a>
-                                                    </li>
+                                                    <li><a href="#" onclick="addShortAnsQues()">Short Answer Type</a></li>
                                                     <li><a href="#">DateTime</a></li>
                                                     <li><a href="#" onclick="addStarRatingQues()">Star</a></li>
                                                 </ul>
@@ -71,6 +71,20 @@
                                             <template id="starQuestionEdit">
                                                 <div th:replace="surveyelements/Question :: editStarRatingQuestion"></div>
                                             </template>
+                                            <!--Radio Type Question-->
+                                            <template id="radioQuesPlaceHolder">
+                                                <div th:replace="surveyelements/Question :: radioQuestion"></div>
+                                            </template>
+                                            <template id="radioQuestionEdit">
+                                                <div th:replace="surveyelements/Question :: editRadioQuestion"></div>
+                                            </template>
+                                            <!--Dropdown Type Question-->
+                                            <template id="dropdownQuesPlaceHolder">
+                                                <div th:replace="surveyelements/Question :: dropdownQuestion"></div>
+                                            </template>
+                                            <template id="dropdownQuestionEdit">
+                                                <div th:replace="surveyelements/Question :: editDropdownQuestion"></div>
+                                            </template>
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +98,8 @@
                                         </div>-->
                                         <div class="col-md-6">
                                             <br/>
-                                            <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+                                            <button type="submit" class="btn btn-primary"
+                                                    th:text="#{form.submit}"></button>
                                         </div>
                                         <div class="col-md-6">
                                             <br/>

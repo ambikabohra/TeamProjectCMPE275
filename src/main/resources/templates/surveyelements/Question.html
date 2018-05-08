@@ -172,8 +172,110 @@
     </div>
 </div>
 
+<!--Radio option part-->
+<div class="container" th:fragment="radioQuestion">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" onclick="editRadioQuestion()">
+                <h4 id="questionRadio">New Question here...</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="radio">
+                            <div class="form-control">
+                                <input type="radio" name="radioQues" value=""/><label style="margin-left: 20px" id="radio1">Radio 1</label>
+                            </div>
+                            <div class="form-control">
+                                <input type="radio" name="radioQues" value=""/> <label style="margin-left: 20px" id="radio2">Radio 2</label>
+                            </div>
+                            <div class="form-control">
+                                <input type="radio" name="radioQues" value=""/> <label style="margin-left: 20px" id="radio3">Radio 3</label>
+                            </div>
+                            <div class="form-control">
+                                <input type="radio" name="radioQues" value=""/><label style="margin-left: 20px" id="radio4">Radio 4</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="container" th:fragment="editRadioQuestion">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-group" id="editradiooptions">
+                    <label id="radioQuesText">Type your question here</label><br/>
+                    <input type="text" class="text" id="radioTextField" oninput="editRadioText()"/>
+                    <br/><br/>
+                    <label>Edit Options</label><br/>
+                    <input type="text" class="text" id="radio1Text" oninput="changeRadioText('radio1')"
+                           placeholder="Radio 1"/>
+                    <input type="text" class="text" id="radio2Text" oninput="changeRadioText('radio2')"
+                           placeholder="Radio 2"/>
+                    <input type="text" class="text" id="radio3Text" oninput="changeRadioText('radio3')"
+                           placeholder="Radio 3"/>
+                    <input type="text" class="text" id="radio4Text" oninput="changeRadioText('radio4')"
+                           placeholder="Radio 4"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!--Dropdown part-->
+
+<div class="container" th:fragment="dropdownQuestion">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" onclick="editDropdownQuestion()">
+                <h4 id="questionDropdown">New Question here...</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="dropdown">
+                            <div class="form-control">
+                                <label style="margin-left: 20px" id="dropdown1">Dropdown 1</label>
+                            </div>
+                            <div class="form-control">
+                                <label style="margin-left: 20px" id="dropdown2">Dropdown 2</label>
+                            </div>
+                            <div class="form-control">
+                                <label style="margin-left: 20px" id="dropdown3">Dropdown 3</label>
+                            </div>
+                            <div class="form-control">
+                                <label style="margin-left: 20px" id="dropdown4">Dropdown 4</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="editDropdownQuestion">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-group" id="editdropdownoptions">
+                    <label id="dropdownQuesText">Type your question here</label><br/>
+                    <input type="text" class="text" id="dropdownTextField" oninput="editDropdownText()"/>
+                    <br/><br/>
+                    <label>Edit Options</label><br/>
+                    <input type="text" class="text" id="dropdown1Text" oninput="changeDropdownText('dropdown1')"
+                           placeholder="Dropdown 1"/>
+                    <input type="text" class="text" id="dropdown2Text" oninput="changeDropdownText('dropdown2')"
+                           placeholder="Dropdown 2"/>
+                    <input type="text" class="text" id="dropdown3Text" oninput="changeDropdownText('dropdown3')"
+                           placeholder="Dropdown 3"/>
+                    <input type="text" class="text" id="dropdown4Text" oninput="changeDropdownText('dropdown4')"
+                           placeholder="Dropdown 4"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div th:replace="common/header :: before-body-scripts"/>
 </body>
