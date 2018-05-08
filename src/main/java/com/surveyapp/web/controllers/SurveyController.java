@@ -1,17 +1,24 @@
 package com.surveyapp.web.controllers;
 
+import com.surveyapp.backend.service.QuestionService;
+import com.surveyapp.utils.SurveyUtils;
 import com.surveyapp.web.domain.frontend.Question;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
-import javax.management.Query;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class SurveyController {
+
+
+    @Autowired
+    private QuestionService questionService;
 
     /* The Application Logger */
     private static final Logger LOG = LoggerFactory.getLogger(SurveyController.class);
@@ -23,11 +30,11 @@ public class SurveyController {
 
     @RequestMapping(value = "/savequestion", method = RequestMethod.POST)
     public String saveQuestionPost(@ModelAttribute Question question, BindingResult bindingResult) {
-        System.out.println(question.getQuesText());
-        System.out.println(question.getOption1Text());
-        System.out.println(question.getOption2Text());
-        System.out.println(question.getOption3Text());
-        System.out.println(question.getOption4Text());
+
+        if(question.getQuesType().equals("checkbox")){
+            com.surveyapp.backend.persistence.domain.backend.Question question1 = SurveyUtils.webToDomainQues(question);
+            questionService.addQuestion(question1);
+        }
         return SurveyorController.CREATE_SURVEY;
     }
 

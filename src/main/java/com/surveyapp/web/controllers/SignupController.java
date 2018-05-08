@@ -94,16 +94,6 @@ public class SignupController {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     @RequestMapping(value = SIGNUP_URL_MAPPING, method = RequestMethod.POST)
     public String signUpPost(HttpServletRequest servletRequest,
                              @RequestParam(name = "planId", required = true) int planId,

@@ -303,30 +303,33 @@ function changeMultipleChoiceOptionText(optionPar) {
 }
 
 function addTrueFalse() {
-    if(addTrueFalseEditTemplate){
-        var temp = document.getElementsByTagName("template")[2];
-        var clon = temp.content.cloneNode(true);
-        if(clon == null || clon == ""){
-            console.log("nothing here");
-        }else{
-            console.log(clon);
-        }
-        document.getElementById("placeHolder").appendChild(clon);
-        addTrueFalseEditTemplate = false;
+
+    var temp = document.getElementsByTagName("template")[2];
+    var clon = temp.content.cloneNode(true);
+    if (clon == null || clon == "") {
+        console.log("nothing here");
+    } else {
+        console.log(clon);
     }
+    document.getElementById("placeHolder").appendChild(clon);
+    addTrueFalseEditTemplate = false;
+
 }
 
 
 function editTrueFalseQues() {
 
-    var temp = document.getElementsByTagName("template")[3];
-    var editTab = temp.content.cloneNode(true);
-    if(editTab == null || editTab == ""){
-        console.log("nothing here");
-    }else{
-        console.log(editTab);
+    if (addTrueFalseEditTemplate) {
+        var temp = document.getElementsByTagName("template")[3];
+        var editTab = temp.content.cloneNode(true);
+        if (editTab == null || editTab == "") {
+            console.log("nothing here");
+        } else {
+            console.log(editTab);
+        }
+        document.getElementById("placeHolder").appendChild(editTab);
+        addTrueFalseEditTemplate = false;
     }
-    document.getElementById("placeHolder").appendChild(editTab);
 
 }
 
@@ -341,29 +344,31 @@ function editTrueFalseQuesText() {
 }
 
 function addShortAnsQues() {
-    if(addSingleAnsEditTemplate){
-        var temp = document.getElementsByTagName("template")[4];
-        var clon = temp.content.cloneNode(true);
-        if(clon == null || clon == ""){
-            console.log("nothing here");
-        }else{
-            console.log(clon);
-        }
-        document.getElementById("placeHolder").appendChild(clon);
-        addTrueFalseEditTemplate = false;
+
+    var temp = document.getElementsByTagName("template")[4];
+    var clon = temp.content.cloneNode(true);
+    if (clon == null || clon == "") {
+        console.log("nothing here");
+    } else {
+        console.log(clon);
     }
+    document.getElementById("placeHolder").appendChild(clon);
+    addTrueFalseEditTemplate = false;
+
 }
 
 function editShortAnsQues() {
-
-    var temp = document.getElementsByTagName("template")[5];
-    var editTab = temp.content.cloneNode(true);
-    if(editTab == null || editTab == ""){
-        console.log("nothing here");
-    }else{
-        console.log(editTab);
+    if (addSingleAnsEditTemplate) {
+        var temp = document.getElementsByTagName("template")[5];
+        var editTab = temp.content.cloneNode(true);
+        if (editTab == null || editTab == "") {
+            console.log("nothing here");
+        } else {
+            console.log(editTab);
+        }
+        document.getElementById("placeHolder").appendChild(editTab);
+        addSingleAnsEditTemplate = false;
     }
-    document.getElementById("placeHolder").appendChild(editTab);
 
 }
 
@@ -391,14 +396,17 @@ function addStarRatingQues() {
 
 function editStarRatingQues() {
 
-    var temp = document.getElementsByTagName("template")[7];
-    var editTab = temp.content.cloneNode(true);
-    if(editTab == null || editTab == ""){
-        console.log("nothing here");
-    }else{
-        console.log(editTab);
+    if (starEditTemplate) {
+        var temp = document.getElementsByTagName("template")[7];
+        var editTab = temp.content.cloneNode(true);
+        if (editTab == null || editTab == "") {
+            console.log("nothing here");
+        } else {
+            console.log(editTab);
+        }
+        document.getElementById("placeHolder").appendChild(editTab);
+        starEditTemplate = false;
     }
-    document.getElementById("placeHolder").appendChild(editTab);
 
 }
 
