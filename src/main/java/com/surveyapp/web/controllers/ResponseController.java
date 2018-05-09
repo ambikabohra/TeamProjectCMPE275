@@ -8,15 +8,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 
 //import javax.transaction.Transactional;
 
-@RestController
+@Controller
 public class ResponseController {
+
+    public static final String SURVEYEE_SURVEY_SUBMIT = "surveyee/submitEmail";
 
     @Autowired
     private ResponseService responseService;
@@ -27,6 +35,11 @@ public class ResponseController {
     @Autowired
     private ParticipantService participantService;
 
+
+
+
+    @Autowired
+    private TokenService tokenService;
 
    //  Get All responses of the survey
     @RequestMapping(value = "/survey/responses/{sId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -86,5 +99,68 @@ public class ResponseController {
         }
 
     }
+
+
+    @RequestMapping(value = "/submitSurvey", method = RequestMethod.GET)
+        public String submitSurvey(@RequestParam("token")  String token, ModelMap model){
+
+        Token tokenObj = tokenService.findByToken(token);
+
+
+        Participant participant = participantService.saveParticipant(null,null, true);
+        tokenObj.getParticipants().add(participant);
+
+        //save response of the participant
+        System.out.println(participant.getpId());
+
+
+        return SURVEYEE_SURVEY_SUBMIT;
+
+        }
+
+
+//    @GetMapping(value="/response")
+//    public String greetingForm(ModelMap model) {
+//        model.addAttribute("response", new Response());
+//        return "response";
+//    }
+//
+//    @PostMapping(value = "/response")
+//    public String submitSurvey(@RequestParam("token")  String token, @ModelAttribute Response response,
+//                               BindingResult bindingResult,
+//                               Model model){
+//
+//        Token tokenObj = tokenService.findByToken(token);
+//
+//        System.out.println(response);
+//        Participant participant = participantService.saveParticipant(null,null, true);
+//        tokenObj.getParticipants().add(participant);
+//
+//        //save response of the participant
+//        System.out.println(participant.getpId());
+//
+//
+//        return SURVEYEE_SURVEY_SUBMIT;
+//
+//    }
+
+
+
+//    @PostMapping("/submitsurveyresponse")
+//    public ResponseEntity<?> getSearchResultViaAjax(
+//            @Valid @RequestBody Response response, Errors errors) {
+//
+//        AjaxResponseBody result = new AjaxResponseBody();
+//
+//        //If error, just return a 400 bad request, along with the error message
+//        if (errors.hasErrors()) {
+//
+//            result.setMsg(errors.getAllErrors()
+//                    .stream().map(x -> x.getDefaultMessage())
+//                    .collect(Collectors.joining(",")));
+//
+//            return ResponseEntity.badRequest().body(result);
+//
+//        }
 
 }

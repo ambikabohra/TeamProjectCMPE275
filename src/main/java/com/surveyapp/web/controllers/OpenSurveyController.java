@@ -71,6 +71,7 @@ public class OpenSurveyController {
         List<Question> questions = questionService.getQuestions(survey);
         m.addAttribute("survey", survey);
         m.addAttribute("questions",questions);
+        m.addAttribute("token",token);
         return SHOW_SURVEY;
 
 
