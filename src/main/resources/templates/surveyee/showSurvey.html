@@ -11,79 +11,82 @@
     <div class="row">
         <div class="col-md-12">
             <div class="jumbotron">
-                <h1 class="text-center" th:text="#{create.survey.heading}"></h1>
-                <p class="lead" th:text="#{create.survey.subheading}"></p>
+                <h1 class="text-center" th:text="#{show.survey.heading}"></h1>
+                <p class="lead" th:text="#{show.survey.subheading}"></p>
                 <div class="container">
                     <div class="row">
-                        <h2>Survey Info</h2>
-                        <h3 th:text="${survey.description}"></h3>
+                        <h2 th:text="${survey.description}"></h2>
 
-                        <ul class="table table-striped">
+                        <ol class="table table-striped">
                             <!--<tr>-->
                                 <!--<th>q_id</th>-->
                                 <!--<th>description</th>-->
                             <!--</tr>-->
                             <li th:each="question : ${questions}">
 
-                                <div th:text="${question.qId}"></div>
+                                <!--<div th:text="${question.qId}"></div>-->
                                 <!--<td th:text="${question.qType}"></td>-->
                                 <div th:text="${question.description}"></div>
 
                                 <div th:if="${question.qType == 'text'}">
-                                    <input  th:text="response"/>
+                                    <input type="text"  />
                                 </div>
 
                                 <div th:if="${question.qType == 'rating'}">
-                                    <input  th:text="response"/>
+                                    <input type="text"/>
                                 </div>
 
                                 <div th:if="${question.qType == 'dropdown'}">
-                                    <ul>
+
                                         <select>
                                             <option th:each="option : ${question.options}" th:value="response">
                                                 <span th:text="${option.optionValue}"></span>
                                             </option>
                                         </select>
-                                    </ul>
+
                                 </div>
 
                                 <div th:if="${question.qType == 'radio'}">
-                                    <ul>
-                                        <label th:each="option : ${question.options}"
+
+                                        <p th:each="option : ${question.options}"
                                                th:if="${question.options.size() > 0}"
                                                th:value="${option.optionValue}">
-                                            <input type="radio"
+                                            <input type="radio" name="radio1"
                                                    th:checked="${#strings.equals('response', option.optionValue)}">
                                             </input>
-                                            <span th:value="${option.optionValue}"/>
-                                        </label>
-                                    </ul>
+                                            <span th:text="${option.optionValue}"/><br></br>
+                                        </p>
+
+
                                 </div>
 
                                 <div th:if="${question.qType == 'checkbox'}">
-                                    <ul>
-                                        <label th:each="option : ${question.options}"
+
+                                        <p th:each="option : ${question.options}"
                                                th:if="${question.options.size() > 0}"
                                                th:value="${option.optionValue}">
                                             <input type="checkbox"
                                                    th:checked="${#strings.equals('response', option.optionValue)}">
                                             </input>
-                                            <span th:value="${option.optionValue}"/>
-                                        </label>
-                                    </ul>
+                                            <span th:text="${option.optionValue}"/><br></br>
+                                        </p>
+
                                 </div>
 
                             </li>
-                        </ul>
+                        </ol>
 
                     </div>
                 </div>
+                <a type="submit" class="btn btn-success btn-md btn-block" value="Submit" th:href="@{/submitSurvey(token=${token})}" >Submit</a>
             </div>
         </div>
     </div>
 </div>
 
 <div th:replace="common/header :: before-body-scripts"/>
+<!--//-->
+
 
 </body>
 

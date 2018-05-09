@@ -17,4 +17,7 @@ public class TokenService {
         return tokenRepository.save(new Token(survey));
     }
 
+    public Token findByToken(String token){
+        return tokenRepository.findByTokenId(token);
+    }
 }
