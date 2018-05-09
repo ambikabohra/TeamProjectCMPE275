@@ -21,6 +21,9 @@ public class SurveyService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserService userService;
+
         public Survey createSurvey(String email, String description, String surveyType, String endTime){
 
             List<Question> question_list = new ArrayList<>();
@@ -38,6 +41,16 @@ public class SurveyService {
     public Survey getSurvey(int sId) {
             return surveyRepository.findBySurveyId(sId);
 
+    }
+
+
+    public List<String> getListOfSurveyDescriptions(String userName){
+
+        List<Survey> surveyList = userService.findByUserName(userName).getSurveys();
+        List<String> surveys = new ArrayList<>();
+        for(Survey survey: surveyList)
+            surveys.add(survey.getDescription());
+        return surveys;
     }
 
     public Survey getSurveyByName(String description) {

@@ -16,79 +16,90 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="well">
-                                <div class="bs-example" data-example-id="simple-justified-button-group">
-                                    <div class="btn-group btn-group-justified" role="group"
-                                         aria-label="Justified button group with nested dropdown">
-                                        <div class="btn-group" role="group">
-                                            <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                               role="button" aria-haspopup="true" aria-expanded="false"> Add Question
-                                                <span class="caret"></span> </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#" onclick="addMultipleChoiceQues()">Multiple Choice</a></li>
-                                                <li><a href="#" onclick="addTrueFalse()">True False</a></li>
-                                                <li><a href="#" onclick="addShortAnsQues()">Short Answer Type</a></li>
-                                                <li><a href="#">DateTime</a></li>
-                                                <li><a href="#" onclick="addStarRatingQues()">Star</a></li>
-                                            </ul>
+                            <form class="form-group" id="surveyForm" method="post">
+                                <div class="well">
+                                    <div class="bs-example" data-example-id="simple-justified-button-group">
+                                        <div class="btn-group btn-group-justified" role="group"
+                                             aria-label="Justified button group with nested dropdown">
+                                            <div class="btn-group" role="group">
+                                                <a href="#" class="btn btn-default dropdown-toggle"
+                                                   data-toggle="dropdown"
+                                                   role="button" aria-haspopup="true" aria-expanded="false"> Add
+                                                    Question
+                                                    <span class="caret"></span> </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#" onclick="addMultipleChoiceQues()">Multiple
+                                                        Choice</a></li>
+                                                    <li><a href="#" onclick="addTrueFalse()">True False</a></li>
+                                                    <li><a href="#" onclick="addShortAnsQues()">Short Answer Type</a>
+                                                    </li>
+                                                    <li><a href="#">DateTime</a></li>
+                                                    <li><a href="#" onclick="addStarRatingQues()">Star</a></li>
+                                                </ul>
+                                            </div>
+                                            <a href="#" class="btn btn-default" role="button">Edit Question</a>
+                                            <a href="#" class="btn btn-default" role="button">Edit Survey</a>
                                         </div>
-                                        <a href="#" class="btn btn-default" role="button">Edit Question</a>
-                                        <a href="#" class="btn btn-default" role="button">Edit Survey</a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="well">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div id="placeHolder"></div>
-                                        <template id="surveyNamePlaceHolder">
-                                            <div th:replace="surveyelements/Question :: multipleChoiceQuestion"></div>
-                                        </template>
-                                        <template id="editMultipleChoiceQues">
-                                            <div th:replace="surveyelements/Question :: editMultipleChoiceQues"></div>
-                                        </template>
-                                        <template id="quesPlaceHolder">
-                                            <div th:replace="surveyelements/Question :: trueFalseOptions"></div>
-                                        </template>
-                                        <template id="optionPlaceHolder">
-                                            <div th:replace="surveyelements/Question :: editTrueFalseQues"></div>
-                                        </template>
-                                        <template id="singleQuesPlaceHolder">
-                                            <div th:replace="surveyelements/Question :: singleQuestion"></div>
-                                        </template>
-                                        <template id="singleAnsQuestionEdit">
-                                            <div th:replace="surveyelements/Question :: singleAnsQuestionEdit"></div>
-                                        </template>
-                                        <!--Star Type Question-->
-                                       <template id="starQuesPlaceHolder">
-                                            <div th:replace="surveyelements/Question :: starRatingQuestion"></div>
-                                        </template>
-                                        <template id="starQuestionEdit">
-                                            <div th:replace="surveyelements/Question :: editStarRatingQuestion"></div>
-                                        </template>
+                                <div class="well">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="placeHolder"></div>
+                                            <template id="surveyNamePlaceHolder">
+                                                <div th:replace="surveyelements/Question :: multipleChoiceQuestion"></div>
+                                            </template>
+                                            <template id="editMultipleChoiceQues">
+                                                <div th:replace="surveyelements/Question :: editMultipleChoiceQues"></div>
+                                            </template>
+                                            <template id="quesPlaceHolder">
+                                                <div th:replace="surveyelements/Question :: trueFalseOptions"></div>
+                                            </template>
+                                            <template id="optionPlaceHolder">
+                                                <div th:replace="surveyelements/Question :: editTrueFalseQues"></div>
+                                            </template>
+                                            <template id="singleQuesPlaceHolder">
+                                                <div th:replace="surveyelements/Question :: singleQuestion"></div>
+                                            </template>
+                                            <template id="singleAnsQuestionEdit">
+                                                <div th:replace="surveyelements/Question :: singleAnsQuestionEdit"></div>
+                                            </template>
+                                            <!--Star Type Question-->
+                                            <template id="starQuesPlaceHolder">
+                                                <div th:replace="surveyelements/Question :: starRatingQuestion"></div>
+                                            </template>
+                                            <template id="starQuestionEdit">
+                                                <div th:replace="surveyelements/Question :: editStarRatingQuestion"></div>
+                                            </template>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <br/>
-                                        <a class="btn btn-primary btn-md btn-block"
-                                           th:href="@{/savequestion}"
-                                           th:text="#{save.question.button.text}"></a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <br/>
-                                        <a class="btn btn-success btn-md btn-block"
-                                           th:href="@{/publishsurvey}"
-                                           th:text="#{publish.survey.button.text}"></a>
+                                <div class="container">
+                                    <div class="row">
+                                        <!--<div class="col-md-6">
+                                            <br/>
+                                            <a class="btn btn-primary btn-md btn-block"
+                                               th:href="@{/savequestion}"
+                                               th:text="#{save.question.button.text}"></a>
+                                        </div>-->
+                                        <div class="col-md-6">
+                                            <br/>
+                                            <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <br/>
+                                            <a class="btn btn-success btn-md btn-block"
+                                               th:href="@{/publishsurvey}"
+                                               th:text="#{publish.survey.button.text}"></a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

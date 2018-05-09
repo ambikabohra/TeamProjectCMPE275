@@ -44,7 +44,6 @@
             <div class="well">
 
                 <h1 th:if="${#httpServletRequest.getParameter('planId') == '1'}" th:text="#{signup.h1.basic.profile}"></h1>
-                <h1 th:if="${#httpServletRequest.getParameter('planId') == '2'}" th:text="#{signup.h1.pro.profile}"></h1>
                 <p class="lead">Please fill in the form to create an account with us!</p>
 
                 <form id="signupForm" th:action="@{/signup}"
