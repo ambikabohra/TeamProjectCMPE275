@@ -71,6 +71,9 @@ public class Survey {
         this.current = new Date();
     }
 
+    public String getDescription(){ return description; }
+
+    public void setDescription(String description) { this.description = description; }
 
     public int getSurveyId() {
         return surveyId;

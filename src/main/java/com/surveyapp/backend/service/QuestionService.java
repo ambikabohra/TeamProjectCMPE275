@@ -6,6 +6,7 @@ import com.surveyapp.backend.persistence.domain.backend.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,5 +33,12 @@ public class QuestionService {
             optionList.add(option);
         }
         return question;
+    }
+
+    //For getting Question List
+    public List<Question> getQuestions(Survey obj){
+        List<Question> questions = new ArrayList<>();
+        questions = obj.getQuestions();
+        return questions;
     }
 }

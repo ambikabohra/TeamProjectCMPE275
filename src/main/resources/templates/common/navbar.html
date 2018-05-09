@@ -20,6 +20,7 @@
                 <li><a th:text="#{navbar.contact.text}" href="/contact"></a></li>
                 <li th:if="${#authorization.expression('isAuthenticated()')}">
                     <a th:text="#{navbar.change.role.text}" href="/payload"></a></li>
+
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -32,7 +33,7 @@
                     </form>
                 </li>
             </ul>
-        </div><!--/.nav-collapse -->
+        </div>
     </div>
 </div>
 

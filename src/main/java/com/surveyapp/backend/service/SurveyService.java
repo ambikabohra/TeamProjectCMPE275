@@ -37,6 +37,7 @@ public class SurveyService {
 
     public Survey getSurvey(int sId) {
             return surveyRepository.findBySurveyId(sId);
+
     }
 
     public Survey getSurveyByName(String description) {
