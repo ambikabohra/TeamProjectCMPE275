@@ -28,8 +28,9 @@
                                                     Question
                                                     <span class="caret"></span> </a>
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="#" onclick="addMultipleChoiceQues()">Multiple
-                                                        Choice</a></li>
+                                                    <li><a href="#" onclick="addMultipleChoiceQues()">Check Box</a></li>
+                                                    <li><a href="#" onclick="addRadioQues()">Radio</a></li>
+                                                    <li><a href="#" onclick="addDropdownQues()">Dropdown</a></li>
                                                     <li><a href="#" onclick="addTrueFalse()">True False</a></li>
                                                     <li><a href="#" onclick="addShortAnsQues()">Short Answer Type</a>
                                                     </li>
@@ -38,7 +39,6 @@
                                                 </ul>
                                             </div>
                                             <a href="#" class="btn btn-default" role="button">Edit Question</a>
-                                            <a href="#" class="btn btn-default" role="button">Edit Survey</a>
                                         </div>
                                     </div>
                                 </div>
@@ -71,35 +71,47 @@
                                             <template id="starQuestionEdit">
                                                 <div th:replace="surveyelements/Question :: editStarRatingQuestion"></div>
                                             </template>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="container">
-                                    <div class="row">
-                                        <!--<div class="col-md-6">
-                                            <br/>
-                                            <a class="btn btn-primary btn-md btn-block"
-                                               th:href="@{/savequestion}"
-                                               th:text="#{save.question.button.text}"></a>
-                                        </div>-->
-                                        <div class="col-md-6">
-                                            <br/>
-                                            <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <br/>
-                                            <a class="btn btn-success btn-md btn-block"
-                                               th:href="@{/publishsurvey}"
-                                               th:text="#{publish.survey.button.text}"></a>
+                                            <!--Radio Type Question-->
+                                            <template id="radioQuesPlaceHolder">
+                                                <div th:replace="surveyelements/Question :: radioQuestion"></div>
+                                            </template>
+                                            <template id="radioQuestionEdit">
+                                                <div th:replace="surveyelements/Question :: editRadioQuestion"></div>
+                                            </template>
+                                            <!--Dropdown Type Question-->
+                                            <template id="dropdownQuesPlaceHolder">
+                                                <div th:replace="surveyelements/Question :: dropdownQuestion"></div>
+                                            </template>
+                                            <template id="dropdownQuestionEdit">
+                                                <div th:replace="surveyelements/Question :: editDropdownQuestion"></div>
+                                            </template>
                                         </div>
                                     </div>
                                 </div>
                             </form>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <br/>
+                                        <form th:action="@{/surveyorhome}" method="get">
+                                            <button type="submit" class="btn btn-primary btn-md btn-block"
+                                                    th:text="#{save.survey.button.text}"></button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <br/>
+                                        <form th:action="@{/publishsurvey}" method="get">
+                                            <button type="submit" class="btn btn-primary btn-md btn-block"
+                                                    th:text="#{publish.survey.button.text}"></button>
+                                            <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

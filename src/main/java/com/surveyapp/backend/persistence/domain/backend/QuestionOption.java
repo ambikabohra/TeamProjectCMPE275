@@ -23,6 +23,7 @@ public class QuestionOption {
     public QuestionOption() {
     }
 
+
     public QuestionOption(String optionValue, Question question) {
         this.optionValue = optionValue;
         this.question = question;

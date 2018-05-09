@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="text-center" th:text="#{close.survey.publish.heading}"></h1>
+                <p class="lead" th:text="#{close.survey.publish.subheading}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="well">
+                <form th:action="@{/closesurveyemails}" method="post" th:object="${__${'emailaddressesObject'}__}">
+                   <div class="form-group">
+                        <h4 style="margin-left: 20px" id="surveyname">Enter Email Addresses here</h4>
+                        <textarea type="text" rows="5" th:field="*{emailAddresses}" class="form-control" placeholder="Separate emails with comma"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+
+
+                    <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: before-body-scripts"/>
+
+</body>
+</html>
+
+
+<!--th:href="@{/closesurveyemails(surveyid=${surveyId})}"-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

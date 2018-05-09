@@ -1,14 +1,9 @@
 package com.surveyapp.backend.persistence.domain.backend;
 
-//import org.dom4j.Entity;
-//import org.hibernate.mapping.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.List;
 
-//import lombok.Data;
 
 @Entity
 public class Question {
@@ -21,21 +16,16 @@ public class Question {
     private String qType;
     private String description;
 
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "surveyId")
-   // @JsonBackReference
-    private Survey survey;
+    private SurveyEntity survey;
 
 
-//    @ManyToMany
-//    @JoinTable(name = "question_response",
-//            joinColumns = {@JoinColumn(name = "q_Id", referencedColumnName = "qId")},
-//            inverseJoinColumns = {@JoinColumn(name = "res_Id", referencedColumnName = "responseId")})
 
-
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Response> responses;
+   /* @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Response> responses;*/
 
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -45,16 +35,11 @@ public class Question {
     public Question() {
     }
 
-//    public Question(String qType, String description) {
-//        this.qType = qType;
-//        this.description = description;
-//    }
-
-    public Question(String qType, String description, Survey survey, List<QuestionOption> options) {
+    public Question(String qType, String description /*Survey survey*//*List<QuestionOption> options*/) {
         this.qType = qType;
         this.description = description;
-        this.survey = survey;
-        this.options =options;
+        //this.survey = survey;
+        //this.options =options;
 
     }
 
@@ -82,11 +67,11 @@ public class Question {
         this.description = description;
     }
 
-    public Survey getSurvey() {
+    public SurveyEntity getSurvey() {
         return survey;
     }
 
-    public void setSurvey(Survey survey) {
+    public void setSurvey(SurveyEntity survey) {
         this.survey = survey;
     }
 
@@ -99,11 +84,13 @@ public class Question {
         this.options = options;
     }
 
+      /*
     public List<Response> getResponses() {
         return responses;
     }
 
     public void setResponses(List<Response> responses) {
         this.responses = responses;
-    }
+    }*/
+
 }
