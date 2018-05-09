@@ -19,6 +19,11 @@
                             <div class="col-md-12">
                                 <div class="well">
                                     <div class="row">
+
+                                        <h2>List of surveys...</h2>
+                                        <div class="btn-group-vertical" th:each="survey : ${surveys}">
+                                            <a  th:href="@{/surveyor/stats(description=${survey})}" class="btn btn-primary" th:text="${survey}"></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -16,26 +16,45 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
+                            <form th:action = "@{/survey}" id="survey"  target="_self" method="post"  >
                             <div class="well">
                                 <div class="bs-example" data-example-id="simple-justified-button-group">
+
+                                        <div class="btn-group btn-group-justified" role="group">
+                                            Title <input  class="text-input" />
+                                            <p>Survey Type
+                                                <select  >
+                                                    <option value="Select" selected="selected">Select</option>
+                                                    <option value="General">General</option>
+                                                    <option value="Closed">Closed</option>
+                                                    <option value="Open">Open</option>
+                                                </select></p>
+                                                <p>  End Time <input type="datetime-local"  />  </p>
+                                        </div>
+
+
                                     <div class="btn-group btn-group-justified" role="group"
                                          aria-label="Justified button group with nested dropdown">
                                         <div class="btn-group" role="group">
+
                                             <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                                role="button" aria-haspopup="true" aria-expanded="false"> Add Question
                                                 <span class="caret"></span> </a>
+
                                             <ul class="dropdown-menu">
                                                 <li><a href="#" onclick="addMultipleChoiceQues()">Multiple Choice</a></li>
                                                 <li><a href="#" onclick="addTrueFalse()">True False</a></li>
                                                 <li><a href="#" onclick="addShortAnsQues()">Short Answer Type</a></li>
                                                 <li><a href="#">DateTime</a></li>
                                                 <li><a href="#">Star</a></li>
+
                                             </ul>
                                         </div>
                                         <a href="#" class="btn btn-default" role="button">Edit Question</a>
                                         <a href="#" class="btn btn-default" role="button">Edit Survey</a>
                                     </div>
                                 </div>
+                                <!--<div class="text-input" th:>Survey Title</div>-->
                             </div>
                             <div class="well">
                                 <div class="row">
@@ -71,20 +90,30 @@
                             </div>
                             <div class="container">
                                 <div class="row">
+                                    <!--<div class="col-md-6">-->
+                                        <!--<br/>-->
+                                        <!--<a class="btn btn-primary btn-md btn-block"-->
+                                           <!--th:href="@{/savesurvey(title=${'survey11'})}">Save Survey</a>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-6">-->
+                                        <!--<br/>-->
+                                        <!--<a class="btn btn-primary btn-md btn-block"-->
+                                           <!--th:href="@{/savequestion}"-->
+                                           <!--th:text="#{save.question.button.text}"></a>-->
+                                    <!--</div>-->
                                     <div class="col-md-6">
                                         <br/>
-                                        <a class="btn btn-primary btn-md btn-block"
-                                           th:href="@{/savequestion}"
-                                           th:text="#{save.question.button.text}"></a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <br/>
-                                        <a class="btn btn-success btn-md btn-block"
-                                           th:href="@{/publishsurvey}"
-                                           th:text="#{publish.survey.button.text}"></a>
+                                        <!--<button type="submit" class="btn btn-success btn-md btn-block"-->
+                                           <!--th:text="#{publish.survey.button.text}"></button>-->
+
+                                        <button type="submit" class="btn btn-success btn-md btn-block"
+                                               th:text="#{publish.survey.button.text}"/>
                                     </div>
                                 </div>
                             </div>
+
+                            </form>
+
                         </div>
                     </div>
                 </div>

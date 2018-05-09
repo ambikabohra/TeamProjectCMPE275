@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6 span4">
-                                            <a href="/surveyresponse">
+                                            <a href="/surveyorresponse" th:href="@{/surveyorresponse}">
                                                 <img class="img-circle"
                                                      th:src="@{/images/result.jpg}"
                                                      alt="See Survey Results" width="140" height="140"/>
@@ -113,6 +113,12 @@
                         </div>
                     </div>
                 </div>
+
+
+                <!--<h2>List of surveys...</h2>-->
+                <!--<div class="btn-group-vertical" th:each="survey : ${surveys}">-->
+                    <!--<a  th:href="@{/surveyor/stats(description=${survey})}" class="btn btn-primary" th:text="${survey}"></a>-->
+                <!--</div>-->
             </div>
         </div>
     </div>
