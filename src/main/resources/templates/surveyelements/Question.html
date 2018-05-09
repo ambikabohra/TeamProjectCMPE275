@@ -44,6 +44,7 @@
                 <form class="form-group" id="editoptions" th:action="@{/savequestion}" method="post"
                       th:object="${__${'question'}__}">
                     <input type="hidden" name="quesType" id="quesType" th:value="'checkbox'"/>
+                    <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
                     <label id="multiChoiceQuesText">Type your question here</label><br/>
                     <input type="text" class="text" id="multipleChoiceQuesTextField" name="multipleChoiceQuesTextField"
                            th:field="*{quesText}" oninput="editMultipleChoiceQuesText()"/>
@@ -97,6 +98,7 @@
                 <form class="form-group" id="editoptionsTF" th:action="@{/savequestion}" method="post"
                       th:object="${__${'question'}__}">
                     <input type="hidden" name="quesType" id="quesType" th:value="'truefalse'"/>
+                    <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
                     <label id="quesTextTF">Type your question here</label><br/>
                     <input type="text" class="text" id="quesTextFieldTF" th:field="*{quesText}"
                            oninput="editTrueFalseQuesText()"/>
@@ -136,6 +138,7 @@
                 <form class="form-group" id="editoptionsSA" th:action="@{/savequestion}" method="post"
                       th:object="${__${'question'}__}">
                     <input type="hidden" name="quesType" id="quesType" th:value="'singleanswer'"/>
+                    <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
                     <label id="quesTextSA">Type your question here</label><br/>
                     <input type="text" class="text" id="quesTextFieldSA" th:field="*{quesText}"
                            oninput="editShortAnsQuesText()"/>
@@ -184,6 +187,7 @@
                 <form class="form-group" id="editQuesStarRating" th:action="@{/savequestion}" method="post"
                       th:object="${__${'question'}__}">
                     <input type="hidden" name="quesType" id="quesType" th:value="'starrating'"/>
+                    <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
                     <label id="quesTextStarRating">Type your question here</label><br/>
                     <input type="text" class="text" id="quesTextStarRatingField" th:field="*{quesText}"
                            oninput="editStarRatingQuesText()"/>
@@ -237,6 +241,7 @@
                 <form class="form-group" id="editradiooptions" th:action="@{/savequestion}" method="post"
                       th:object="${__${'question'}__}">
                     <input type="hidden" name="quesType" id="quesType" th:value="'radio'"/>
+                    <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
                     <label id="radioQuesText">Type your question here</label><br/>
                     <input type="text" class="text" id="radioTextField" th:field="*{quesText}"
                            oninput="editRadioText()"/>
@@ -301,6 +306,7 @@
                 <form class="form-group" id="editdropdownoptions" th:action="@{/savequestion}" method="post"
                       th:object="${__${'question'}__}">
                     <input type="hidden" name="quesType" id="quesType" th:value="'dropdown'"/>
+                    <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
                     <label id="dropdownQuesText">Type your question here</label><br/>
                     <input type="text" class="text" id="dropdownTextField" th:field="*{quesText}"
                            oninput="editDropdownText()"/>

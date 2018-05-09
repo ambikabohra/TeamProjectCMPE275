@@ -32,13 +32,13 @@
                                                     <li><a href="#" onclick="addRadioQues()">Radio</a></li>
                                                     <li><a href="#" onclick="addDropdownQues()">Dropdown</a></li>
                                                     <li><a href="#" onclick="addTrueFalse()">True False</a></li>
-                                                    <li><a href="#" onclick="addShortAnsQues()">Short Answer Type</a></li>
+                                                    <li><a href="#" onclick="addShortAnsQues()">Short Answer Type</a>
+                                                    </li>
                                                     <li><a href="#">DateTime</a></li>
                                                     <li><a href="#" onclick="addStarRatingQues()">Star</a></li>
                                                 </ul>
                                             </div>
                                             <a href="#" class="btn btn-default" role="button">Edit Question</a>
-                                            <a href="#" class="btn btn-default" role="button">Edit Survey</a>
                                         </div>
                                     </div>
                                 </div>
@@ -88,28 +88,30 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <br/>
-                                            <a class="btn btn-primary btn-md btn-block"
-                                               th:href="@{/savequestion}"
-                                               th:text="#{save.question.button.text}"></a>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <br/>
-                                            <a class="btn btn-success btn-md btn-block"
-                                               th:href="@{/publishsurvey}"
-                                               th:text="#{publish.survey.button.text}"></a>
-                                        </div>
+                            </form>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <br/>
+                                        <form th:action="@{/surveyorhome}" method="get">
+                                            <button type="submit" class="btn btn-primary btn-md btn-block"
+                                                    th:text="#{save.survey.button.text}"></button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <br/>
+                                        <form th:action="@{/publishsurvey}" method="get">
+                                            <button type="submit" class="btn btn-primary btn-md btn-block"
+                                                    th:text="#{publish.survey.button.text}"></button>
+                                            <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
+                                        </form>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -1,8 +1,8 @@
 package com.surveyapp.backend.persistence.domain.backend;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -16,27 +16,29 @@ public class Question {
     private String qType;
     private String description;
 
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "surveyId")
-    private Survey survey;
+    private SurveyEntity survey;
+
 
 
    /* @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Response> responses;
+    private List<Response> responses;*/
 
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<QuestionOption> options;
 
-*/
+
     public Question() {
     }
 
-    public Question(String qType, String description, Survey survey/*List<QuestionOption> options*/) {
+    public Question(String qType, String description /*Survey survey*//*List<QuestionOption> options*/) {
         this.qType = qType;
         this.description = description;
-        this.survey = survey;
+        //this.survey = survey;
         //this.options =options;
 
     }
@@ -65,15 +67,15 @@ public class Question {
         this.description = description;
     }
 
-    public Survey getSurvey() {
+    public SurveyEntity getSurvey() {
         return survey;
     }
 
-    public void setSurvey(Survey survey) {
+    public void setSurvey(SurveyEntity survey) {
         this.survey = survey;
     }
 
-    /*
+
     public List<QuestionOption> getOptions() {
         return options;
     }
@@ -82,6 +84,7 @@ public class Question {
         this.options = options;
     }
 
+      /*
     public List<Response> getResponses() {
         return responses;
     }
@@ -89,4 +92,5 @@ public class Question {
     public void setResponses(List<Response> responses) {
         this.responses = responses;
     }*/
+
 }

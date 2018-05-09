@@ -1,39 +1,49 @@
 package com.surveyapp.backend.persistence.domain.backend;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.surveyapp.backend.persistence.converters.LocalDateTimeAttributeConverter;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Survey {
+public class SurveyEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int surveyId;
 
     @Column
-    private Boolean isPublished;
+    private String surveyName;
 
-    @Column
-    private String endTime;
+    @Column(name = "expiry_date")
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
+    private LocalDateTime endTime;
 
     @Column
     private String surveyType;
 
+    @Column
+    private Boolean isPublished;
+
+    @Column
     private String description;
 
-    @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Question> questions;  //question can be added with survey creation or later
+    @Column
+    private String url;
 
-/*
     @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Token> tokens = new ArrayList<Token>();*/
+    private List<Question> questions;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id")
     private User user;   //mapped to User table
+
+    /* @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Token> tokens = new ArrayList<Token>();
 
 
     private Date current = new Date();
@@ -42,39 +52,32 @@ public class Survey {
     @Column(name = "curr", length = 10)
     public Date getCurrrent() {
         return this.current;
+    }*/
+
+    public SurveyEntity() {
     }
-
-
-    public Survey() {
-    }
-
-    public Survey(Boolean isPublished, String description, String endTime, String surveyType, List<Question> questions  ) {
-        this.isPublished = isPublished;
-        this.description = description;
-        this.endTime = endTime;
-        this.surveyType = surveyType;
-        this.questions = questions;
-        this.current = new Date();
-    }
-
 
     public int getSurveyId() {
         return surveyId;
     }
 
-    public Boolean getPublished() {
-        return isPublished;
+    public void setSurveyId(int surveyId) {
+        this.surveyId = surveyId;
     }
 
-    public void setPublished(Boolean isPublished) {
-        isPublished = isPublished;
+    public String getSurveyName() {
+        return surveyName;
     }
 
-    public String getEndTime() {
+    public void setSurveyName(String surveyName) {
+        this.surveyName = surveyName;
+    }
+
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
@@ -86,26 +89,12 @@ public class Survey {
         this.surveyType = surveyType;
     }
 
-    public List<Question> getQuestions() {
-        return questions;
+    public Boolean getPublished() {
+        return isPublished;
     }
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
-
-   /* public List<Token> getTokens() { return tokens; }
-
-    public void setTokens(List<Token> tokens) {
-        this.tokens = tokens;
-    }*/
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setPublished(Boolean published) {
+        isPublished = published;
     }
 
     public String getDescription() {
@@ -116,11 +105,28 @@ public class Survey {
         this.description = description;
     }
 
-    public Date getCurrent() {
-        return current;
+    public List<Question> getQuestions() {
+        return questions;
     }
 
-    public void setCurrent(Date current) {
-        this.current = current;
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
 }
