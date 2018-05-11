@@ -1,5 +1,6 @@
 package com.surveyapp.backend.persistence.repositories;
 
+//import com.surveyapp.backend.persistence.domain.backend.Survey;
 import com.surveyapp.backend.persistence.domain.backend.SurveyEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,7 @@ public interface SurveyRepository extends CrudRepository<SurveyEntity, Integer> 
 
     public SurveyEntity findBySurveyId(int surveyId);
 
-        public  Survey findBySurveyId(int sId);
+//    public SurveyEntity findBySId(int sId);
 
-    public Survey findByDescription(String description);
+    public SurveyEntity findByDescription(String description);
 }

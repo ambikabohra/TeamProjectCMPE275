@@ -2,7 +2,8 @@ package com.surveyapp.web.controllers;
 
 
 import com.surveyapp.backend.persistence.domain.backend.Counter;
-import com.surveyapp.backend.persistence.domain.backend.Survey;
+//import com.surveyapp.backend.persistence.domain.backend.Survey;
+import com.surveyapp.backend.persistence.domain.backend.SurveyEntity;
 import com.surveyapp.backend.persistence.domain.backend.Token;
 import com.surveyapp.backend.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class StatController {
 //            return SURVEYOR_RESPONSE;
 //        }
 
-        Survey survey = surveyService.getSurveyByName(surveyName);
+        SurveyEntity survey = surveyService.getSurveyByName(surveyName);
 
         //get participant count
         int count =0;
@@ -70,16 +71,16 @@ public class StatController {
         }
     }
 
-    @RequestMapping(value="/stats", method = RequestMethod.GET)
-    public String getQuestionResponses(@RequestParam("surveyId") String sId, ModelMap model) {
-
-        Survey survey = surveyService.getSurvey(Integer.valueOf(sId));
-        List<com.surveyapp.backend.persistence.domain.backend.Question> questions = survey.getQuestions();
-
-        model.addAttribute("questions", questions);
-
-        return SURVEYOR_STATS;
-    }
+//    @RequestMapping(value="/stats", method = RequestMethod.GET)
+//    public String getQuestionResponses(@RequestParam("surveyId") String sId, ModelMap model) {
+//
+//        Survey survey = surveyService.getSurvey(Integer.valueOf(sId));
+//        List<com.surveyapp.backend.persistence.domain.backend.Question> questions = survey.getQuestions();
+//
+//        model.addAttribute("questions", questions);
+//
+//        return SURVEYOR_STATS;
+//    }
 
 
     @RequestMapping(value = "/surveyorresponse", method = RequestMethod.GET)

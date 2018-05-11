@@ -22,7 +22,7 @@ public class Token {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "surveyId")
-    private Survey survey;
+    private SurveyEntity survey;
 
 
     @ManyToMany(fetch = FetchType.EAGER,
@@ -40,7 +40,7 @@ public class Token {
 //    @OneToMany(mappedBy = "token", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Participant> participants;
 
-    public Token(Survey survey) {
+    public Token(SurveyEntity survey) {
         this.survey = survey;
        // this.participants = participants;
     }
@@ -56,11 +56,11 @@ public class Token {
         this.tokenId = tokenId;
     }
 
-    public Survey getSurvey() {
+    public SurveyEntity getSurvey() {
         return survey;
     }
 
-    public void setSurvey(Survey survey) {
+    public void setSurvey(SurveyEntity survey) {
         this.survey = survey;
     }
 

@@ -557,6 +557,19 @@ function changeDropdownText(optionPar) {
 }
 
 
+function getStarQuesRepsonse(value) {
+
+    console.log("function called ", value,quesId,surveyId);
+
+
+    document.getElementById("placeHolder").appendChild(clon);
+
+
+
+
+}
+
+
 
 
 

@@ -22,13 +22,12 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="well">
-                <form th:action="@{/closesurveyemails}" method="post" th:object="${__${'emailaddressesObject'}__}">
-                   <div class="form-group">
+                <form th:action="@{/closesurveyemails}" th:object="${__${'emailaddressesObject'}__}">
+                    <div class="form-group">
+                        <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
                         <h4 style="margin-left: 20px" id="surveyname">Enter Email Addresses here</h4>
                         <textarea type="text" rows="5" th:field="*{emailAddresses}" class="form-control" placeholder="Separate emails with comma"/>
                     </div>
-                    <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
-
 
                     <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
                 </form>

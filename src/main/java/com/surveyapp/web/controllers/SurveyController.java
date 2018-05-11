@@ -2,11 +2,9 @@ package com.surveyapp.web.controllers;
 
 import com.surveyapp.backend.persistence.domain.backend.QuestionOption;
 import com.surveyapp.backend.persistence.domain.backend.SurveyEntity;
+import com.surveyapp.backend.persistence.domain.backend.Token;
 import com.surveyapp.backend.persistence.domain.backend.User;
-import com.surveyapp.backend.service.QuestionOptionService;
-import com.surveyapp.backend.service.QuestionService;
-import com.surveyapp.backend.service.SurveyService;
-import com.surveyapp.backend.service.UserService;
+import com.surveyapp.backend.service.*;
 import com.surveyapp.utils.SurveyUtils;
 import com.surveyapp.web.domain.frontend.EmailAddresses;
 import com.surveyapp.web.domain.frontend.Question;
@@ -14,6 +12,8 @@ import com.surveyapp.web.domain.frontend.Survey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.token.TokenService;
@@ -30,6 +30,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class SurveyController {
@@ -46,12 +47,20 @@ public class SurveyController {
 
     @Autowired
     private QuestionOptionService questionOptionService;
-/*
+
+private static final String EMAIL_MESSAGE_TEXT_PROPERTY_NAME = "surveytoken.email.text" ;
+    public static final String SHOW_SURVEY = "surveyee/showSurvey";
+
 
     @Autowired
-    private TokenService tokenService;
-*/
+    private I18NService i18NService;
 
+    @Autowired
+    private EmailService emailService;
+
+
+    @Value("${webmaster.email}")
+    private String webMasterEmail;
     /* The Application Logger */
     private static final Logger LOG = LoggerFactory.getLogger(SurveyController.class);
 
@@ -134,7 +143,9 @@ public class SurveyController {
             return "survey/publishCloseSurvey";
 
         } else {
-            String urlForSurvey = "http://localhost:8080/survey?surveyId=" + surveyId;
+            String token = UUID.randomUUID().toString();
+
+            String urlForSurvey = "http://ec2-52-36-9-6.us-west-2.compute.amazonaws.com:8080/survey?surveyId=" + surveyId +"&token=" + token;
             surveyEntity.setUrl(urlForSurvey);
             surveyService.addSurvey(surveyEntity);
             model.addAttribute("url", urlForSurvey);
@@ -142,42 +153,79 @@ public class SurveyController {
             return "survey/publishGeneralSurvey";
         }
     }
+    @RequestMapping(value = "/closesurveyemails", method = RequestMethod.GET)
+    public String closeSurveyEmailsPost(@RequestParam("surveyId") int surveyId,
+                                        @ModelAttribute EmailAddresses emailAddresses, HttpServletRequest servletRequest){
 
-    @RequestMapping(value = "/closesurveyemails", method = RequestMethod.POST)
-    public String closeSurveyEmailsPost(@ModelAttribute EmailAddresses emailAddresses, HttpServletRequest servletRequest, ModelMap model){
-
-
+        System.out.println("emailAddresses "+emailAddresses.getEmailAddresses());
         List<String> listOfEmails = Arrays.asList(emailAddresses.getEmailAddresses().split("\\s*,\\s*"));
 
         for (String s:listOfEmails) {
             System.out.println(s);
         }
+        SurveyEntity survey = surveyService.getSurveyById(surveyId);
 
-        /*SurveyEntity surveyObj = surveyService.getSurveyById(surveyId);
 
-        int sId = surveyObj.getSurveyId();
-        String type = surveyObj.getSurveyType();
+        for(int i = 0; i < listOfEmails.size(); i++){
+            String token = UUID.randomUUID().toString();
+            String tokenURL = "http://ec2-52-36-9-6.us-west-2.compute.amazonaws.com:8080/survey?surveyId="+ surveyId+"&token=" + token;
 
-        String newToken = null;
-        if (type.equals("Close Survey"))
-        {
-            *//**
-             * for closed survey,  email list will be passed
-             * add new token for each email id
-             *//*
-           for (String email : listOfEmails) {
-                Token token = tokenService.generateToken(surveyObj);
-                token.getParticipants().add(new Participant(email, null, true));
-            }
+           /* SurveyEntity surveyEntity = new SurveyEntity();
+
+            surveyEntity.setSurveyName(survey.getSurveyName());
+            surveyEntity.setUrl(tokenURL);
+            surveyEntity.setPublished(true);
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String name = auth.getName();
+            System.out.println(name);
+            User user = userService.findByUserName(name);
+            surveyEntity.setUser(user);
+            surveyEntity.setSurveyType(survey.getSurveyType());
+            surveyEntity.setEndTime(survey.getEndTime());
+            surveyEntity.setDescription(survey.getDescription());
+            surveyEntity.setQuestions(survey.getQuestions());
+
+            surveyService.addSurvey(surveyEntity);*/
+
+            sendEmail(servletRequest, listOfEmails.get(i), tokenURL);
         }
-        else
-        {
-            //for open survey, no email list
-            Token token = tokenService.generateToken(surveyObj);
-            newToken = token.getTokenId();
-        }*/
 
         return "survey/closeSurveyEmailSent";
     }
 
+
+    public void sendEmail(HttpServletRequest servletRequest, String email, String tokenURL) {
+
+        String emailText = i18NService.getMessage(EMAIL_MESSAGE_TEXT_PROPERTY_NAME, servletRequest.getLocale());
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        //for(String email: emailList){
+        mailMessage.setTo(email);
+        mailMessage.setSubject("[Devopsbuddy]: Click the link to take this survey");
+        mailMessage.setText(emailText + "\r\n" + tokenURL);
+        mailMessage.setFrom(webMasterEmail);
+        emailService.sendGenericEmailMessage(mailMessage);
+        //}
+    }
+
+    @RequestMapping(value="/survey", method = RequestMethod.GET)
+    public String getSurvey(@RequestParam(value="surveyId") int surveyId,
+                            @RequestParam(value="token") String token ,
+                            ModelMap m){
+
+        SurveyEntity survey =  surveyService.getSurvey(surveyId);
+
+        if(token.isEmpty()){
+
+        }else{
+
+        }
+
+        System.out.println(survey.getSurveyType());
+        List<com.surveyapp.backend.persistence.domain.backend.Question> questions = questionService.getQuestions(survey);
+        m.addAttribute("survey", survey);
+        m.addAttribute("questions",questions);
+        return SHOW_SURVEY;
+
+    }
 }

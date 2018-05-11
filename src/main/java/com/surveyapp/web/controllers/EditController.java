@@ -1,7 +1,8 @@
 package com.surveyapp.web.controllers;
 
 import com.surveyapp.backend.persistence.domain.backend.Question;
-import com.surveyapp.backend.persistence.domain.backend.Survey;
+//import com.surveyapp.backend.persistence.domain.backend.Survey;
+import com.surveyapp.backend.persistence.domain.backend.SurveyEntity;
 import com.surveyapp.backend.persistence.domain.backend.Token;
 import com.surveyapp.backend.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class EditController {
     @RequestMapping(value="/surveyor/editSurvey", method = RequestMethod.GET)
     public String getSurveyDetails(@RequestParam("description") String surveyName, ModelMap model) {
 
-        Survey survey = surveyService.getSurveyByName(surveyName);
+        SurveyEntity survey = surveyService.getSurveyByName(surveyName);
 
         model.addAttribute("survey", survey);
         model.addAttribute("questions", survey.getQuestions());

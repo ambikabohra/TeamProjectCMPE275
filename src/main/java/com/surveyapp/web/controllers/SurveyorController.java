@@ -1,7 +1,7 @@
 package com.surveyapp.web.controllers;
 
 import com.surveyapp.backend.persistence.domain.backend.Counter;
-import com.surveyapp.backend.persistence.domain.backend.Survey;
+//import com.surveyapp.backend.persistence.domain.backend.Survey;
 import com.surveyapp.backend.persistence.domain.backend.Token;
 import com.surveyapp.backend.service.SurveyService;
 import com.surveyapp.backend.service.UserService;
@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
+import com.surveyapp.web.domain.frontend.Question;
+import com.surveyapp.web.domain.frontend.Survey;
+
 import java.util.List;
+
 
 @Controller
 public class SurveyorController {
@@ -24,20 +27,11 @@ public class SurveyorController {
     public static final String SURVEYOR_HOME = "surveyor/surveyorHome";
 
     public static final String QUESTION = "question";
-
-    public static final String SHARE_SURVEY = "surveyor/shareSurvey";
-
     public static final String CHECK_RESPONSES = "surveyor/surveyResponse";
-
     public static final String EDIT_SURVEY = "surveyor/editSurvey";
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private SurveyService surveyService;
-
-
 
     @RequestMapping(value = "/surveyorhome", method = RequestMethod.GET)
     public String getSurveryorHome(ModelMap model){
@@ -47,13 +41,15 @@ public class SurveyorController {
     }
 
     public static final String CREATE_SURVEY = "surveyor/createSurvey";
+    public static final String SET_SURVEY_DETAILS = "survey/setsurvey";
 
-    @RequestMapping(value = "/createsurvey", method = RequestMethod.GET)
+    @RequestMapping(value = "/setsurvey", method = RequestMethod.GET)
     public String createSurveyGet(ModelMap model){
-        model.addAttribute(QUESTION ,new Question());
-        model.addAttribute("role","surveyor");
-        return CREATE_SURVEY;
+        model.addAttribute("newsurvey", new Survey());
+        return SET_SURVEY_DETAILS;
     }
+
+    public static final String SHARE_SURVEY = "surveyor/shareSurvey";
 
     @RequestMapping(value = "/sharesurvey", method = RequestMethod.GET)
     public String shareSurveyGet(ModelMap model){

@@ -24,8 +24,8 @@ public class Question {
 
 
 
-   /* @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Response> responses;*/
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Response> responses;
 
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -84,13 +84,13 @@ public class Question {
         this.options = options;
     }
 
-      /*
+
     public List<Response> getResponses() {
         return responses;
     }
 
     public void setResponses(List<Response> responses) {
         this.responses = responses;
-    }*/
+    }
 
 }

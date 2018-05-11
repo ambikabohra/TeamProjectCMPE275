@@ -48,17 +48,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/contact/**",
             "/error/**/*",
             "/console/**",
+            "/survey/response/**",
             ForgotMyPasswordController.FORGOT_PASSWORD_URL_MAPPING,
             ForgotMyPasswordController.CHANGE_PASSWORD_PATH,
             SignupController.SIGNUP_URL_MAPPING,
             SignupController.VERIFY_ACCOUNT_URL
+
     };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         List<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
-        if(activeProfiles.contains("dev")){
+        if(activeProfiles.contains("prod")){
             http.csrf().disable();
             http.headers().frameOptions().disable();
         }

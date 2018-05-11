@@ -8,4 +8,5 @@ import javax.transaction.Transactional;
 @Transactional
 public interface QuestionRepository extends CrudRepository<Question, Integer> {
 
+    Question findByqId(int i);
 }

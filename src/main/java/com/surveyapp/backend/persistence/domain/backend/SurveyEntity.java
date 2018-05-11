@@ -5,6 +5,7 @@ import com.surveyapp.backend.persistence.converters.LocalDateTimeAttributeConver
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,9 +43,8 @@ public class SurveyEntity {
     @JoinColumn(name = "id")
     private User user;   //mapped to User table
 
-    /* @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Token> tokens = new ArrayList<Token>();
-
+    @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Token> tokens = new ArrayList<>();
 
     private Date current = new Date();
 
@@ -52,10 +52,20 @@ public class SurveyEntity {
     @Column(name = "curr", length = 10)
     public Date getCurrrent() {
         return this.current;
-    }*/
+    }
 
     public SurveyEntity() {
     }
+
+    public SurveyEntity(Boolean isPublished, String description, LocalDateTime endTime, String surveyType, List<Question> questions  ) {
+        this.isPublished = isPublished;
+        this.description = description;
+        this.endTime = endTime;
+        this.surveyType = surveyType;
+        this.questions = questions;
+        this.current = new Date();
+    }
+
 
     public int getSurveyId() {
         return surveyId;
@@ -129,4 +139,19 @@ public class SurveyEntity {
         this.url = url;
     }
 
+    public List<Token> getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(List<Token> tokens) {
+        this.tokens = tokens;
+    }
+
+    public Date getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Date current) {
+        this.current = current;
+    }
 }
