@@ -36,6 +36,10 @@ public class Response {
         this.participant = participant;
     }
 
+    public Response(String answer) {
+        this.answer = answer;
+    }
+
     public Response() {
     }
 

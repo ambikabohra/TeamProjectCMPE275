@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="text-center" th:text="#{create.survey.heading}"></h1>
+                <p class="lead" th:text="#{create.survey.subheading}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="well">
+                <form class="form-group" id="setSurvey" th:action="@{/setsurvey}" method="post" th:object="${__${'newsurvey'}__}">
+                    <div class="form-group input-group mb-3">
+                        <h4 style="margin-left: 20px" id="surveytype">Survey Type</h4>
+                        <select class="custom-select" id="inputGroupSelect01" th:field="*{surveyType}">
+                            <option selected="selected" value="">Choose...</option>
+                            <option value="General Survey">General Survey</option>
+                            <option value="Close Survey">Close Survey</option>
+                            <option value="Open Survey">Open Survey</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h4 style="margin-left: 20px" id="surveyname">Survey Name</h4>
+                        <input type="text" value="" th:field="*{surveyName}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <h4 style="margin-left: 20px" id="surveydesc">Survey Description</h4>
+                        <input type="text" value="" th:field="*{surveyDesc}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <h4 style="margin-left: 20px" id="endtime">Survey Expiration Time</h4>
+                        <input type="text" value="" th:field="*{days}" class="form-control" placeholder="days"/>
+                        <input type="text" value="" th:field="*{hours}" class="form-control" placeholder="hours"/>
+                        <input type="text" value="" th:field="*{minutes}" class="form-control" placeholder="minutes"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: before-body-scripts"/>
+
+</body>
+</html>

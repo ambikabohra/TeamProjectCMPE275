@@ -2,7 +2,8 @@ package com.surveyapp.web.controllers;
 
 import com.surveyapp.backend.persistence.domain.backend.Question;
 import com.surveyapp.backend.persistence.domain.backend.QuestionOption;
-import com.surveyapp.backend.persistence.domain.backend.Survey;
+//import com.surveyapp.backend.persistence.domain.backend.Survey;
+import com.surveyapp.backend.persistence.domain.backend.SurveyEntity;
 import com.surveyapp.backend.service.OptionService;
 import com.surveyapp.backend.service.QuestionService;
 import com.surveyapp.backend.service.SurveyService;
@@ -65,7 +66,7 @@ public class OpenSurveyController {
         //To populate HTML, we need survey name,
 
 
-        Survey survey =  surveyService.getSurvey(surveyId);
+        SurveyEntity survey =  surveyService.getSurveyObject(surveyId);
 
         System.out.println(survey.getSurveyType());
         List<Question> questions = questionService.getQuestions(survey);

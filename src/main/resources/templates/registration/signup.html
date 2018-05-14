@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common/header :: common-header" />
+<head th:replace="common/header :: common-header"/>
 
 
 <body>
 
-<div th:replace="common/navbar :: common-navbar" />
+<div th:replace="common/navbar :: common-navbar"/>
 
 <div class="container">
 
@@ -25,10 +25,11 @@
                     <div class="well">
                         <form id="verifyaccount" th:action="@{/verifycode}" method="get" role="form">
                             <!-- Code -->
-                            <input type="hidden" name="principal_id" id="principal_id" th:value="${principalId}" />
+                            <input type="hidden" name="principal_id" id="principal_id" th:value="${principalId}"/>
                             <p th:text="#{signup.verify.link.text}" class="text-center"/>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary" th:text="#{signup.verify.button.text}"></button>
+                                <button type="submit" class="btn btn-primary"
+                                        th:text="#{signup.verify.button.text}"></button>
                             </div>
                         </form>
                     </div>
@@ -43,8 +44,8 @@
 
             <div class="well">
 
-                <h1 th:if="${#httpServletRequest.getParameter('planId') == '1'}" th:text="#{signup.h1.basic.profile}"></h1>
-                <h1 th:if="${#httpServletRequest.getParameter('planId') == '2'}" th:text="#{signup.h1.pro.profile}"></h1>
+                <h1 th:if="${#httpServletRequest.getParameter('planId') == '1'}"
+                    th:text="#{signup.h1.basic.profile}"></h1>
                 <p class="lead">Please fill in the form to create an account with us!</p>
 
                 <form id="signupForm" th:action="@{/signup}"
@@ -53,7 +54,7 @@
 
                     <!-- Hidden field for the POST request -->
                     <div th:if="${param.containsKey('planId')}">
-                        <input type="hidden" name="planId" th:value="${#httpServletRequest.getParameter('planId')}" />
+                        <input type="hidden" name="planId" th:value="${#httpServletRequest.getParameter('planId')}"/>
                     </div>
 
                     <div class="form-group">
@@ -61,18 +62,18 @@
                             <label for="username"
                                    th:text="#{signup.form.error.username.already.exists}"></label>
                             <input type="text" id="username" th:field="*{username}"
-                                   class="form-control fieldError" />
+                                   class="form-control fieldError"/>
                         </div>
                         <div th:if="${duplicatedUsername == null}">
                             <label for="username" th:text="#{signup.form.username}"></label>
                             <input type="text" id="username" th:field="*{username}"
-                                   class="form-control" />
+                                   class="form-control"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div th:if="${duplicatedEmail}">
-                            <label for="email" th:text="#{signup.form.error.email.already.exists}" ></label>
+                            <label for="email" th:text="#{signup.form.error.email.already.exists}"></label>
                             <input type="email" id="email" th:field="*{email}" class="form-control fieldError"/>
                         </div>
                         <div th:if="${duplicatedEmail == null}">
@@ -109,7 +110,7 @@
 
                     <div class="form-group">
                         <label for="file" th:text="#{signup.form.profile.image.url}"></label>
-                        <input type="file" id="file" name="file" class="form-control" />
+                        <input type="file" id="file" name="file" class="form-control"/>
                     </div>
 
                     <div class="form-group">
@@ -141,7 +142,7 @@
                     <div class="form-group">
                         <label for="phoneNumber" th:text="#{signup.form.phoneNumber}"></label>
                         <input type="text" id="phoneNumber" th:field="*{phoneNumber}" class="form-control"
-                               name="phoneNumber" />
+                               name="phoneNumber"/>
                     </div>
 
                     <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
@@ -160,7 +161,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<div th:replace="common/header :: before-body-scripts" />
+<div th:replace="common/header :: before-body-scripts"/>
 
 </body>
 </html>

@@ -11,23 +11,21 @@
     <div class="row">
         <div class="col-md-12">
             <div class="jumbotron">
-                <h1 class="text-center" th:text="#{edit.survey.heading}"></h1>
-                <p class="lead" th:text="#{edit.survey.subheading}"></p>
+                <h1 class="text-center" th:text="#{general.survey.publish.heading}"></h1>
+                <p class="lead" th:text="#{general.survey.publish.subheading}"></p>
                 <div class="text-center">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="well">
-                                    <div class="row">
-
-                                        <div class="btn-group-vertical" th:each="survey : ${surveys}">
-
-                                            <a  th:href="@{/surveyor/editSurvey(description=${survey})}" class="btn btn-primary"
-                                                th:text="${survey}" name="name"></a>
-
-
-                                        </div>
-                                    </div>
+                                    <h3 th:text="#{general.survey.publish.link.test}" ></h3>
+                                    <h2><a th:href="@{/survey(surveyId=${surveyId})}" th:text="${url}" /></h2>
+                                    <br/>
+                                    <hr/>
+                                    <br/>
+                                    <a class="btn btn-primary btn-lg btn-block"
+                                       th:href="@{/surveyorhome}"
+                                       th:text="#{general.survey.publish.button.text}"></a>
                                 </div>
                             </div>
                         </div>

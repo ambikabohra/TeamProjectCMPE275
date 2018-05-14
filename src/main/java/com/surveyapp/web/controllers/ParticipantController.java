@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import sun.plugin.liveconnect.SecurityContextHelper;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class ParticipantController {
 
         Set<Token> tokenSet = participant.getTokens(); // get a set of tokens mapped to user
 
-        List<Survey> surveys= new ArrayList<>();
+        List<SurveyEntity> surveys= new ArrayList<>();
 
         for(Token token:tokenSet){
             surveys.add(token.getSurvey());  //make a survey lists tagged to that token

@@ -35,4 +35,8 @@ public class ResponseService {
 //            i++;
 //        }
     }
+
+    public Response saveResponse1(String s) {
+        return responseRepository.save(new Response(s));
+    }
 }

@@ -75,7 +75,7 @@ public class User implements Serializable, UserDetails {
     private Set<PasswordResetToken> passwordResetTokens = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Survey> surveys= new ArrayList<>();   //mapped survey list to user
+    private List<SurveyEntity> surveys= new ArrayList<>();   //mapped survey list to user
 
     public Set<PasswordResetToken> getPasswordResetTokens() {
         return passwordResetTokens;
@@ -215,11 +215,11 @@ public class User implements Serializable, UserDetails {
         this.code = code;
     }
 
-    public List<Survey> getSurveys() {
+    public List<SurveyEntity> getSurveys() {
         return surveys;
     }
 
-    public void setSurveys(List<Survey> surveys) {
+    public void setSurveys(List<SurveyEntity> surveys) {
         this.surveys = surveys;
     }
 

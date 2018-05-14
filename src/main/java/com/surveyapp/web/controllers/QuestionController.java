@@ -21,17 +21,18 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
-    @RequestMapping(value="/question/{sId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> questionForm(@PathVariable(value = "sId") int sId,
-                                          @RequestParam(value = "questiondesc") String description,
-                                          @RequestParam(value = "questionType") String qType,
-                                          @RequestParam(value = "options", required = false) String[] options){
-
-        Survey obj = surveyService.getSurvey(sId);
-        List<QuestionOption> optionList = new ArrayList<>();
-        Question question = questionService.saveQuestion( qType, description, obj, optionList, options);
-
-        return new ResponseEntity<>(question, HttpStatus.OK);
-    }
+//    @RequestMapping(value="/question/{sId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> questionForm(@PathVariable(value = "sId") int sId,
+//                                          @RequestParam(value = "questiondesc") String description,
+//                                          @RequestParam(value = "questionType") String qType,
+//                                          @RequestParam(value = "options", required = false) String[] options){
+//
+//
+//        Survey obj = surveyService.getSurveyObject(sId);
+//        List<QuestionOption> optionList = new ArrayList<>();
+//        Question question = questionService.saveQuestion( qType, description, obj, optionList, options);
+//
+//        return new ResponseEntity<>(question, HttpStatus.OK);
+//    }
 
 }

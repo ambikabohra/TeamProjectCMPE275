@@ -22,20 +22,10 @@ public class Token {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "surveyId")
-    private Survey survey;
+    private SurveyEntity survey;
 
 
-//    @ManyToMany(fetch = FetchType.LAZY,
-//            cascade = {
-//                    CascadeType.PERSIST,
-//                    CascadeType.MERGE
-//            })
-//    @JoinTable(name = "user_tokens",
-//            joinColumns = { @JoinColumn(name = "pId") },
-//            inverseJoinColumns = { @JoinColumn(name = "tokenId") })
-//             private Set<Participant> participants = new HashSet<>();
-
-    @ManyToMany(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
@@ -43,13 +33,14 @@ public class Token {
     @JoinTable(name = "user_tokens",
             joinColumns = { @JoinColumn(name = "tokenId") },
             inverseJoinColumns = { @JoinColumn(name = "pId") })
-    private Set<Participant> participants = new HashSet<>();
+             private Set<Participant> participants = new HashSet<>();
+
 
 //    @Transient
 //    @OneToMany(mappedBy = "token", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Participant> participants;
 
-    public Token(Survey survey) {
+    public Token(SurveyEntity survey) {
         this.survey = survey;
        // this.participants = participants;
     }
@@ -65,11 +56,11 @@ public class Token {
         this.tokenId = tokenId;
     }
 
-    public Survey getSurvey() {
+    public SurveyEntity getSurvey() {
         return survey;
     }
 
-    public void setSurvey(Survey survey) {
+    public void setSurvey(SurveyEntity survey) {
         this.survey = survey;
     }
 

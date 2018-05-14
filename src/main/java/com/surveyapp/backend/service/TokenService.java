@@ -12,7 +12,7 @@ public class TokenService {
     @Autowired
     private TokenRepository tokenRepository;
 
-    public Token generateToken(Survey survey) {
+    public Token generateToken(SurveyEntity survey) {
 
         return tokenRepository.save(new Token(survey));
     }
