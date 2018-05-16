@@ -1,9 +1,11 @@
 package com.surveyapp.web.controllers;
 
+import com.google.zxing.WriterException;
 import com.surveyapp.backend.persistence.domain.backend.QuestionOption;
 import com.surveyapp.backend.persistence.domain.backend.SurveyEntity;
 import com.surveyapp.backend.persistence.domain.backend.Token;
 import com.surveyapp.backend.persistence.domain.backend.User;
+import com.surveyapp.backend.persistence.repositories.TokenRepository;
 import com.surveyapp.backend.service.*;
 import com.surveyapp.utils.SurveyUtils;
 import com.surveyapp.web.domain.frontend.EmailAddresses;
@@ -24,8 +26,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import sun.security.krb5.internal.ccache.FileCredentialsCache;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,7 +52,8 @@ public class SurveyController {
     @Autowired
     private QuestionOptionService questionOptionService;
 
-private static final String EMAIL_MESSAGE_TEXT_PROPERTY_NAME = "surveytoken.email.text" ;
+
+    private static final String EMAIL_MESSAGE_TEXT_PROPERTY_NAME = "surveytoken.email.text" ;
     public static final String SHOW_SURVEY = "surveyee/showSurvey";
 
 
@@ -58,6 +63,9 @@ private static final String EMAIL_MESSAGE_TEXT_PROPERTY_NAME = "surveytoken.emai
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private TokenRepository tokenRepository;
+
 
     @Value("${webmaster.email}")
     private String webMasterEmail;
@@ -65,6 +73,7 @@ private static final String EMAIL_MESSAGE_TEXT_PROPERTY_NAME = "surveytoken.emai
     private static final Logger LOG = LoggerFactory.getLogger(SurveyController.class);
 
     public static final String ADD_QUESTION = "surveyor/createSurvey";
+
 
     @RequestMapping(value = "/setsurvey", method = RequestMethod.POST)
     public String setSurveyPost(@ModelAttribute Survey newsurvey, BindingResult bindingResult, ModelMap model) {
@@ -143,11 +152,15 @@ private static final String EMAIL_MESSAGE_TEXT_PROPERTY_NAME = "surveytoken.emai
             return "survey/publishCloseSurvey";
 
         } else {
-            String token = UUID.randomUUID().toString();
+            //generate token
+            Token token = tokenRepository.save(new Token(surveyEntity));
 
-            String urlForSurvey = "http://ec2-52-36-9-6.us-west-2.compute.amazonaws.com:8080/survey?surveyId=" + surveyId +"&token=" + token;
+//            String token = UUID.randomUUID().toString();
+
+            String urlForSurvey = "http://ec2-52-36-9-6.us-west-2.compute.amazonaws.com:8080/survey?surveyId=" + surveyId +"&token=" + token.getTokenId();
             surveyEntity.setUrl(urlForSurvey);
             surveyService.addSurvey(surveyEntity);
+
             model.addAttribute("url", urlForSurvey);
             model.addAttribute("surveyId", surveyId);
             return "survey/publishGeneralSurvey";
@@ -167,8 +180,9 @@ private static final String EMAIL_MESSAGE_TEXT_PROPERTY_NAME = "surveytoken.emai
 
 
         for(int i = 0; i < listOfEmails.size(); i++){
-            String token = UUID.randomUUID().toString();
-            String tokenURL = "http://ec2-52-36-9-6.us-west-2.compute.amazonaws.com:8080/survey?surveyId="+ surveyId+"&token=" + token;
+//            String token = UUID.randomUUID().toString();
+            Token token = tokenRepository.save(new Token(survey));
+            String tokenURL = "http://ec2-52-36-9-6.us-west-2.compute.amazonaws.com:8080/survey?surveyId="+ surveyId+"&token=" + token.getTokenId();
 
            /* SurveyEntity surveyEntity = new SurveyEntity();
 
@@ -225,6 +239,8 @@ private static final String EMAIL_MESSAGE_TEXT_PROPERTY_NAME = "surveytoken.emai
         List<com.surveyapp.backend.persistence.domain.backend.Question> questions = questionService.getQuestions(survey);
         m.addAttribute("survey", survey);
         m.addAttribute("questions",questions);
+        m.addAttribute("token", token);
+        m.addAttribute("surveyId", surveyId);
         return SHOW_SURVEY;
 
     }

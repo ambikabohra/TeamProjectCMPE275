@@ -65,7 +65,7 @@ public class ParticipantController {
                                         ModelMap model){
 
             //SAVE user in partcipant table
-            Participant participant = participantService.saveParticipant(email,password,true );
+            Participant participant = participantService.saveParticipant(null, email,password,true );
 //                                                 map.addAttribute("participant " + participant);
             return new ResponseEntity<>(participant, HttpStatus.OK);
     }

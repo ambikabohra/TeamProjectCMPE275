@@ -14,7 +14,7 @@
                 <h1 class="text-center" th:text="#{show.survey.heading}"></h1>
                 <p class="lead" th:text="#{show.survey.subheading}"></p>
                 <div class="container">
-                    <div class="row">
+                    <div class="row" th:if="${survey != null}">
                         <h2 th:text="${survey.surveyName}"></h2>
                         <ol class="table table-striped">
                             <form th:id="responseForm" th:with="surveyId=${survey.getSurveyId()}">
@@ -106,7 +106,7 @@
                 </div>
                 <div id="placeholder"></div>
                 <a type="submit" class="btn btn-success btn-md btn-block" value="Submit"
-                   th:href="@{/submitSurvey(token=${token},surveyId=${surveyId})}">Submit</a>
+                   th:href="@{/submitSurvey(surveyId=${surveyId})}">Submit</a>
                 <!--th:href="@{/submitSurvey(token=${token})}">Submit</a>-->
             </div>
         </div>

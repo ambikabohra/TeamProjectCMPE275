@@ -16,9 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
-
+import java.util.Set;
 
 
 @Service
@@ -33,6 +31,9 @@ public class SurveyService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ParticipantService participantService;
 
     public void addSurvey(SurveyEntity surveyEntity){
         surveyRepository.save(surveyEntity);
@@ -81,6 +82,19 @@ public class SurveyService {
         List<String> surveys = new ArrayList<>();
         for(SurveyEntity survey: surveyList)
             surveys.add(survey.getDescription());
+        return surveys;
+    }
+
+    public List<SurveyEntity> getListOfGivenSurveyDescriptions(String userName){
+
+        Set<Token> tokens = participantService.getParticipantByPName(userName).getTokens();
+
+//        List<SurveyEntity> surveyList = new ArrayList<>();
+        List<SurveyEntity> surveys = new ArrayList<>();
+        for(Token token: tokens){
+            surveys.add(token.getSurvey());
+        }
+
         return surveys;
     }
 

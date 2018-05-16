@@ -19,12 +19,19 @@ public class ParticipantService {
         return participant;
     }
 
-    public Participant saveParticipant(String email, String password, boolean b) {
-        return participantRepository.save(new Participant(email, password, true));
+    public Participant saveParticipant(String pName, String email, String password, boolean b) {
+        return participantRepository.save(new Participant(pName, email, password, true));
     }
 
     public Participant getParticipantByEmail(String email) {
 
         return  participantRepository.findByEmail(email);
     }
+
+    public Participant getParticipantByPName(String userName) {
+        return  participantRepository.findByPName(userName);
+    }
+
+//    public  findByEmail(String userName) {
+//    }
 }

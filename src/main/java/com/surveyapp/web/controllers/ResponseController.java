@@ -12,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -124,12 +127,22 @@ public class ResponseController {
 
 
     @RequestMapping(value = "/submitSurvey", method = RequestMethod.GET)
-        public String submitSurvey( ModelMap model){
+        public String submitSurvey(@RequestParam String token,
+                                   @RequestParam (value = "surveyId") int surveyId,
+                                   ModelMap model){
 
-//        Token tokenObj = tokenService.findByToken(token);
+        Token tokenObj = tokenService.findByToken(token);
 
+        //find participant name
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // String userName = auth.getName(); //get logged in username
 
-        Participant participant = participantService.saveParticipant(null,null, true);
+        String currentUserName = null;
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            currentUserName = authentication.getName();
+        }
+
+        Participant participant = participantService.saveParticipant(currentUserName, null,null, true);
 //        tokenObj.getParticipants().add(participant);
         Question que = questionRepository.findByqId(5);
         System.out.println(que.getqId());
@@ -141,6 +154,7 @@ public class ResponseController {
         return SURVEYEE_SURVEY_SUBMIT;
 
         }
+
 
 
 

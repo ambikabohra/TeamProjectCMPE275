@@ -13,6 +13,7 @@ public class Participant {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
 
+    private String pName;
     private String email;
 
     private String pswd;
@@ -35,7 +36,8 @@ public class Participant {
     @OneToMany(mappedBy = "participant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Response> participantresponses= new ArrayList<Response>();
 
-    public Participant(String email, String pswd, Boolean isValid) {
+    public Participant(String pName, String email, String pswd, Boolean isValid) {
+        this.pName = pName;
         this.email = email;
         this.pswd = pswd;
         this.isValid  =isValid;

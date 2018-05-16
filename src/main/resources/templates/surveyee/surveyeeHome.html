@@ -26,6 +26,19 @@
                             <div class="col-md-6">
                                 <div class="well">
 
+                                    <h2>List of surveys...</h2>
+                                    <div th:if="${surveys != null}">
+
+                                    <div class="btn-group-vertical" th:each="survey : ${surveys}">
+                                        <!--<span th:if="${error != null}">-->
+                                        <!--<a th:text="${error}" href="/surveyorresponse"></a>-->
+
+                                        <!--</span> &lt;!&ndash;<span th:if="${survey !=null}">&ndash;&gt;-->
+                                        <a  th:href="@{/openSurvey(surveyId=${survey.getSurveyId()})}" class="btn btn-primary"
+                                            th:text="${survey.getDescription()}" name="name"></a>
+                                    </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

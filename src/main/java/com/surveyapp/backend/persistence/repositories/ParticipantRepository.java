@@ -15,4 +15,6 @@ public interface ParticipantRepository extends CrudRepository<Participant, Integ
 
 //    @Query(value = "SELECT * FROM Participant t where t.id = :pId")
      Participant findByUserId(int userId);
+
+    Participant findByPName(String userName);
 }
