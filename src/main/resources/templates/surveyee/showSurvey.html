@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="text-center" th:text="#{show.survey.heading}"></h1>
+                <p class="lead" th:text="#{show.survey.subheading}"></p>
+                <div class="container">
+                    <div class="row">
+                        <h2 th:text="${survey.surveyName}"></h2>
+                        <ol class="table table-striped">
+                            <form th:id="responseForm" th:with="surveyId=${survey.getSurveyId()}">
+                                <li th:each="question, iterStat : ${questions}">
+                                    <div th:with="quesId=${question.getqId()}"  th:text="${question.description}" th:id="'question'+${iterStat.index}"></div>
+
+                                    <div th:if="${question.qType == 'singleanswer'}">
+                                        <input type="text" th:id="'shortAns'+${iterStat.index}"/>
+                                    </div>
+
+                                    <div th:if="${question.qType == 'starrating'}">
+                                        <ul class="rate-area" th:id="'ratingQues'+${iterStat.index}">
+                                            <input type="radio" id="5-star" th:name="'rating'+${iterStat.index}"
+                                                   value="5" onclick="getStarQuesRepsonse(5,quesId,surveyId)"/>
+                                            <label for="5-star" title="Amazing" style="height: 70px; width: 70px">5
+                                                stars</label>
+                                            <input type="radio" id="4-star" th:name="'rating'+${iterStat.index}"
+                                                   value="4" onclick="getStarQuesRepsonse(4)"/>
+                                            <label for="4-star" title="Good" style="height: 70px; width: 70px">4
+                                                stars</label>
+                                            <input type="radio" id="3-star" th:name="'rating'+${iterStat.index}"
+                                                   value="3" onclick="getStarQuesRepsonse(3)"/>
+                                            <label for="3-star" title="Average" style="height: 70px; width: 70px">3
+                                                stars</label>
+                                            <input type="radio" id="2-star" th:name="'rating'+${iterStat.index}"
+                                                   value="2" onclick="getStarQuesRepsonse(2)"/>
+                                            <label for="2-star" title="Not Good" style="height: 70px; width: 70px">2
+                                                stars</label>
+                                            <input type="radio" id="1-star" th:name="'rating'+${iterStat.index}"
+                                                   value="1" onclick="getStarQuesRepsonse(1)"/>
+                                            <label for="1-star" title="Bad" style="height: 70px; width: 70px">1
+                                                star</label>
+                                        </ul>
+                                        <div>
+                                            <p></p>
+                                        </div>
+
+                                    </div>
+                                    <br/>
+                                    <div>
+                                        <p></p>
+                                    </div>
+
+                                    <div th:if="${question.qType == 'dropdown'}">
+
+                                        <select th:id="'multipleChoice'+${iterStat.index}">
+                                            <option th:each="option : ${question.options}" th:value="response">
+                                                <span th:text="${option.optionValue}"></span>
+                                            </option>
+                                        </select>
+
+                                    </div>
+
+                                    <div th:if="${question.qType == 'radio'}">
+
+                                        <p th:each="option : ${question.options}"
+                                           th:if="${question.options.size() > 0}"
+                                           th:value="${option.optionValue}">
+                                            <input type="radio" th:name="'radio'+${iterStat.index}"
+                                                   th:checked="${#strings.equals('response', option.optionValue)}">
+                                            </input>
+                                            <span th:text="${option.optionValue}"/><br></br>
+                                        </p>
+
+
+                                    </div>
+
+                                    <div th:if="${question.qType == 'checkbox'}">
+
+                                        <p th:each="option : ${question.options}"
+                                           th:if="${question.options.size() > 0}"
+                                           th:value="${option.optionValue}">
+                                            <input type="checkbox"
+                                                   th:checked="${#strings.equals('response', option.optionValue)}">
+                                            </input>
+                                            <span th:text="${option.optionValue}"/><br></br>
+                                        </p>
+
+                                    </div>
+
+                                    <br/><br/>
+
+                                </li>
+                                <br/>
+                            </form>
+                        </ol>
+
+                    </div>
+                </div>
+                <div id="placeholder"></div>
+                <a type="submit" class="btn btn-success btn-md btn-block" value="Submit"
+                   th:href="@{/submitSurvey(token=${token},surveyId=${surveyId})}">Submit</a>
+                <!--th:href="@{/submitSurvey(token=${token})}">Submit</a>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="common/header :: before-body-scripts"/>
+<!--//-->
+
+
+</body>
+
+</html>

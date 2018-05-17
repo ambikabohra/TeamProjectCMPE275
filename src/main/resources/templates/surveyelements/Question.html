@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+<!--multiple choice part-->
+<div class="container" th:fragment="multipleChoiceQuestion">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" onclick="editMultipleChoiceQuestion()">
+                <h4 id="questionMC">New Question here...</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="options">
+                            <div class="form-control">
+                                <input type="checkbox" value=""/><label style="margin-left: 20px" id="option1">Option
+                                1</label>
+                            </div>
+                            <div class="form-control">
+                                <input type="checkbox" value=""/> <label style="margin-left: 20px" id="option2">Option
+                                2</label>
+                            </div>
+                            <div class="form-control">
+                                <input type="checkbox" value=""/> <label style="margin-left: 20px" id="option3">Option
+                                3</label>
+                            </div>
+                            <div class="form-control">
+                                <input type="checkbox" value=""/><label style="margin-left: 20px" id="option4">Option
+                                4</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="editMultipleChoiceQues">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-group" id="editoptions" th:action="@{/savequestion}" method="post"
+                      th:object="${__${'question'}__}">
+                    <input type="hidden" name="quesType" id="quesType" th:value="'checkbox'"/>
+                    <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
+                    <label id="multiChoiceQuesText">Type your question here</label><br/>
+                    <input type="text" class="text" id="multipleChoiceQuesTextField" name="multipleChoiceQuesTextField"
+                           th:field="*{quesText}" oninput="editMultipleChoiceQuesText()"/>
+                    <br/><br/>
+                    <label>Edit Options</label><br/>
+                    <input type="text" class="text" id="option1Text" th:field="*{option1Text}"
+                           oninput="changeMultipleChoiceOptionText('option1')" placeholder="Option 1"/>
+                    <input type="text" class="text" id="option2Text" th:field="*{option2Text}"
+                           oninput="changeMultipleChoiceOptionText('option2')" placeholder="Option 2"/>
+                    <input type="text" class="text" id="option3Text" th:field="*{option3Text}"
+                           oninput="changeMultipleChoiceOptionText('option3')" placeholder="Option 3"/>
+                    <input type="text" class="text" id="option4Text" th:field="*{option4Text}"
+                           oninput="changeMultipleChoiceOptionText('option4')" placeholder="Option 4"/>
+                    <div class="col-md-6">
+                        <br/>
+                        <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="trueFalseOptions">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" onclick="editTrueFalseQues()">
+                <h4 id="questionTF">New Question here...</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="optionsTF">
+                            <div class="form-control">
+                                <input type="radio" name="TF" value="True"/><label style="margin-left: 20px" id="true">True</label>
+                            </div>
+                            <div class="form-control">
+                                <input type="radio" name="TF" value="False"/> <label style="margin-left: 20px"
+                                                                                     id="false">False</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="editTrueFalseQues">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-group" id="editoptionsTF" th:action="@{/savequestion}" method="post"
+                      th:object="${__${'question'}__}">
+                    <input type="hidden" name="quesType" id="quesType" th:value="'truefalse'"/>
+                    <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
+                    <label id="quesTextTF">Type your question here</label><br/>
+                    <input type="text" class="text" id="quesTextFieldTF" th:field="*{quesText}"
+                           oninput="editTrueFalseQuesText()"/>
+                    <div class="col-md-6">
+                        <br/>
+                        <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="singleQuestion">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" onclick="editShortAnsQues()">
+                <h4 id="questionSA">New Question here...</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="optionsSA">
+                            <div class="form-control">
+                                <input type="text" name="shortAns" value=""/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="singleAnsQuestionEdit">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-group" id="editoptionsSA" th:action="@{/savequestion}" method="post"
+                      th:object="${__${'question'}__}">
+                    <input type="hidden" name="quesType" id="quesType" th:value="'singleanswer'"/>
+                    <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
+                    <label id="quesTextSA">Type your question here</label><br/>
+                    <input type="text" class="text" id="quesTextFieldSA" th:field="*{quesText}"
+                           oninput="editShortAnsQuesText()"/>
+                    <div class="col-md-6">
+                        <br/>
+                        <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Star option part-->
+<div class="container" th:fragment="starRatingQuestion">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" onclick="editStarRatingQues()">
+                <h4 id="questionStar">New Question here...</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="rate-area">
+                            <input type="radio" id="5-star" name="rating" value="5"/>
+                            <label for="5-star" title="Amazing" style="height: 70px; width: 70px">5 stars</label>
+                            <input type="radio" id="4-star" name="rating" value="4"/>
+                            <label for="4-star" title="Good" style="height: 70px; width: 70px">4 stars</label>
+                            <input type="radio" id="3-star" name="rating" value="3"/>
+                            <label for="3-star" title="Average" style="height: 70px; width: 70px">3 stars</label>
+                            <input type="radio" id="2-star" name="rating" value="2"/>
+                            <label for="2-star" title="Not Good" style="height: 70px; width: 70px">2 stars</label>
+                            <input type="radio" id="1-star" name="rating" value="1"/>
+                            <label for="1-star" title="Bad" style="height: 70px; width: 70px">1 star</label>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="editStarRatingQuestion">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-group" id="editQuesStarRating" th:action="@{/savequestion}" method="post"
+                      th:object="${__${'question'}__}">
+                    <input type="hidden" name="quesType" id="quesType" th:value="'starrating'"/>
+                    <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
+                    <label id="quesTextStarRating">Type your question here</label><br/>
+                    <input type="text" class="text" id="quesTextStarRatingField" th:field="*{quesText}"
+                           oninput="editStarRatingQuesText()"/>
+                    <div class="col-md-6">
+                        <br/>
+                        <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Radio option part-->
+<div class="container" th:fragment="radioQuestion">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" onclick="editRadioQuestion()">
+                <h4 id="questionRadio">New Question here...</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="radio">
+                            <div class="form-control">
+                                <input type="radio" name="radioQues" value=""/><label style="margin-left: 20px"
+                                                                                      id="radio1">Radio 1</label>
+                            </div>
+                            <div class="form-control">
+                                <input type="radio" name="radioQues" value=""/> <label style="margin-left: 20px"
+                                                                                       id="radio2">Radio 2</label>
+                            </div>
+                            <div class="form-control">
+                                <input type="radio" name="radioQues" value=""/> <label style="margin-left: 20px"
+                                                                                       id="radio3">Radio 3</label>
+                            </div>
+                            <div class="form-control">
+                                <input type="radio" name="radioQues" value=""/><label style="margin-left: 20px"
+                                                                                      id="radio4">Radio 4</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="editRadioQuestion">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-group" id="editradiooptions" th:action="@{/savequestion}" method="post"
+                      th:object="${__${'question'}__}">
+                    <input type="hidden" name="quesType" id="quesType" th:value="'radio'"/>
+                    <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
+                    <label id="radioQuesText">Type your question here</label><br/>
+                    <input type="text" class="text" id="radioTextField" th:field="*{quesText}"
+                           oninput="editRadioText()"/>
+                    <br/><br/>
+                    <label>Edit Options</label><br/>
+                    <input type="text" class="text" id="radio1Text" oninput="changeRadioText('radio1')"
+                           th:field="*{option1Text}"
+                           placeholder="Radio 1"/>
+                    <input type="text" class="text" id="radio2Text" oninput="changeRadioText('radio2')"
+                           th:field="*{option2Text}"
+                           placeholder="Radio 2"/>
+                    <input type="text" class="text" id="radio3Text" oninput="changeRadioText('radio3')"
+                           th:field="*{option3Text}"
+                           placeholder="Radio 3"/>
+                    <input type="text" class="text" id="radio4Text" oninput="changeRadioText('radio4')"
+                           th:field="*{option4Text}"
+                           placeholder="Radio 4"/>
+                    <div class="col-md-6">
+                        <br/>
+                        <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Dropdown part-->
+
+<div class="container" th:fragment="dropdownQuestion">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron" onclick="editDropdownQuestion()">
+                <h4 id="questionDropdown">New Question here...</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="dropdown">
+                            <div class="form-control">
+                                <label style="margin-left: 20px" id="dropdown1">Dropdown 1</label>
+                            </div>
+                            <div class="form-control">
+                                <label style="margin-left: 20px" id="dropdown2">Dropdown 2</label>
+                            </div>
+                            <div class="form-control">
+                                <label style="margin-left: 20px" id="dropdown3">Dropdown 3</label>
+                            </div>
+                            <div class="form-control">
+                                <label style="margin-left: 20px" id="dropdown4">Dropdown 4</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="editDropdownQuestion">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-group" id="editdropdownoptions" th:action="@{/savequestion}" method="post"
+                      th:object="${__${'question'}__}">
+                    <input type="hidden" name="quesType" id="quesType" th:value="'dropdown'"/>
+                    <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
+                    <label id="dropdownQuesText">Type your question here</label><br/>
+                    <input type="text" class="text" id="dropdownTextField" th:field="*{quesText}"
+                           oninput="editDropdownText()"/>
+                    <br/><br/>
+                    <label>Edit Options</label><br/>
+                    <input type="text" class="text" id="dropdown1Text" oninput="changeDropdownText('dropdown1')"
+                           th:field="*{option1Text}"
+                           placeholder="Dropdown 1"/>
+                    <input type="text" class="text" id="dropdown2Text" oninput="changeDropdownText('dropdown2')"
+                           th:field="*{option2Text}"
+                           placeholder="Dropdown 2"/>
+                    <input type="text" class="text" id="dropdown3Text" oninput="changeDropdownText('dropdown3')"
+                           th:field="*{option3Text}"
+                           placeholder="Dropdown 3"/>
+                    <input type="text" class="text" id="dropdown4Text" oninput="changeDropdownText('dropdown4')"
+                           th:field="*{option4Text}"
+                           placeholder="Dropdown 4"/>
+                    <div class="col-md-6">
+                        <br/>
+                        <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function addItem(){
+var ul = document.getElementById("dynamic-list");
+var candidate = document.getElementById("candidate");
+var li = document.createElement("li");
+li.setAttribute('id',candidate.value);
+li.appendChild(document.createTextNode(candidate.value));
+ul.appendChild(li);
+}
+
+function removeItem(){
+var ul = document.getElementById("dynamic-list");
+var candidate = document.getElementById("candidate");
+var item = document.getElementById(candidate.value);
+ul.removeChild(item);
+}
+</script>
+
+<div th:replace="common/header :: before-body-scripts"/>
+</body>
+</html>

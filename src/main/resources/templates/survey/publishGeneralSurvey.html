@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="text-center" th:text="#{general.survey.publish.heading}"></h1>
+                <p class="lead" th:text="#{general.survey.publish.subheading}"></p>
+                <div class="text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="well">
+                                    <h3 th:text="#{general.survey.publish.link.test}" ></h3>
+                                    <h2><a th:href="@{/survey(surveyId=${surveyId})}" th:text="${url}" /></h2>
+                                    <br/>
+                                    <hr/>
+                                    <br/>
+                                    <img class="btn btn-primary btn-lg btn-block"
+                                       th:src="@{/generate/QR/${url}}"/>
+
+                                    <a class="btn btn-primary btn-lg btn-block"
+                                       th:href="@{/surveyorhome}"
+                                       th:text="#{general.survey.publish.button.text}"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="common/header :: before-body-scripts"/>
+
+</body>
+</html>

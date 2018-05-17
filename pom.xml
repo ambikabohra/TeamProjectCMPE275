@@ -3,13 +3,13 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.devopsbuddy</groupId>
-	<artifactId>devopsbuddy</artifactId>
+	<groupId>com.surveyapp</groupId>
+	<artifactId>surveyapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>devopsbuddy</name>
-	<description>Startup-ready web skeleton</description>
+	<name>surveyapp</name>
+	<description>Website to create and take surveys</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -120,6 +120,26 @@
 			<scope>test</scope>
 		</dependency>
 
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>3.3.0</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -127,7 +147,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<addResources>true</addResources>
+				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
 

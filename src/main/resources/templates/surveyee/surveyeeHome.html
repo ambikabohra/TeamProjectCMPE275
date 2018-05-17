@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar"/>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="jumbotron">
+
+                <div class="text-center">
+
+                    <!-- <h1 th:text=""/>
+
+                     <p class="lead" th:text=""/>
+ -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="well">
+
+                                    <h2>List of surveys...</h2>
+                                    <div th:if="${surveys != null}">
+
+                                    <div class="btn-group-vertical" th:each="survey : ${surveys}">
+                                        <!--<span th:if="${error != null}">-->
+                                        <!--<a th:text="${error}" href="/surveyorresponse"></a>-->
+
+                                        <!--</span> &lt;!&ndash;<span th:if="${survey !=null}">&ndash;&gt;-->
+                                        <a  th:href="@{/openSurvey(surveyId=${survey.getSurveyId()})}" class="btn btn-primary"
+                                            th:text="${survey.getDescription()}" name="name"></a>
+                                    </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<div th:replace="common/header :: before-body-scripts"/>
+
+</body>
+</html>

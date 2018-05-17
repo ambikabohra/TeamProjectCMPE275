@@ -40,8 +40,8 @@ public class SignupController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private S3Service s3Service;
+//    @Autowired
+//    private S3Service s3Service;
 
     @Autowired
     private I18NService i18NService;
@@ -93,6 +93,7 @@ public class SignupController {
         return SUBSCRIPTION_VIEW_NAME;
     }
 
+
     @RequestMapping(value = SIGNUP_URL_MAPPING, method = RequestMethod.POST)
     public String signUpPost(HttpServletRequest servletRequest,
                              @RequestParam(name = "planId", required = true) int planId,
@@ -138,17 +139,17 @@ public class SignupController {
         User user = UserUtils.fromWebUserToDomainUser(payload);
 
         // Stores the profile image on Amazon S3 and stores the URL in the user's record
-        if (file != null && !file.isEmpty()) {
-
-            String profileImageUrl = s3Service.storeProfileImage(file, payload.getUsername());
-            if (profileImageUrl != null) {
-                user.setProfileImageUrl(profileImageUrl);
-            } else {
-                LOG.warn("There was a problem uploading the profile image to S3. The user's profile will" +
-                        " be created without the image");
-            }
-
-        }
+//        if (file != null && !file.isEmpty()) {
+//
+//            String profileImageUrl = s3Service.storeProfileImage(file, payload.getUsername());
+//            if (profileImageUrl != null) {
+//                user.setProfileImageUrl(profileImageUrl);
+//            } else {
+//                LOG.warn("There was a problem uploading the profile image to S3. The user's profile will" +
+//                        " be created without the image");
+//            }
+//
+//        }
 
         // Sets the Plan and the Roles (depending on the chosen plan)
         LOG.debug("Retrieving plan from the database");

@@ -28,3 +28,4 @@
 /.nb-gradle/
 
 .devopsbuddy.iml
+.DS_Store

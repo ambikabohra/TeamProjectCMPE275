@@ -1,3 +1,4 @@
+/*
 package com.surveyapp.backend.service;
 
 import com.amazonaws.AmazonClientException;
@@ -20,13 +21,17 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+*/
 /**
  * Created by tedonema on 08/05/2016.
- */
+ *//*
+
 @Service
 public class S3Service {
 
-    /** The application logger */
+    */
+/** The application logger *//*
+
     private static final Logger LOG = LoggerFactory.getLogger(S3Service.class);
 
     private static final String PROFILE_PICTURE_FILE_NAME = "profilePicture";
@@ -44,13 +49,15 @@ public class S3Service {
     private AmazonS3Client s3Client;
 
 
-    /**
+    */
+/**
      * It stores the given file name in S3 and returns the key under which the file has been stored
      * @param uploadedFile The multipart file uploaed by the user
      * @param username The username for which to upload this file
      * @return The URL of the uploaded image
      * @throws S3Exception If something goes wrong
-     */
+     *//*
+
     public String storeProfileImage(MultipartFile uploadedFile, String username)  {
 
         String profileImageUrl = null;
@@ -96,13 +103,15 @@ public class S3Service {
 
     //--------------> Private methods
 
-    /**
+    */
+/**
      * Returns the root URL where the bucket name is located.
      * <p>Please note that the URL does not contain the bucket name</p>
      * @param bucketName The bucket name
      * @return the root URL where the bucket name is located.
      * @throws S3Exception If something goes wrong.
-     */
+     *//*
+
     private String ensureBucketExists(String bucketName) {
 
         String bucketUrl = null;
@@ -124,13 +133,15 @@ public class S3Service {
         return bucketUrl;
     }
 
-    /**
+    */
+/**
      * It stores the given file name in S3 and returns the key under which the file has been stored
      * @param resource The file resource to upload to S3
      * @return The URL of the uploaded resource or null if a problem occurred
      *
      * @throws S3Exception If the resource file does not exist
-     */
+     *//*
+
     private String storeProfileImageToS3(File resource, String username) {
 
         String resourceUrl = null;
@@ -167,4 +178,4 @@ public class S3Service {
         return resourceUrl;
 
     }
-}
+}*/

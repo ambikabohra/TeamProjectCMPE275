@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="text-center" th:text="#{survey.stats.heading}"></h1>
+                    <div class="text-center">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="well">
+
+
+                                        <div class="row" th:if="${stats != null}">
+
+                                            <h2  class="btn btn-success btn-lg btn-block" th:text="#{survey.stats.heading1}"/>
+                                            <!--<div id="survey_stats" class="stats" >-->
+                                            <ol>
+                                                    <li> Title: <span th:text="${stats.getDescription()}"/></li>
+                                                    <li> Start Time: <span th:text="${stats.getCurrent()}"/></li>
+                                                    <li> End Time: <span th:text="${stats.getEndTime()}"/></li>
+
+                                                    <span th:if="${stats.getSurveyType() == 'closed'}">
+                                                <!--check the token list size, which is equal to registered participants-->
+                                                        <span th:with="participants =${stats.getTokens().size()}" >
+                                                            <li>Participants: <span th:text="${participants}" /></li>
+                                                            <li>Submissions: <span th:text="${stats.getQuestions().get(0).getResponses().size()}"></span></li>
+                                                            <li>Participation rate: <span th:text="${(stats.getQuestions().get(0).getResponses().size())/(participants*1.0)}"></span> </li>
+                                                        </span>
+                                                    </span>
+                                                    <span th:unless="${stats.getSurveyType() == 'closed'}" >
+                                                        <span th:with="participants =${stats.getTokens().get(0).getParticipants().size()}">
+                                <!--get the token and participants registered under that-->
+                                                            <li>Participants: <span th:text="${participants}"/></li>
+                                                             <li>Submissions: <span th:text="${stats.getQuestions().get(0).getResponses().size()}"></span></li>
+                                                            <li>Participation rate: <span th:text="${(stats.getQuestions().get(0).getResponses().size())/(participants*1.0)}"/> </li>
+                                                        </span>
+                                                    </span>
+                                                </ol>
+                                        </div>
+
+
+                            <!--question stats-->
+
+                                        <div class="well">
+
+                                             <h2 class="btn btn-success btn-lg btn-block" th:text="#{survey.stats.questions}"/>
+                                            <ol>
+
+                                                <li th:each="question : ${stats.getQuestions()}">
+                                                    <label>Question : <span th:text="${question.getDescription()}"/></label>
+                                                    <br></br>
+                                                    <label> Type: <span th:text="${question.getqType()}"/></label>
+
+
+                                            <!--check question type-->
+                                            <!--<span th:if="${question.getqType() == 'shortanswer' || question.getqType() == 'dateTime' || question.getqType() == 'text'  }"  th:with="options =${question.getOptions()} ">-->
+                                                <!--&lt;!&ndash;text answers printed&ndash;&gt;-->
+                                                <!--<span>Responses:-->
+                                                    <!--<ol th:each="response : ${question.getResponses()}">-->
+                                                            <!--<span th:text="${response.getAnswer()}"> </span>-->
+                                                    <!--</ol>-->
+                                                <!--</span>-->
+                                             <!--</span>-->
+
+                                                    <span th:unless="${question.getqType() == 'text'}"  th:with="options =${question.getOptions()} ">
+
+                                                    <span th:each="option : ${options}">
+                                                     <br></br>
+                                                    <label th:text="${option.getOptionValue()}" ></label>
+
+                                                    <span th:each="response,iterStat : ${question.getResponses()}">
+                                                        <span th:if="${response.getAnswer().equals(option.getOptionValue())}" >
+                                                            <span th:text="${counter.incrementCount()}" />
+                                                        </span>
+
+                                                    </span>
+
+                                                    <span th:text="${counter.getValue()}"/>
+                                                    <span th:text="${counter.resetCount()}"></span>
+
+                                                </span>
+
+                                            </span>
+                                            <br></br>
+                                            <label>Total responses given :<span th:text="${question.getResponses().size()}"/></label>
+                                        <!--</span>-->
+                                        <!--</div>-->
+                                        </li>
+                                    </ol>
+                                </div>
+
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        </div>
+                    </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<div th:replace="common/header :: before-body-scripts"/>
+
+</body>
+</html>

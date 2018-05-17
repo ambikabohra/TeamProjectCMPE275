@@ -1,8 +1,15 @@
-$( document ).ready( main );
+$(document).ready(main);
+
+var addMultipleChoiceEditTemplate = true;
+var addTrueFalseEditTemplate = true;
+var addSingleAnsEditTemplate = true;
+var starEditTemplate = true;
+var addRadioEditTemplate = true;
+var addDropdownEditTemplate = true;
 
 function main() {
 
-    $('.btn-collapse').click(function(e) {
+    $('.btn-collapse').click(function (e) {
         e.preventDefault();
         var $this = $(this);
         var $collapse = $this.closest('.collapse-group').find('.collapse');
@@ -220,8 +227,351 @@ function main() {
         }
     })
     // Revalidate phone number when changing the country
-        .on('change', '[name="country"]', function(e) {
+        .on('change', '[name="country"]', function (e) {
             $('#signupForm').formValidation('revalidateField', 'phoneNumber');
         });
 
 }
+
+var count = 0;
+
+
+function addMultipleChoiceQues() {
+
+    var temp = document.getElementsByTagName("template")[0];
+    var clon = temp.content.cloneNode(true);
+    if (clon == null || clon == "") {
+        console.log("nothing here");
+    } else {
+        console.log(clon);
+    }
+    document.getElementById("placeHolder").appendChild(clon);
+
+}
+
+function editMultipleChoiceQuestion() {
+
+    if (addMultipleChoiceEditTemplate) {
+        var temp = document.getElementsByTagName("template")[1];
+        var editTab = temp.content.cloneNode(true);
+        if (editTab == null || editTab == "") {
+            console.log("nothing here");
+        } else {
+            console.log(editTab);
+        }
+        document.getElementById("placeHolder").appendChild(editTab);
+        addMultipleChoiceEditTemplate = false;
+    }
+}
+
+function editMultipleChoiceQuesText() {
+
+    var question = document.getElementById("questionMC");
+    var quesTextFieldValue = document.getElementById("multipleChoiceQuesTextField").value;
+    question.innerHTML = quesTextFieldValue;
+    console.log(quesTextFieldValue);
+
+}
+
+function changeMultipleChoiceOptionText(optionPar) {
+
+    var option;
+    var optionText;
+
+    if (optionPar == "option1") {
+
+        option = document.getElementById("option1");
+        optionText = document.getElementById("option1Text").value;
+        option.innerHTML = optionText;
+    } else if (optionPar == "option2") {
+
+        option = document.getElementById("option2");
+        optionText = document.getElementById("option2Text").value;
+        option.innerHTML = optionText;
+    } else if (optionPar == "option3") {
+
+        option = document.getElementById("option3");
+        optionText = document.getElementById("option3Text").value;
+        option.innerHTML = optionText;
+    } else if (optionPar == "option4") {
+
+        option = document.getElementById("option4");
+        optionText = document.getElementById("option4Text").value;
+        option.innerHTML = optionText;
+    }
+
+}
+
+function addTrueFalse() {
+
+    var temp = document.getElementsByTagName("template")[2];
+    var clon = temp.content.cloneNode(true);
+    if (clon == null || clon == "") {
+        console.log("nothing here");
+    } else {
+        console.log(clon);
+    }
+    document.getElementById("placeHolder").appendChild(clon);
+    addTrueFalseEditTemplate = false;
+
+}
+
+
+function editTrueFalseQues() {
+
+    if (addTrueFalseEditTemplate) {
+        var temp = document.getElementsByTagName("template")[3];
+        var editTab = temp.content.cloneNode(true);
+        if (editTab == null || editTab == "") {
+            console.log("nothing here");
+        } else {
+            console.log(editTab);
+        }
+        document.getElementById("placeHolder").appendChild(editTab);
+        addTrueFalseEditTemplate = false;
+    }
+
+}
+
+
+function editTrueFalseQuesText() {
+
+    var question = document.getElementById("questionTF");
+    var quesTextFieldValue = document.getElementById("quesTextFieldTF").value;
+    question.innerHTML = quesTextFieldValue;
+    console.log(quesTextFieldValue);
+
+}
+
+function addShortAnsQues() {
+
+    var temp = document.getElementsByTagName("template")[4];
+    var clon = temp.content.cloneNode(true);
+    if (clon == null || clon == "") {
+        console.log("nothing here");
+    } else {
+        console.log(clon);
+    }
+    document.getElementById("placeHolder").appendChild(clon);
+    addTrueFalseEditTemplate = false;
+
+}
+
+function editShortAnsQues() {
+    if (addSingleAnsEditTemplate) {
+        var temp = document.getElementsByTagName("template")[5];
+        var editTab = temp.content.cloneNode(true);
+        if (editTab == null || editTab == "") {
+            console.log("nothing here");
+        } else {
+            console.log(editTab);
+        }
+        document.getElementById("placeHolder").appendChild(editTab);
+        addSingleAnsEditTemplate = false;
+    }
+
+}
+
+function editShortAnsQuesText() {
+
+    var question = document.getElementById("questionSA");
+    var quesTextFieldValue = document.getElementById("quesTextFieldSA").value;
+    question.innerHTML = quesTextFieldValue;
+    console.log(quesTextFieldValue);
+
+}
+
+function addStarRatingQues() {
+
+    var temp = document.getElementsByTagName("template")[6];
+    var clon = temp.content.cloneNode(true);
+    if (clon == null || clon == "") {
+        console.log("nothing here");
+    } else {
+        console.log(clon);
+    }
+    document.getElementById("placeHolder").appendChild(clon);
+
+}
+
+function editStarRatingQues() {
+
+    if (starEditTemplate) {
+        var temp = document.getElementsByTagName("template")[7];
+        var editTab = temp.content.cloneNode(true);
+        if (editTab == null || editTab == "") {
+            console.log("nothing here");
+        } else {
+            console.log(editTab);
+        }
+        document.getElementById("placeHolder").appendChild(editTab);
+        starEditTemplate = false;
+    }
+
+}
+
+function editStarRatingQuesText() {
+
+    var question = document.getElementById("questionStar");
+    var quesTextFieldValue = document.getElementById("quesTextStarRatingField").value;
+    question.innerHTML = quesTextFieldValue;
+    console.log(quesTextFieldValue);
+
+}
+
+
+//Radio
+
+function addRadioQues() {
+
+    var temp = document.getElementsByTagName("template")[8];
+    var clon = temp.content.cloneNode(true);
+    if (clon == null || clon == "") {
+        console.log("nothing here");
+    } else {
+        console.log(clon);
+    }
+    document.getElementById("placeHolder").appendChild(clon);
+
+}
+
+function editRadioQuestion() {
+
+    if (addRadioEditTemplate) {
+        var temp = document.getElementsByTagName("template")[9];
+        var editTab = temp.content.cloneNode(true);
+        if (editTab == null || editTab == "") {
+            console.log("nothing here");
+        } else {
+            console.log(editTab);
+        }
+        document.getElementById("placeHolder").appendChild(editTab);
+        addRadioEditTemplate = false;
+    }
+}
+
+function editRadioText() {
+
+    var question = document.getElementById("questionRadio");
+    var quesTextFieldValue = document.getElementById("radioTextField").value;
+    question.innerHTML = quesTextFieldValue;
+    console.log(quesTextFieldValue);
+
+}
+
+function changeRadioText(optionPar) {
+
+    var option;
+    var optionText;
+
+    if (optionPar == "radio1") {
+
+        option = document.getElementById("radio1");
+        optionText = document.getElementById("radio1Text").value;
+        option.innerHTML = optionText;
+    } else if (optionPar == "radio2") {
+
+        option = document.getElementById("radio2");
+        optionText = document.getElementById("radio2Text").value;
+        option.innerHTML = optionText;
+    } else if (optionPar == "radio3") {
+
+        option = document.getElementById("radio3");
+        optionText = document.getElementById("radio3Text").value;
+        option.innerHTML = optionText;
+    } else if (optionPar == "radio4") {
+
+        option = document.getElementById("radio4");
+        optionText = document.getElementById("radio4Text").value;
+        option.innerHTML = optionText;
+    }
+
+}
+
+//Dropdown
+
+function addDropdownQues() {
+
+    var temp = document.getElementsByTagName("template")[10];
+    var clon = temp.content.cloneNode(true);
+    if (clon == null || clon == "") {
+        console.log("nothing here");
+    } else {
+        console.log(clon);
+    }
+    document.getElementById("placeHolder").appendChild(clon);
+
+}
+
+function editDropdownQuestion() {
+
+    if (addDropdownEditTemplate) {
+        var temp = document.getElementsByTagName("template")[11];
+        var editTab = temp.content.cloneNode(true);
+        if (editTab == null || editTab == "") {
+            console.log("nothing here");
+        } else {
+            console.log(editTab);
+        }
+        document.getElementById("placeHolder").appendChild(editTab);
+        addDropdownEditTemplate = false;
+    }
+}
+
+function editDropdownText() {
+
+    var question = document.getElementById("questionDropdown");
+    var quesTextFieldValue = document.getElementById("dropdownTextField").value;
+    question.innerHTML = quesTextFieldValue;
+    console.log(quesTextFieldValue);
+
+}
+
+function changeDropdownText(optionPar) {
+
+    var option;
+    var optionText;
+
+    if (optionPar == "dropdown1") {
+
+        option = document.getElementById("dropdown1");
+        optionText = document.getElementById("dropdown1Text").value;
+        option.innerHTML = optionText;
+    } else if (optionPar == "dropdown2") {
+
+        option = document.getElementById("dropdown2");
+        optionText = document.getElementById("dropdown2Text").value;
+        option.innerHTML = optionText;
+    } else if (optionPar == "dropdown3") {
+
+        option = document.getElementById("dropdown3");
+        optionText = document.getElementById("dropdown3Text").value;
+        option.innerHTML = optionText;
+    } else if (optionPar == "dropdown4") {
+
+        option = document.getElementById("dropdown4");
+        optionText = document.getElementById("dropdown4Text").value;
+        option.innerHTML = optionText;
+    }
+
+}
+
+
+function getStarQuesRepsonse(value) {
+
+    console.log("function called ", value,quesId,surveyId);
+
+
+    document.getElementById("placeHolder").appendChild(clon);
+
+
+
+
+}
+
+
+
+
+
+
+

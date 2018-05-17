@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="text-center" th:text="#{survey.response.heading}"></h1>
+                <p class="lead" th:text="#{survey.response.subheading}"></p>
+                <div class="text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="well">
+                                    <div class="row">
+
+                                        <!--<h2>Statistics..</h2>-->
+                                        <!--<div class="btn-group-vertical">-->
+                                            <!--<h2 class="btn btn-success btn-lg btn-block" >Survey Statistics</h2>-->
+                                            <!--&lt;!&ndash;<li> Start Time: <span th:text="${stats.getCurrent()}"></span></li>&ndash;&gt;-->
+
+                                            <!--&lt;!&ndash;<li> End Time: <span th:text="${stats.getEndTime()}"></span></li>&ndash;&gt;-->
+
+                                            <!--&lt;!&ndash;<span th:if="${stats.getSurveyType() == 'closed'}">&ndash;&gt;-->
+                                                <!--&lt;!&ndash;&lt;!&ndash;check the token list size, which is equal to registered participants&ndash;&gt;&ndash;&gt;-->
+                                                        <!--&lt;!&ndash;<span th:with="participants =${stats.getTokens().size()}" >&ndash;&gt;-->
+                                                            <!--&lt;!&ndash;<span>Participants: <li th:text="${participants}" > </li></span>&ndash;&gt;-->
+                                                            <!--&lt;!&ndash;<span>Participation rate: <li th:text="${(stats.getQuestions().get(0).getResponses().size())/(participants*1.0)}"></li> </span>&ndash;&gt;-->
+                                                        <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<span th:unless="${stats.getSurveyType() == 'closed'}" >&ndash;&gt;-->
+                                                        <!--&lt;!&ndash;<span th:with="participants =${stats.getTokens().get(0).getParticipants().size()}">&ndash;&gt;-->
+                                <!--&lt;!&ndash;&lt;!&ndash;get the token and participants registered under that&ndash;&gt;&ndash;&gt;-->
+                                                            <!--&lt;!&ndash;<span>Participants: <li th:text="${participants}"></li></span>&ndash;&gt;-->
+                                                            <!--&lt;!&ndash;<span>Participation rate: <li th:text="${(stats.getQuestions().get(0).getResponses().size())/(participants*1.0)}"></li> </span>&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="common/header :: before-body-scripts"/>
+
+</body>
+</html>

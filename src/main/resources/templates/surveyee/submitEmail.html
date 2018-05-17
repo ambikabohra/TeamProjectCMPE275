@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="text-center" th:text="#{surveyee.survey.submission}"></h1>
+                <p class="lead" th:text="#{surveyee.survey.confirmation}"></p>
+                <div class="text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="well">
+                                    <div class="row">
+                                        <span>
+                                            <!--th:action="/sendEmailVerification(email=${email})}"-->
+                                            <form id="confirmationEmailForm" th:object="${emailaddresses}">
+                                                <input type="email" id="email" th:field="*{emailAddresses}" class="form-control" placeholder="Enter your email"/>
+                                                <a th:href="@{/submitSurvey}"  type="submit" class="btn btn-success" value="Confirm" >Confirm</a>
+                                                <a type="submit" class="btn btn-danger" value="Cancel">Cancel</a>
+                                            </form>
+                                        </span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="common/header :: before-body-scripts"/>
+
+</body>
+</html>

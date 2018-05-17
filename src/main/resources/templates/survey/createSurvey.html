@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header"/>
+
+<body onload="onload(event)">
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+      integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"></link>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+<div th:replace="common/navbar :: common-navbar"/>
+
+<div class="container">
+
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+
+                <div class="text-center">
+
+                    <!-- <h1 th:text=""/>
+
+                     <p class="lead" th:text=""/>
+ -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="well">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+        </div>
+
+    </div>
+
+    <div  id="container"></div>
+
+</div>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<div th:replace="common/header :: before-body-scripts"/>
+
+<script type="text/jsx">
+
+
+    class Survey extends React.Component {
+        constructor() {
+            super();
+            this.state = {
+                survey: {
+                    title: "This is first survey",
+                    questions: [{
+                        title: "First Question",
+                        edit: false,
+                        value: "option2",//for text, dropdown
+                        type: "mc-dropdown",
+                        options: [{
+                            value: "option1",
+                            checked: false //used for checkboxes, radio buttons
+                        }, {
+                            value: "option2",
+                            checked: true
+                        }]
+                    }]
+                },
+                mode: {
+                    edit: false
+                }
+            };
+        }
+
+        surveyTitleChange(event) {
+            const state = this.state;
+            this.setState({
+                survey: {
+                    ...this.state.survey,
+                    title: event.target.value
+                }
+            });
+        }
+
+        questionTitleChange(e, question) {
+            question.title = e.target.value;
+
+            this.setState({
+                survey: {
+                    ...this.state.survey
+                }
+            });
+        }
+
+        selectChange(e, question) {
+            question.value = e.target.value;
+
+            this.setState({
+                survey: {
+                    ...this.state.survey
+                }
+            });
+        }
+
+        toggleEdit(e, question) {
+            question.edit = e.target.getAttribute("aria-pressed") === "true"?true:false;
+
+            this.setState({
+                survey: {
+                    ...this.state.survey
+                }
+            });
+        }
+
+        radioChange(e, question, index, optionIndex) {
+            const value = e.target.value;
+            question.options.forEach((ele, index, arr) => {
+                if (optionIndex === index) {
+                    arr[index].checked = true;
+                } else if (ele.checked == true) {
+                    arr[index].checked = false;
+                }
+            });
+
+            this.setState({
+                survey: {
+                    ...this.state.survey
+                }
+            });
+        }
+
+        addOption(e, question, questionIndex, option, optionIndex) {
+            question.options.splice(optionIndex, 0, {
+                value: "",
+                edit: true,
+                checked: false
+            });
+
+            this.setState({
+                survey: {
+                    ...this.state.survey
+                }
+            });
+        }
+
+        removeOption(e, question, questionIndex, option, optionIndex) {
+            question.options.splice(optionIndex, 1);
+
+            this.setState({
+                survey: {
+                    ...this.state.survey
+                }
+            });
+        }
+
+        editOption(e, option) {
+            option.value = e.target.value;
+
+            this.setState({
+                survey: {
+                    ...this.state.survey
+                }
+            });
+        }
+
+        getTemplate(question, index) {
+
+            const editMode = (question.edit === true)?true:false;
+
+            const btnGroup = (
+                <div className="btn-group d-flex justify-content-end" role="group" aria-label="Button group with nested dropdown">
+                    <button className="btn btn-secondary" onClick={this.deleteQuestion.bind(this, index)}>-</button>
+                    <button type="button" className="btn btn-secondary" data-toggle="button" aria-pressed={editMode}
+                            onClick={(e) => this.toggleEdit(e, question)}>e</button>
+                    <div className="btn-group" role="group">
+                        <button className="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">+</button>
+                        <div className="dropdown-menu">
+                            <a className="dropdown-item" href="#" data-questiontype="mc-dropdown"
+                               onClick={(e) => this.addQuestion(e, index)}>Dropdown</a>
+                            <a className="dropdown-item" href="#" data-questiontype="mc-radio"
+                               onClick={(e) => this.addQuestion(e, index)}>Radio</a>
+                            <a className="dropdown-item" href="#" data-questiontype="mc-checkbox"
+                               onClick={(e) => this.addQuestion(e, index)}>Checkbox</a>
+                            <a className="dropdown-item" href="#" data-questiontype="text"
+                               onClick={(e) => this.addQuestion(e, index)}>Text</a>
+                            <a className="dropdown-item" href="#" data-questiontype="yes-no"
+                               onClick={(e) => this.addQuestion(e, index)}>Yes/No</a>
+                        </div>
+                    </div>
+                </div>
+            );
+
+            const editQuestion = (<input className="form-control" placeholder="Enter your Question"
+                                         onChange={(e) => this.questionTitleChange(e, question)}
+                                         value={question.title}></input>);
+
+            const editOptions = editMode && (question.options.map((option, optionIndex) => <div key={optionIndex}>
+                <input className="form-control" placeholder="Edit your option"
+                       onChange={(e) => this.editOption(e, option)} value={option.value}></input>
+                <button className="btn btn-primary" onClick={(e) => this.addOption(e, question, index, option, optionIndex)}>+</button>
+                <button className="btn btn-primary" onClick={(e) => this.removeOption(e, question, index, option, optionIndex)}>-</button>
+            </div>));
+
+
+            if (question.type === "mc-dropdown") {
+                return (
+                    <div key={index}>
+                        {btnGroup}
+                        {editQuestion}
+                        {!editMode &&
+                        <select className="form-control" onChange={(e) => this.selectChange(e, question)} value={question.value}>
+                            {question.options.map((option, optionIndex) => <option value={option.value}
+                                                                                   key={optionIndex}>{option.value}</option>)}
+                        </select>
+                        }
+                        {editOptions}
+                    </div>
+                );
+            } else if (question.type === "mc-radio") {
+                return (
+                    <div key={index}>
+                        {btnGroup}
+                        {editQuestion}
+                        {!editMode &&
+                        question.options.map((option, optionIndex) => <div className="form-check" key={optionIndex}>
+                            <label className="form-check-label">
+                                <input className="form-check-input" type="radio"
+                                       value={option.value}
+                                       checked={option.checked}
+                                       onChange={(e) => this.radioChange(e, question, index, optionIndex)}></input>
+                                {option.value}
+                            </label>
+                        </div>)
+                        }
+                        {editOptions}
+                    </div>
+                );
+            } else if (question.type === "mc-checkbox") {
+                return (
+                    <div key={index}>
+                        {btnGroup}
+                        {editQuestion}
+                        {!editMode &&
+                        question.options.map((option, optionIndex) => <div className="form-check" key={optionIndex}>
+                            <label className="form-check-label">
+                                <input className="form-check-input" type="checkbox"
+                                       value={option.value}
+                                       checked={option.checked}
+                                       onChange={(e) => this.radioChange(e, question, index, optionIndex)}></input>
+                                {option.value}
+                            </label>
+                        </div>)
+                        }
+                        {editOptions}
+                    </div>
+                );
+            } else if (question.type === "star") {
+
+            } else if (question.type === "text") {
+
+            } else if (question.type === "yes-no") {
+
+            }
+        }
+
+        deleteQuestion(index) {
+            const questions = this.state.survey.questions;
+            questions.splice(index, 1);
+            this.setState({
+                survey: {
+                    ...this.state.survey,
+                    questions: questions
+                }
+            });
+        }
+
+        addQuestion(e, index) {
+            const questions = this.state.survey.questions;
+            questions.splice(index, 0, {
+                title: "",
+                edit: true,
+                value: "",//for text, dropdown
+                type: e.target.dataset.questiontype,
+                options: [{
+                    value: "",
+                    checked: false
+                }]
+            });
+            this.setState({
+                survey: {
+                    ...this.state.survey,
+                    questions: questions
+                }
+            });
+        }
+
+        getQuestion(type) {
+            switch (type) {
+                case "": return ;
+
+            }
+        }
+
+
+        render() {
+            const {
+                mode,
+                survey
+            } = this.state;
+            return (
+                <div>
+
+                    <section>
+                        <div className="question-wrapper">
+                            <h3>Title</h3>
+                            <textarea className="form-control"
+                                      onChange={this.surveyTitleChange.bind(this)}
+                                      placeholder="Enter your survey title"
+                                      value={survey.title}></textarea>
+
+                        </div>
+                    </section>
+
+                    <div>
+                        {survey.questions.map(this.getTemplate, this)}
+
+                    </div>
+
+                </div>
+            );
+        }
+    }
+
+
+    function onload(event) {
+        ReactDOM.render(
+            <Survey/>,
+            document.getElementById('container'),
+            function() {
+                $('#btn').click(function() {
+                    alert('Hello!');
+                });
+            }
+        );
+    }
+</script>
+
+</body>
+</html>
