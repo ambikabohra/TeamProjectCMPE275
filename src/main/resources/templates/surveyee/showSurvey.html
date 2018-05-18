@@ -17,6 +17,7 @@
                     <div class="row">
                         <h2 th:text="${survey.surveyName}"></h2>
                         <ol class="table table-striped">
+
                             <form th:id="responseForm" th:with="surveyId=${survey.getSurveyId()}">
                                 <li th:each="question, iterStat : ${questions}">
                                     <div th:with="quesId=${question.getqId()}"  th:text="${question.description}" th:id="'question'+${iterStat.index}"></div>

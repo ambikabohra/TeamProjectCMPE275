@@ -335,23 +335,69 @@
 </div>
 
 <script>
-function addItem(){
-var ul = document.getElementById("dynamic-list");
-var candidate = document.getElementById("candidate");
-var li = document.createElement("li");
-li.setAttribute('id',candidate.value);
-li.appendChild(document.createTextNode(candidate.value));
-ul.appendChild(li);
-}
+    function addItem() {
+        var ul = document.getElementById("dynamic-list");
+        var candidate = document.getElementById("candidate");
+        var li = document.createElement("li");
+        li.setAttribute('id', candidate.value);
+        li.appendChild(document.createTextNode(candidate.value));
+        ul.appendChild(li);
+    }
 
-function removeItem(){
-var ul = document.getElementById("dynamic-list");
-var candidate = document.getElementById("candidate");
-var item = document.getElementById(candidate.value);
-ul.removeChild(item);
-}
+    function removeItem() {
+        var ul = document.getElementById("dynamic-list");
+        var candidate = document.getElementById("candidate");
+        var item = document.getElementById(candidate.value);
+        ul.removeChild(item);
+    }
 </script>
+
+
+<!-- For Edit Survey Part --><!-- For Edit Survey Part --><!-- For Edit Survey Part --><!-- For Edit Survey Part -->
+
+
+<div class="container" th:fragment="editSurveyEditMultipleChoiceQues">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-group" id="editSurveyEditOptions"
+                      th:action="@{/updatequestion(questionId = ${question.qId})}" method="post"
+                      th:object="${__${'question'}__}">
+
+                    <input type="hidden" name="quesType" id="quesType" th:value="'checkbox'"/>
+                    <input type="hidden" name="surveyId" id="surveyId" th:value="${survey.surveyId}"/>
+
+                    <label>Type your question here</label><br/>
+                    <input type="text" class="text" th:id="'multipleChoiceQuesTextField'+${question.qId}"
+                           name="multipleChoiceQuesTextField"
+                           th:field="*{quesText}"
+                           th:onclick="'javascript:editSurveyEditMultipleChoiceQuesText(\'' + ${question.qId}+'\');'"/>
+                    <br/><br/>
+                    <label>Edit Options</label><br/>
+                    <input type="text" class="text" id="option1Text" th:field="*{option1Text}"
+                           oninput="changeMultipleChoiceOptionText('option1')" placeholder="Option 1"/>
+                    <input type="text" class="text" id="option2Text" th:field="*{option2Text}"
+                           oninput="changeMultipleChoiceOptionText('option2')" placeholder="Option 2"/>
+                    <input type="text" class="text" id="option3Text" th:field="*{option3Text}"
+                           oninput="changeMultipleChoiceOptionText('option3')" placeholder="Option 3"/>
+                    <input type="text" class="text" id="option4Text" th:field="*{option4Text}"
+                           oninput="changeMultipleChoiceOptionText('option4')" placeholder="Option 4"/>
+                    <div class="col-md-6">
+                        <br/>
+                        <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div th:replace="common/header :: before-body-scripts"/>
 </body>
 </html>
+
+
+
+
+

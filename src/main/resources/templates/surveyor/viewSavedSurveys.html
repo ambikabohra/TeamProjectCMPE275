@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="text-center" th:text="#{edit.survey.heading}"></h1>
+                <p class="lead text-center" th:text="#{edit.survey.subheading}"></p>
+                <div class="text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="well">
+                                    <h2 class="text-center" th:text="#{edit.survey.list.heading}"></h2>
+                                    <h4 th:text="#{edit.survey.list.subheading}"></h4>
+                                    <hr/>
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="bs-docs-example">
+                                                <ul class="nav nav-tabs nav-stacked" th:each="survey : ${surveyList}">
+                                                    <li style="border: 1px solid #ddd;">
+                                                        <a class=""
+                                                           th:href="@{/editSavedSurvey(surveyId=${survey.surveyId})}"
+                                                           th:text="${survey.surveyName}">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="common/header :: before-body-scripts"/>
+
+</body>
+</html>

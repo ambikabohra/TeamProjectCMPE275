@@ -557,15 +557,37 @@ function changeDropdownText(optionPar) {
 }
 
 
-function getStarQuesRepsonse(value) {
+/*------------------------------------------------------------------------------------------------------------*/
+//For Edit Survey Part
 
-    console.log("function called ", value,quesId,surveyId);
+var addEditQuestion = [];
+var i = 0;
 
+function editQuestionText(quesId) {
 
-    document.getElementById("placeHolder").appendChild(clon);
+    if(!addEditQuestion.includes(quesId)){
+        console.log("Inside editQuestionText")
+        var temp = document.getElementsByTagName("template")[0];
+        var clon = temp.content.cloneNode(true);
+        if (clon == null || clon == "") {
+            console.log("nothing here");
+        } else {
+            console.log(clon);
+        }
+        document.getElementById("placeHolder"+quesId).appendChild(clon);
+        addEditQuestion[i] = quesId;
+        i++;
+    }
+}
 
+function editSurveyEditMultipleChoiceQuesText(questionId){
 
+    console.log(questionId);
 
+    var question = document.getElementById(questionId);
+    var quesTextFieldValue = document.getElementById("multipleChoiceQuesTextField"+questionId).value;
+    question.innerHTML = quesTextFieldValue;
+    console.log(quesTextFieldValue);
 
 }
 

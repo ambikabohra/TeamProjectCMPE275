@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="text-center" th:text="#{edit.survey.heading}"></h1>
+                <p class="lead text-center" th:text="#{edit.survey.subheading}"></p>
+                <div class="text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3">
+                                <div class="well">
+                                    <h2 class="text-center" th:text="#{edit.survey.question.heading}"></h2>
+                                    <h4 th:text="#{edit.survey.question.subheading}"></h4>
+                                    <hr/>
+                                    <br/>
+                                    <div class="bs-docs-example">
+                                        <ul class="nav nav-tabs nav-stacked" th:each="question : ${questionList}">
+                                            <li style="border: 1px solid #ddd;" th:with="quesId=${question}">
+                                                <a class="" th:id="${question.qId}"
+                                                   th:onclick="'javascript:editQuestionText(\'' + ${question.qId} + '\');'"
+                                                   th:text="${question.description}">
+                                                </a>
+                                                <div th:if="${question.qType}=='checkbox' or 'radio'">
+                                                    <ul class="nav nav-tabs nav-stacked"
+                                                        th:each="option : ${question.options}">
+                                                        <li style="border: 1px solid #ddd;"
+                                                            th:text="${option.optionValue}">
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <br/>
+                                                <template th:id="'template'+${question.qId}">
+                                                    <div th:replace="surveyelements/Question :: editSurveyEditMultipleChoiceQues"></div>
+                                                </template>
+                                                <br/>
+                                                <div style="padding: 10px;">
+                                                    <a class="btn btn-danger" th:text="#{delete}"
+                                                       th:href="@{/deleteQuestion(questionId=${question.qId}, surveyId=${survey.surveyId})}"></a>
+                                                </div>
+                                            </li>
+                                            <br/>
+                                            <hr/>
+                                            <div th:id="'placeHolder'+${question.qId}"></div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="common/header :: before-body-scripts"/>
+
+</body>
+</html>

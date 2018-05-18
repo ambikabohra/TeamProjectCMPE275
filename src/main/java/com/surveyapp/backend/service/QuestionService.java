@@ -46,4 +46,8 @@ public class QuestionService {
         questions = obj.getQuestions();
         return questions;
     }
+
+    public void deleteQuestion(int i) {
+        questionRepository.delete(i);
+    }
 }
