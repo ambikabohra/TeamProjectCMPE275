@@ -368,10 +368,10 @@
                     <input type="hidden" name="surveyId" id="surveyId" th:value="${survey.surveyId}"/>
 
                     <label>Type your question here</label><br/>
-                    <input type="text" class="text" th:id="'multipleChoiceQuesTextField'+${question.qId}"
+                    <input type="text" class="text" th:id="'multipleChoiceQuesTextField'"
                            name="multipleChoiceQuesTextField"
                            th:field="*{quesText}"
-                           th:onclick="'javascript:editSurveyEditMultipleChoiceQuesText(\'' + ${question.qId}+'\');'"/>
+                           oninput="editSurveyEditMultipleChoiceQuesText(event)"/>
                     <br/><br/>
                     <label>Edit Options</label><br/>
                     <input type="text" class="text" id="option1Text" th:field="*{option1Text}"

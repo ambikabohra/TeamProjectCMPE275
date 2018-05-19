@@ -2,14 +2,12 @@ package com.surveyapp.utils;
 
 
 import com.surveyapp.backend.persistence.domain.backend.Question;
-import com.surveyapp.backend.persistence.domain.backend.QuestionOption;
 import com.surveyapp.backend.persistence.domain.backend.SurveyEntity;
 import com.surveyapp.backend.persistence.domain.backend.User;
 import com.surveyapp.web.domain.frontend.Survey;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
-import java.util.*;
 
 public class SurveyUtils {
 
@@ -18,15 +16,12 @@ public class SurveyUtils {
     }
 
     public static <T extends com.surveyapp.web.domain.frontend.Question> Question webToDomainQues(T frontendPayload, SurveyEntity survey/*, List<QuestionOption> questionOptionList*/) {
+
         Question question = new Question();
+
         question.setqType(frontendPayload.getQuesType());
         question.setDescription(frontendPayload.getQuesText());
-        System.out.println("reached till here");
         question.setSurvey(survey);
-        System.out.println("this ran too");
-        System.out.println("reached till here 1");
-       /* question.setOptions(questionOptionList);*/
-        System.out.println("this ran too 1");
         return question;
 
     }

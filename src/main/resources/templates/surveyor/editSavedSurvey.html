@@ -24,23 +24,20 @@
                                     <br/>
                                     <div class="bs-docs-example">
                                         <ul class="nav nav-tabs nav-stacked" th:each="question : ${questionList}">
-                                            <li style="border: 1px solid #ddd;" th:with="quesId=${question}">
-                                                <a class="" th:id="${question.qId}"
-                                                   th:onclick="'javascript:editQuestionText(\'' + ${question.qId} + '\');'"
+                                            <li style="border: 1px solid #ddd;">
+                                                <a class="" th:id="'question'+${question.qId}"
                                                    th:text="${question.description}">
                                                 </a>
                                                 <div th:if="${question.qType}=='checkbox' or 'radio'">
                                                     <ul class="nav nav-tabs nav-stacked"
-                                                        th:each="option : ${question.options}">
+                                                        th:each="option, iterstat : ${question.options}">
                                                         <li style="border: 1px solid #ddd;"
-                                                            th:text="${option.optionValue}">
+                                                            th:text="${option.optionValue}"
+                                                            th:id="'option'+${question.qId}+${iterstat.index+1}">
                                                         </li>
                                                     </ul>
                                                 </div>
                                                 <br/>
-                                                <template th:id="'template'+${question.qId}">
-                                                    <div th:replace="surveyelements/Question :: editSurveyEditMultipleChoiceQues"></div>
-                                                </template>
                                                 <br/>
                                                 <div style="padding: 10px;">
                                                     <a class="btn btn-danger" th:text="#{delete}"
@@ -49,7 +46,61 @@
                                             </li>
                                             <br/>
                                             <hr/>
-                                            <div th:id="'placeHolder'+${question.qId}"></div>
+                                            <div th:if="${question.qType}=='checkbox' or 'radio' or 'dropdown'">
+                                                <div class="container" th:fragment="editSurveyEditMultipleChoiceQues">
+                                                    <div class="well">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <form class="form-group" id="editSurveyEditOptions"
+                                                                      th:action="@{/updatequestion(questionId = ${question.qId})}"
+                                                                      method="post"
+                                                                      th:object="${__${'questionObj'}__}">
+
+                                                                    <input type="hidden" name="quesType" id="quesType"
+                                                                           th:value="'checkbox'"/>
+                                                                    <input type="hidden" name="surveyId" id="surveyId"
+                                                                           th:value="${survey.surveyId}"/>
+
+                                                                    <label>Type your question here</label><br/>
+                                                                    <input type="text" class="text"
+                                                                           th:id="${question.qId}"
+                                                                           name="multipleChoiceQuesTextField"
+                                                                           th:field="*{quesText}"
+                                                                           oninput="editSurveyEditMultipleChoiceQuesText(event)"/>
+                                                                    <br/><br/>
+                                                                    <label>Edit Options</label><br/>
+                                                                    <input type="text" class="text"
+                                                                           th:id="'option'+${question.qId}+'1T'"
+                                                                           th:field="*{option1Text}"
+                                                                           oninput="changeMultipleChoiceOptionText(event)"
+                                                                           placeholder="Option 1"/>
+                                                                    <input type="text" class="text"
+                                                                           th:id="'option'+${question.qId}+'2T'"
+                                                                           th:field="*{option2Text}"
+                                                                           oninput="changeMultipleChoiceOptionText(event)"
+                                                                           placeholder="Option 2"/>
+                                                                    <input type="text" class="text"
+                                                                           th:id="'option'+${question.qId}+'3T'"
+                                                                           th:field="*{option3Text}"
+                                                                           oninput="changeMultipleChoiceOptionText(event)"
+                                                                           placeholder="Option 3"/>
+                                                                    <input type="text" class="text"
+                                                                           th:id="'option'+${question.qId}+'4T'"
+                                                                           th:field="*{option4Text}"
+                                                                           oninput="changeMultipleChoiceOptionText(event)"
+                                                                           placeholder="Option 4"/>
+                                                                    <div class="col-md-6 col-md-offset-3">
+                                                                        <br/>
+                                                                        <button type="submit" class="btn btn-primary"
+                                                                                th:text="#{form.submit}"></button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </ul>
                                     </div>
                                 </div>

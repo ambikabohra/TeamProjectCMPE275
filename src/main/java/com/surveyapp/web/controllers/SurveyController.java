@@ -1,7 +1,5 @@
 package com.surveyapp.web.controllers;
 
-import com.google.zxing.WriterException;
-import com.surveyapp.backend.persistence.domain.backend.QuestionOption;
 import com.surveyapp.backend.persistence.domain.backend.SurveyEntity;
 import com.surveyapp.backend.persistence.domain.backend.Token;
 import com.surveyapp.backend.persistence.domain.backend.User;
@@ -18,7 +16,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.token.TokenService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -26,15 +23,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import sun.security.krb5.internal.ccache.FileCredentialsCache;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 public class SurveyController {
@@ -114,19 +106,7 @@ public class SurveyController {
 
         questionService.addQuestion(question1);
 
-        if (question.getQuesType().equals("checkbox") || question.getQuesType().equals("radio") || question.getQuesType().equals("dropdown")) {
-
-            QuestionOption option1 = new QuestionOption(question.getOption1Text(), question1);
-            QuestionOption option2 = new QuestionOption(question.getOption2Text(), question1);
-            QuestionOption option3 = new QuestionOption(question.getOption3Text(), question1);
-            QuestionOption option4 = new QuestionOption(question.getOption4Text(), question1);
-
-            questionOptionService.addQuestionOption(option1);
-            questionOptionService.addQuestionOption(option2);
-            questionOptionService.addQuestionOption(option3);
-            questionOptionService.addQuestionOption(option4);
-
-        }
+        SurveyorController.createQuestionOptions(question, question1, questionOptionService);
 
         model.addAttribute("question", new Question());
         model.addAttribute("surveyId", surveyId);

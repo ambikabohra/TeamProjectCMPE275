@@ -566,13 +566,13 @@ var i = 0;
 function editQuestionText(quesId) {
 
     if(!addEditQuestion.includes(quesId)){
-        console.log("Inside editQuestionText")
+        console.log("Inside editQuestionText", quesId);
         var temp = document.getElementsByTagName("template")[0];
         var clon = temp.content.cloneNode(true);
         if (clon == null || clon == "") {
             console.log("nothing here");
         } else {
-            console.log(clon);
+            //console.log(clon);
         }
         document.getElementById("placeHolder"+quesId).appendChild(clon);
         addEditQuestion[i] = quesId;
@@ -580,14 +580,53 @@ function editQuestionText(quesId) {
     }
 }
 
-function editSurveyEditMultipleChoiceQuesText(questionId){
+function editSurveyEditMultipleChoiceQuesText(event) {
 
-    console.log(questionId);
+    console.log("inside editSurveyEditMultipleChoiceQuesText", event.target.id);
 
-    var question = document.getElementById(questionId);
-    var quesTextFieldValue = document.getElementById("multipleChoiceQuesTextField"+questionId).value;
+    var question = document.getElementById('question' + event.target.id);
+    console.log("question", question.innerText);
+    var quesTextFieldValue = document.getElementById(event.target.id).value;
     question.innerHTML = quesTextFieldValue;
     console.log(quesTextFieldValue);
+
+}
+
+function changeMultipleChoiceOptionText(event) {
+
+    var id = event.target.id;
+
+    console.log("id in changeMultipleChoiceOptionText", id);
+
+    var questionId = id.substr(6, id.length - 8);
+
+    console.log("question id in changeMultipleChoiceOptionText", questionId);
+
+    var optionNum = id.substr(id.length - 2, 1);
+
+    console.log("option Num in changeMultipleChoiceOptionText", optionNum);
+
+    if (optionNum == 1) {
+
+        var option1Text = document.getElementById(id).value;
+        document.getElementById('option' + questionId + optionNum).innerText = option1Text;
+
+    } else if (optionNum == 2) {
+
+        var option1Text = document.getElementById(id).value;
+        document.getElementById('option' + questionId + optionNum).innerText = option1Text;
+
+    } else if (optionNum == 3) {
+
+        var option1Text = document.getElementById(id).value;
+        document.getElementById('option' + questionId + optionNum).innerText = option1Text;
+
+    } else if (optionNum == 4) {
+
+        var option1Text = document.getElementById(id).value;
+        document.getElementById('option' + questionId + optionNum).innerText = option1Text;
+
+    }
 
 }
 
