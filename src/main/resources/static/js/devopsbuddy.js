@@ -231,36 +231,83 @@ function main() {
             $('#signupForm').formValidation('revalidateField', 'phoneNumber');
         });
 
+
+    /* set survey form validation */
+    $('#setSurvey').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            surveyName: {
+                validators: {
+                    notEmpty: {
+                        message: 'The survey name is required'
+                    }
+                }
+            },
+            surveyDesc: {
+                validators: {
+                    notEmpty: {
+                        message: 'The survey description is required'
+                    }
+                }
+            },
+            days: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter number of days after which survey should expire, else enter 0'
+                    },
+                    integer: {
+                        message: 'Only Integers are allowed here'
+                    }
+                }
+            },
+            hours: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter number of hours after which survey should expire, else enter 0'
+                    },
+                    integer: {
+                        message: 'Only Integers are allowed here'
+                    }
+                }
+            },
+            minutes: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter number of minutes after which survey should expire, cannot enter 0 if hours and minutes are 0'
+                    },
+                    integer: {
+                        message: 'Only Integers are allowed here'
+                    }
+                }
+            }
+        }
+    });
+
+
 }
+
 
 var count = 0;
 
+var addquestionflag = true;
 
 function addMultipleChoiceQues() {
 
-    var temp = document.getElementsByTagName("template")[0];
-    var clon = temp.content.cloneNode(true);
-    if (clon == null || clon == "") {
-        console.log("nothing here");
-    } else {
-        console.log(clon);
-    }
-    document.getElementById("placeHolder").appendChild(clon);
-
-}
-
-function editMultipleChoiceQuestion() {
-
-    if (addMultipleChoiceEditTemplate) {
-        var temp = document.getElementsByTagName("template")[1];
-        var editTab = temp.content.cloneNode(true);
-        if (editTab == null || editTab == "") {
+    if (addquestionflag == true) {
+        var temp = document.getElementsByTagName("template")[0];
+        var clon = temp.content.cloneNode(true);
+        if (clon == null || clon == "") {
             console.log("nothing here");
         } else {
-            console.log(editTab);
+            console.log(clon);
         }
-        document.getElementById("placeHolder").appendChild(editTab);
-        addMultipleChoiceEditTemplate = false;
+        document.getElementById("placeHolder").appendChild(clon);
+        addquestionflag = false;
     }
 }
 
@@ -313,24 +360,6 @@ function addTrueFalse() {
     }
     document.getElementById("placeHolder").appendChild(clon);
     addTrueFalseEditTemplate = false;
-
-}
-
-
-function editTrueFalseQues() {
-
-    if (addTrueFalseEditTemplate) {
-        var temp = document.getElementsByTagName("template")[3];
-        var editTab = temp.content.cloneNode(true);
-        if (editTab == null || editTab == "") {
-            console.log("nothing here");
-        } else {
-            console.log(editTab);
-        }
-        document.getElementById("placeHolder").appendChild(editTab);
-        addTrueFalseEditTemplate = false;
-    }
-
 }
 
 
@@ -340,37 +369,25 @@ function editTrueFalseQuesText() {
     var quesTextFieldValue = document.getElementById("quesTextFieldTF").value;
     question.innerHTML = quesTextFieldValue;
     console.log(quesTextFieldValue);
-
 }
 
 function addShortAnsQues() {
 
-    var temp = document.getElementsByTagName("template")[4];
-    var clon = temp.content.cloneNode(true);
-    if (clon == null || clon == "") {
-        console.log("nothing here");
-    } else {
-        console.log(clon);
-    }
-    document.getElementById("placeHolder").appendChild(clon);
-    addTrueFalseEditTemplate = false;
+    if (addquestionflag == true) {
 
-}
-
-function editShortAnsQues() {
-    if (addSingleAnsEditTemplate) {
-        var temp = document.getElementsByTagName("template")[5];
-        var editTab = temp.content.cloneNode(true);
-        if (editTab == null || editTab == "") {
+        var temp = document.getElementsByTagName("template")[4];
+        var clon = temp.content.cloneNode(true);
+        if (clon == null || clon == "") {
             console.log("nothing here");
         } else {
-            console.log(editTab);
+            console.log(clon);
         }
-        document.getElementById("placeHolder").appendChild(editTab);
-        addSingleAnsEditTemplate = false;
+        document.getElementById("placeHolder").appendChild(clon);
+        addTrueFalseEditTemplate = false;
+        addquestionflag = false;
     }
-
 }
+
 
 function editShortAnsQuesText() {
 
@@ -383,31 +400,17 @@ function editShortAnsQuesText() {
 
 function addStarRatingQues() {
 
-    var temp = document.getElementsByTagName("template")[6];
-    var clon = temp.content.cloneNode(true);
-    if (clon == null || clon == "") {
-        console.log("nothing here");
-    } else {
-        console.log(clon);
-    }
-    document.getElementById("placeHolder").appendChild(clon);
-
-}
-
-function editStarRatingQues() {
-
-    if (starEditTemplate) {
-        var temp = document.getElementsByTagName("template")[7];
-        var editTab = temp.content.cloneNode(true);
-        if (editTab == null || editTab == "") {
+    if (addquestionflag == true) {
+        var temp = document.getElementsByTagName("template")[6];
+        var clon = temp.content.cloneNode(true);
+        if (clon == null || clon == "") {
             console.log("nothing here");
         } else {
-            console.log(editTab);
+            console.log(clon);
         }
-        document.getElementById("placeHolder").appendChild(editTab);
-        starEditTemplate = false;
+        document.getElementById("placeHolder").appendChild(clon);
+        addquestionflag = false;
     }
-
 }
 
 function editStarRatingQuesText() {
@@ -419,34 +422,20 @@ function editStarRatingQuesText() {
 
 }
 
-
 //Radio
 
 function addRadioQues() {
 
-    var temp = document.getElementsByTagName("template")[8];
-    var clon = temp.content.cloneNode(true);
-    if (clon == null || clon == "") {
-        console.log("nothing here");
-    } else {
-        console.log(clon);
-    }
-    document.getElementById("placeHolder").appendChild(clon);
-
-}
-
-function editRadioQuestion() {
-
-    if (addRadioEditTemplate) {
-        var temp = document.getElementsByTagName("template")[9];
-        var editTab = temp.content.cloneNode(true);
-        if (editTab == null || editTab == "") {
+    if (addquestionflag == true) {
+        var temp = document.getElementsByTagName("template")[8];
+        var clon = temp.content.cloneNode(true);
+        if (clon == null || clon == "") {
             console.log("nothing here");
         } else {
-            console.log(editTab);
+            console.log(clon);
         }
-        document.getElementById("placeHolder").appendChild(editTab);
-        addRadioEditTemplate = false;
+        document.getElementById("placeHolder").appendChild(clon);
+        addquestionflag = false;
     }
 }
 
@@ -492,31 +481,19 @@ function changeRadioText(optionPar) {
 
 function addDropdownQues() {
 
-    var temp = document.getElementsByTagName("template")[10];
-    var clon = temp.content.cloneNode(true);
-    if (clon == null || clon == "") {
-        console.log("nothing here");
-    } else {
-        console.log(clon);
-    }
-    document.getElementById("placeHolder").appendChild(clon);
-
-}
-
-function editDropdownQuestion() {
-
-    if (addDropdownEditTemplate) {
-        var temp = document.getElementsByTagName("template")[11];
-        var editTab = temp.content.cloneNode(true);
-        if (editTab == null || editTab == "") {
+    if (addquestionflag == true) {
+        var temp = document.getElementsByTagName("template")[10];
+        var clon = temp.content.cloneNode(true);
+        if (clon == null || clon == "") {
             console.log("nothing here");
         } else {
-            console.log(editTab);
+            console.log(clon);
         }
-        document.getElementById("placeHolder").appendChild(editTab);
-        addDropdownEditTemplate = false;
+        document.getElementById("placeHolder").appendChild(clon);
+        addquestionflag = false;
     }
 }
+
 
 function editDropdownText() {
 
@@ -557,6 +534,99 @@ function changeDropdownText(optionPar) {
 }
 
 
+//Add edit question text and options text fragment- common for all question types
+
+function editQuestion() {
+
+    var questionType = document.getElementById("questionType").innerText;
+    console.log("question type ", questionType);
+
+    if (questionType == "MultipleChoice") {
+        if (addMultipleChoiceEditTemplate) {
+            var temp = document.getElementsByTagName("template")[1];
+            var editTab = temp.content.cloneNode(true);
+            if (editTab == null || editTab == "") {
+                console.log("nothing here");
+            } else {
+                console.log(editTab);
+            }
+            document.getElementById("placeHolder").appendChild(editTab);
+            addMultipleChoiceEditTemplate = false;
+        }
+    } else if (questionType == "ShortAnswer") {
+
+        if (addSingleAnsEditTemplate) {
+            var temp = document.getElementsByTagName("template")[5];
+            var editTab = temp.content.cloneNode(true);
+            if (editTab == null || editTab == "") {
+                console.log("nothing here");
+            } else {
+                console.log(editTab);
+            }
+            document.getElementById("placeHolder").appendChild(editTab);
+            addSingleAnsEditTemplate = false;
+        }
+
+    } else if (questionType == "StarRating") {
+
+        if (starEditTemplate) {
+            var temp = document.getElementsByTagName("template")[7];
+            var editTab = temp.content.cloneNode(true);
+            if (editTab == null || editTab == "") {
+                console.log("nothing here");
+            } else {
+                console.log(editTab);
+            }
+            document.getElementById("placeHolder").appendChild(editTab);
+            starEditTemplate = false;
+        }
+
+    } else if (questionType == "Radio") {
+
+        if (addRadioEditTemplate) {
+            var temp = document.getElementsByTagName("template")[9];
+            var editTab = temp.content.cloneNode(true);
+            if (editTab == null || editTab == "") {
+                console.log("nothing here");
+            } else {
+                console.log(editTab);
+            }
+            document.getElementById("placeHolder").appendChild(editTab);
+            addRadioEditTemplate = false;
+        }
+
+    } else if (questionType == "Dropdown") {
+
+        if (addDropdownEditTemplate) {
+            var temp = document.getElementsByTagName("template")[11];
+            var editTab = temp.content.cloneNode(true);
+            if (editTab == null || editTab == "") {
+                console.log("nothing here");
+            } else {
+                console.log(editTab);
+            }
+            document.getElementById("placeHolder").appendChild(editTab);
+            addDropdownEditTemplate = false;
+        }
+
+    } else if (questionType == "TrueFalse") {
+
+        if (addTrueFalseEditTemplate) {
+            var temp = document.getElementsByTagName("template")[3];
+            var editTab = temp.content.cloneNode(true);
+            if (editTab == null || editTab == "") {
+                console.log("nothing here");
+            } else {
+                console.log(editTab);
+            }
+            document.getElementById("placeHolder").appendChild(editTab);
+            addTrueFalseEditTemplate = false;
+        }
+    }
+}
+
+
+
 /*------------------------------------------------------------------------------------------------------------*/
 //For Edit Survey Part
 
@@ -592,7 +662,7 @@ function editSurveyEditMultipleChoiceQuesText(event) {
 
 }
 
-function changeMultipleChoiceOptionText(event) {
+function editChangeMultipleChoiceOptionText(event) {
 
     var id = event.target.id;
 
@@ -627,6 +697,18 @@ function changeMultipleChoiceOptionText(event) {
         document.getElementById('option' + questionId + optionNum).innerText = option1Text;
 
     }
+
+}
+
+function editSurveyEditSingleAnswerQuesText(event) {
+
+    console.log("inside editSurveyEditSingleAnswerQuesText", event.target.id);
+
+    var question = document.getElementById('question' + event.target.id);
+    console.log("question", question.innerText);
+    var quesTextFieldValue = document.getElementById(event.target.id).value;
+    question.innerHTML = quesTextFieldValue;
+    console.log(quesTextFieldValue);
 
 }
 

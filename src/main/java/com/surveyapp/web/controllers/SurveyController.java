@@ -68,26 +68,45 @@ public class SurveyController {
 
 
     @RequestMapping(value = "/setsurvey", method = RequestMethod.POST)
-    public String setSurveyPost(@ModelAttribute Survey newsurvey, BindingResult bindingResult, ModelMap model) {
+    public String setSurveyPost(@RequestParam(value = "surveyId", required = false) Integer surveyId,
+                                @ModelAttribute Survey newsurvey, BindingResult bindingResult, ModelMap model) {
 
-        System.out.println(newsurvey.getSurveyName());
-        System.out.println(newsurvey.getSurveyType());
-        System.out.println(newsurvey.getDays());
-        System.out.println(newsurvey.getHours());
-        System.out.println(newsurvey.getMinutes());
-        System.out.println(newsurvey.getSurveyDesc());
+        SurveyEntity surveyEntity = null;
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-        System.out.println(name);
+        System.out.println("survey id " + surveyId);
 
-        User user = userService.findByUserName(name);
-        System.out.println(user);
+        if (surveyId == null) {
 
-        SurveyEntity surveyEntity = SurveyUtils.webToDomainSurvey(newsurvey, user);
+            System.out.println("inside if, newSurvey object is not null");
 
-        surveyService.addSurvey(surveyEntity);
-        surveyEntity = surveyService.getSurvey(newsurvey.getSurveyName());
+            System.out.println(newsurvey.getSurveyName());
+            System.out.println(newsurvey.getSurveyType());
+            System.out.println(newsurvey.getDays());
+            System.out.println(newsurvey.getHours());
+            System.out.println(newsurvey.getMinutes());
+            System.out.println(newsurvey.getSurveyDesc());
+
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String name = auth.getName();
+            System.out.println(name);
+
+            User user = userService.findByUserName(name);
+            System.out.println(user);
+
+            surveyEntity = SurveyUtils.webToDomainSurvey(newsurvey, user);
+
+            surveyService.addSurvey(surveyEntity);
+            surveyEntity = surveyService.getSurvey(newsurvey.getSurveyName());
+
+        } else {
+
+            System.out.println("inside else survey already exists");
+
+            surveyEntity = surveyService.getSurveyById(surveyId);
+
+        }
+
+
 
         model.addAttribute("question", new Question());
         model.addAttribute("surveyId", surveyEntity.getSurveyId());

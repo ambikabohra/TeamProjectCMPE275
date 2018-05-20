@@ -38,13 +38,14 @@
                                                     <li><a href="#" onclick="addStarRatingQues()">Star</a></li>
                                                 </ul>
                                             </div>
-                                            <a href="#" class="btn btn-default" role="button">Edit Question</a>
+                                            <a href="#" class="btn btn-default" role="button" onclick="editQuestion()">Edit
+                                                Question</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="well">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-12" id="addHere">
                                             <div id="placeHolder"></div>
                                             <template id="surveyNamePlaceHolder">
                                                 <div th:replace="surveyelements/Question :: multipleChoiceQuestion"></div>

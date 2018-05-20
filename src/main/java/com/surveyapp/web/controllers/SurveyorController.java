@@ -54,6 +54,7 @@ public class SurveyorController {
     }
 
     public static final String CREATE_SURVEY = "surveyor/createSurvey";
+
     public static final String SET_SURVEY_DETAILS = "survey/setsurvey";
 
     @RequestMapping(value = "/setsurvey", method = RequestMethod.GET)
@@ -199,14 +200,18 @@ public class SurveyorController {
 
         question1.setDescription(question.getQuesText());
 
-        questionService.addQuestion(question1);
 
-        List<QuestionOption> questionOptionList = question1.getOptions();
+        if (question1.getqType().equals("checkbox") || question1.getqType().equals("radio") || question1.getqType().equals("dropdown")) {
 
-        questionOptionList.get(0).setOptionValue(question.getOption1Text());
-        questionOptionList.get(1).setOptionValue(question.getOption2Text());
-        questionOptionList.get(2).setOptionValue(question.getOption3Text());
-        questionOptionList.get(3).setOptionValue(question.getOption4Text());
+            List<QuestionOption> questionOptionList = question1.getOptions();
+
+            questionOptionList.get(0).setOptionValue(question.getOption1Text());
+            questionOptionList.get(1).setOptionValue(question.getOption2Text());
+            questionOptionList.get(2).setOptionValue(question.getOption3Text());
+            questionOptionList.get(3).setOptionValue(question.getOption4Text());
+
+
+        }
 
         questionService.addQuestion(question1);
 

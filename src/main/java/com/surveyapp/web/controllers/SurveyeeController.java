@@ -2,26 +2,20 @@
 
 package com.surveyapp.web.controllers;
 
-        import com.surveyapp.backend.persistence.domain.backend.Participant;
-        import com.surveyapp.backend.persistence.domain.backend.Question;
-        import com.surveyapp.backend.persistence.domain.backend.Response;
-        import com.surveyapp.backend.persistence.domain.backend.SurveyEntity;
-        import com.surveyapp.backend.service.ParticipantService;
-        import com.surveyapp.backend.service.QuestionService;
-        import com.surveyapp.backend.service.SurveyService;
-        import com.surveyapp.web.domain.frontend.EmailAddresses;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.security.authentication.AnonymousAuthenticationToken;
-        import org.springframework.security.core.Authentication;
-        import org.springframework.security.core.context.SecurityContextHolder;
-        import org.springframework.stereotype.Controller;
-        import org.springframework.ui.ModelMap;
-        import org.springframework.web.bind.annotation.RequestMapping;
-        import org.springframework.web.bind.annotation.RequestMethod;
-        import org.springframework.web.bind.annotation.RequestParam;
+import com.surveyapp.backend.persistence.domain.backend.SurveyEntity;
+import com.surveyapp.backend.service.QuestionService;
+import com.surveyapp.backend.service.SurveyService;
+import com.surveyapp.backend.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-        import java.util.ArrayList;
-        import java.util.List;
+import java.util.List;
 
 @Controller
 public class SurveyeeController {
@@ -36,27 +30,19 @@ public class SurveyeeController {
     @Autowired
     private QuestionService questionService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(value = "/surveyeehome", method = RequestMethod.GET)
     public String getSurveysOfSurveyee(ModelMap model){
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-       // String userName = auth.getName(); //get logged in username
+        String username = authentication.getName();
 
-    String currentUserName = null;
-        if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            currentUserName = authentication.getName();
-        }
-        List<SurveyEntity> surveys = new ArrayList<>();
-        System.out.println("name of the participant" + currentUserName);
-//        if(currentUserName != null) {
-            //list of surveys, a participant has given
-            surveys = (surveyService.getListOfGivenSurveyDescriptions(currentUserName));
-//            System.out.println("name of the survey" + surveys.get(0));
+        int userId = (int) userService.findByUserName(username).getId();
 
-//        }
-        model.addAttribute("surveys", surveys);
-        model.addAttribute("error", null);
-        model.addAttribute("role","surveyee");
+
+
         return SURVEYEE_HOME;
     }
 

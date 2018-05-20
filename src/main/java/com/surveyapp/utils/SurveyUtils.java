@@ -1,6 +1,5 @@
 package com.surveyapp.utils;
 
-
 import com.surveyapp.backend.persistence.domain.backend.Question;
 import com.surveyapp.backend.persistence.domain.backend.SurveyEntity;
 import com.surveyapp.backend.persistence.domain.backend.User;

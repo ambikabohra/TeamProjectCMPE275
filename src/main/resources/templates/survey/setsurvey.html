@@ -23,7 +23,8 @@
             <div class="well">
                 <form class="form-group" id="setSurvey" th:action="@{/setsurvey}" method="post" th:object="${__${'newsurvey'}__}">
                     <div class="form-group input-group mb-3">
-                        <h4 style="margin-left: 20px" id="surveytype">Survey Type</h4>
+                        <label for="inputGroupSelect01" style="margin-left: 20px; padding-right: 20px;" id="surveytype">Survey
+                            Type</label>
                         <select class="custom-select" id="inputGroupSelect01" th:field="*{surveyType}">
                             <option selected="selected" value="">Choose...</option>
                             <option value="General Survey">General Survey</option>
@@ -32,20 +33,29 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <h4 style="margin-left: 20px" id="surveyname">Survey Name</h4>
-                        <input type="text" value="" th:field="*{surveyName}" class="form-control"/>
+                        <label for="surveyName" style="margin-left: 20px" id="sname">Survey Name</label>
+                        <input type="text" value="" id="surveyName" th:field="*{surveyName}" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <h4 style="margin-left: 20px" id="surveydesc">Survey Description</h4>
-                        <input type="text" value="" th:field="*{surveyDesc}" class="form-control"/>
+                        <label for="surveyDesc" style="margin-left: 20px" id="sdesc">Survey Description</label>
+                        <input type="text" value="" id="surveyDesc" th:field="*{surveyDesc}" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <h4 style="margin-left: 20px" id="endtime">Survey Expiration Time</h4>
-                        <input type="text" value="" th:field="*{days}" class="form-control" placeholder="days"/>
-                        <input type="text" value="" th:field="*{hours}" class="form-control" placeholder="hours"/>
-                        <input type="text" value="" th:field="*{minutes}" class="form-control" placeholder="minutes"/>
+                        <label for="surveyDesc" style="margin-left: 20px" id="sdesc">Survey Expiration Time</label>
+                        <input type="text" value="" id="days" th:field="*{days}" class="form-control"
+                               placeholder="days"/>
                     </div>
-                    <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+                    <div class="form-group">
+                        <input type="text" value="" id="hours" th:field="*{hours}" class="form-control"
+                               placeholder="hours"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" value="" id="minutes" th:field="*{minutes}" class="form-control"
+                               placeholder="minutes"/>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+                    </div>
                 </form>
             </div>
         </div>
