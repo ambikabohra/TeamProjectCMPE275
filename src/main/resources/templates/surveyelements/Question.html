@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
 
 <head th:replace="common/header :: common-header"/>
 
@@ -68,6 +68,104 @@
         </div>
     </div>
 </div>
+
+<!-- image option part -->
+
+<!--multiple choice part-->
+<div class="container" th:fragment="imageQuestion">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <p id="questionType" hidden="hidden">ImageQuestion</p>
+                <h4 id="questionIMG">New Question here...</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="imageOptions">
+                            <div class="form-control" style="width: 100%; height: auto;">
+                                <input type="checkbox" value="">
+                                <img
+                                        style="margin-left: 20px; width: 30px; height: 30px; " id="option1"
+                                        th:src="@{/images/image_icon.png}">Option 1</img>
+
+                                </input>
+                            </div>
+                            <div class="form-control" style="width: 100%; height: auto;">
+                                <input type="checkbox" value=""/> <img
+                                    style="margin-left: 20px ; width: 30px; height: 30px;" id="option2"
+                                    th:src="@{/images/image_icon.png}">Option
+                                2</img>
+                            </div>
+                            <div class="form-control" style="width: 100%; height: auto;">
+                                <input type="checkbox" value=""/> <img
+                                    style="margin-left: 20px ; width: 30px; height: 30px;" id="option3"
+                                    th:src="@{/images/image_icon.png}">Option
+                                3</img>
+                            </div>
+                            <div class="form-control" style="width: 100%; height: auto;">
+                                <input type="checkbox" value=""/><img
+                                    style="margin-left: 20px ; width: 30px; height: 30px;" id="option4"
+                                    th:src="@{/images/image_icon.png}">Option
+                                4</img>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:fragment="editImageQuestion">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-group" id="editImageOptions" th:action="@{/saveimagequestion}" method="post"
+                      th:object="${__${'question'}__}" enctype="multipart/form-data">
+                    <input type="hidden" name="quesType" id="quesType" th:value="'image'"/>
+                    <input type="hidden" name="surveyId" id="surveyId" th:value="${surveyId}"/>
+                    <label id="imageQuesText">Type your question here</label><br/>
+                    <input type="text" class="text" id="imageQuesTextField" name="imageQuesTextField"
+                           th:field="*{quesText}" oninput="editImageQuesText()"/>
+                    <br/><br/>
+                    <label>Edit Options</label><br/>
+
+                    <input type="text" class="text" id="option1Text" th:field="*{option1Text}"
+                           oninput="changeMultipleChoiceOptionText('option1')" placeholder="Option 1"/>
+
+                    <div class="form-group">
+                        <input type="file" id="file1" name="file1" class="form-control"/>
+                    </div>
+
+                    <input type="text" class="text" id="option2Text" th:field="*{option2Text}"
+                           oninput="changeMultipleChoiceOptionText('option1')" placeholder="Option 2"/>
+
+                    <div class="form-group">
+                        <input type="file" id="file2" name="file2" class="form-control"/>
+                    </div>
+
+                    <input type="text" class="text" id="option3Text" th:field="*{option3Text}"
+                           oninput="changeMultipleChoiceOptionText('option1')" placeholder="Option 3"/>
+
+                    <div class="form-group">
+                        <input type="file" id="file3" name="file3" class="form-control"/>
+                    </div>
+
+                    <input type="text" class="text" id="option4Text" th:field="*{option4Text}"
+                           oninput="changeMultipleChoiceOptionText('option1')" placeholder="Option 4"/>
+
+                    <div class="form-group">
+                        <input type="file" id="file4" name="file4" class="form-control"/>
+                    </div>
+                    <div class="col-md-6">
+                        <br/>
+                        <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="container" th:fragment="trueFalseOptions">
     <div class="row">

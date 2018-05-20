@@ -6,6 +6,7 @@ var addSingleAnsEditTemplate = true;
 var starEditTemplate = true;
 var addRadioEditTemplate = true;
 var addDropdownEditTemplate = true;
+var addImageEditTemplate = true;
 
 function main() {
 
@@ -288,6 +289,54 @@ function main() {
         }
     });
 
+    /* Contact form validation */
+    $('#editoptions').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            multipleChoiceQuesTextField: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter question text'
+                    }
+                }
+            },
+            option1Text: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter option text'
+                    }
+                }
+            },
+            option2Text: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter option text'
+                    }
+                }
+            },
+            option3Text: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter option text'
+                    }
+                }
+            },
+            option4Text: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter option text'
+                    }
+                }
+            }
+        }
+    });
+
+
 
 }
 
@@ -346,6 +395,31 @@ function changeMultipleChoiceOptionText(optionPar) {
         optionText = document.getElementById("option4Text").value;
         option.innerHTML = optionText;
     }
+
+}
+
+
+function addImageQues() {
+
+    if (addquestionflag == true) {
+        var temp = document.getElementsByTagName("template")[12];
+        var clon = temp.content.cloneNode(true);
+        if (clon == null || clon == "") {
+            console.log("nothing here");
+        } else {
+            console.log(clon);
+        }
+        document.getElementById("placeHolder").appendChild(clon);
+        addquestionflag = false;
+    }
+}
+
+function editImageQuesText() {
+
+    var question = document.getElementById("questionIMG");
+    var quesTextFieldValue = document.getElementById("imageQuesTextField").value;
+    question.innerHTML = quesTextFieldValue;
+    console.log(quesTextFieldValue);
 
 }
 
@@ -622,6 +696,19 @@ function editQuestion() {
             document.getElementById("placeHolder").appendChild(editTab);
             addTrueFalseEditTemplate = false;
         }
+    } else if (questionType == "ImageQuestion") {
+
+        if (addImageEditTemplate) {
+            var temp = document.getElementsByTagName("template")[13];
+            var editTab = temp.content.cloneNode(true);
+            if (editTab == null || editTab == "") {
+                console.log("nothing here");
+            } else {
+                console.log(editTab);
+            }
+            document.getElementById("placeHolder").appendChild(editTab);
+            addImageEditTemplate = false;
+        }
     }
 }
 
@@ -711,7 +798,6 @@ function editSurveyEditSingleAnswerQuesText(event) {
     console.log(quesTextFieldValue);
 
 }
-
 
 
 

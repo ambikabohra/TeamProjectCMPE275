@@ -117,21 +117,6 @@ public class SurveyorController {
         return EDIT_SAVED_SURVEY;
     }
 
-    static void createQuestionOptions(@ModelAttribute com.surveyapp.web.domain.frontend.Question question, Question question1, QuestionOptionService questionOptionService) {
-        if (question.getQuesType().equals("checkbox") || question.getQuesType().equals("radio") || question.getQuesType().equals("dropdown")) {
-
-            QuestionOption option1 = new QuestionOption(question.getOption1Text(), question1);
-            QuestionOption option2 = new QuestionOption(question.getOption2Text(), question1);
-            QuestionOption option3 = new QuestionOption(question.getOption3Text(), question1);
-            QuestionOption option4 = new QuestionOption(question.getOption4Text(), question1);
-
-            questionOptionService.addQuestionOption(option1);
-            questionOptionService.addQuestionOption(option2);
-            questionOptionService.addQuestionOption(option3);
-            questionOptionService.addQuestionOption(option4);
-
-        }
-    }
 
     @RequestMapping(value = "/deleteQuestion", method = RequestMethod.GET)
     public String deleteQuestionGet(@RequestParam("surveyId") String surveyId,
@@ -156,23 +141,24 @@ public class SurveyorController {
 
         if (survey == null) {
             modelMap.addAttribute("status", "surveyNotFound");
+
         } else {
             List<Question> questionList = survey.getQuestions();
 
             if (questionList.size() == 0) {
                 modelMap.addAttribute("status", "questionsNotFound");
+
             } else {
                 for (Question question : questionList) {
                     if (question.getqType().equals("checkbox") || question.getqType().equals("radio") || question.getqType().equals("dropdown")) {
 
                     }
                 }
-
-                modelMap.addAttribute("user", user);
-                modelMap.addAttribute("survey", survey);
-                modelMap.addAttribute("questionList", questionList);
-                modelMap.addAttribute("questionObj", new com.surveyapp.web.domain.frontend.Question());
             }
+            modelMap.addAttribute("user", user);
+            modelMap.addAttribute("survey", survey);
+            modelMap.addAttribute("questionList", questionList);
+            modelMap.addAttribute("questionObj", new com.surveyapp.web.domain.frontend.Question());
         }
     }
 

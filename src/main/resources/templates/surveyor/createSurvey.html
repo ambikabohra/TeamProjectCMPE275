@@ -29,6 +29,7 @@
                                                     <span class="caret"></span> </a>
                                                 <ul class="dropdown-menu">
                                                     <li><a href="#" onclick="addMultipleChoiceQues()">Check Box</a></li>
+                                                    <li><a href="#" onclick="addImageQues()">Image Choice</a></li>
                                                     <li><a href="#" onclick="addRadioQues()">Radio</a></li>
                                                     <li><a href="#" onclick="addDropdownQues()">Dropdown</a></li>
                                                     <li><a href="#" onclick="addTrueFalse()">True False</a></li>
@@ -43,6 +44,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </form>
                                 <div class="well">
                                     <div class="row">
                                         <div class="col-md-12" id="addHere">
@@ -86,10 +88,15 @@
                                             <template id="dropdownQuestionEdit">
                                                 <div th:replace="surveyelements/Question :: editDropdownQuestion"></div>
                                             </template>
+                                            <template id="imageQuesPlaceHolder">
+                                                <div th:replace="surveyelements/Question :: imageQuestion"></div>
+                                            </template>
+                                            <template id="imageQuestionEdit">
+                                                <div th:replace="surveyelements/Question :: editImageQuestion"></div>
+                                            </template>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-6">
