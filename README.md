@@ -4,6 +4,11 @@ Survey Ape
 
 URL: http://ec2-52-36-9-6.us-west-2.compute.amazonaws.com:8080/
 
+Ambika Bohra - 011540269
+Karan Didwani - 011439376
+Lavanya Kandukuri - 011833588
+Rovin singh - 011812801
+
 Build Instruction:
 1) Clone this Repository or download the zip file
 2) Extract the zip
